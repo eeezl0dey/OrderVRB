@@ -15,8 +15,9 @@ int main(int argc, char *argv[])
     SourceDB sourceDB;
     if(sourceDB.connect())
     {
-        engine.load(QUrl(QStringLiteral("qrc:/login.qml")));
-//        engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+//        engine.load(QUrl(QStringLiteral("qrc:/Login.qml")));
+//        engine.load(QUrl(QStringLiteral("qrc:/MainWND.qml")));
+        engine.load(QUrl(QStringLiteral("qrc:/Kontragent.qml")));
     }
     else
         qDebug() << sourceDB.getLastError();

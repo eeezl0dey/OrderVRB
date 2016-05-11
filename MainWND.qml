@@ -14,14 +14,17 @@ ApplicationWindow {
 
     menuBar: MenuBar {
         Menu {
-            title: qsTr("&File")
+            title: qsTr("Файл")
             MenuItem {
-                text: qsTr("&Open")
-                onTriggered: messageDialog.show(qsTr("Open action triggered"));
-            }
-            MenuItem {
-                text: qsTr("E&xit")
+                text: qsTr("Выход")
                 onTriggered: Qt.quit();
+            }
+        }
+        Menu {
+            title: qsTr("&Справочники")
+            MenuItem {
+                text: qsTr("&Контрагенты")
+                onTriggered: messageDialog.show(qsTr("Open action triggered"));
             }
         }
     }
