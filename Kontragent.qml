@@ -33,8 +33,13 @@ Window{
     }
 
     KontragentForm {
+        id: kontrForm
         anchors.fill: parent
-        model: dataBase.modelKontr
+    }
+
+    onActiveChanged: {
+        dataBase.loadMKontragent();
+        kontrForm.model = dataBase.modelKontr;
     }
 }
 

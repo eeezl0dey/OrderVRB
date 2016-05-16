@@ -17,14 +17,14 @@ Item {
         anchors.top: parent.top
         TableViewColumn {
             id: columnNum
-            role: "id"
+            role: "idcontragent"
             title: "#"
             width: 50
             horizontalAlignment: Text.AlignHCenter
         }
         TableViewColumn {
             id:columnFullname
-            role: "fullname"
+            role: "fname"
             title: "Наименование"
             width: parent.width - columnNum.width - columnInn.width
             horizontalAlignment: Text.AlignHCenter

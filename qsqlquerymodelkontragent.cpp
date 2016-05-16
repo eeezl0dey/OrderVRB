@@ -9,7 +9,7 @@ QSqlQueryModelKontragent::QSqlQueryModelKontragent(QObject *parent) :
 QVariant QSqlQueryModelKontragent::data(const QModelIndex & index, int role) const {
 
     // Определяем номер колонки, адрес так сказать, по номеру роли
-    int columnId = role - Qt::UserRole - 1;
+     int columnId = role - Qt::UserRole - 1;
     // Создаём индекс с помощью новоиспечённого ID колонки
     QModelIndex modelIndex = this->index(index.row(), columnId);
 
