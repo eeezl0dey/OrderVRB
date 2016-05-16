@@ -32,14 +32,68 @@ Window{
              }
     }
 
-    KontragentForm {
-        id: kontrForm
+    Item {
+        id: kontrItem
         anchors.fill: parent
-    }
+        TableView {
+            id: idTable;
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 45
+            anchors.right: parent.right
+            anchors.left: parent.left
+            anchors.top: parent.top
+            TableViewColumn {
+                id: columnNum
+                role: "idcontragent"
+                title: "#"
+                width: 50
+                horizontalAlignment: Text.AlignHCenter
+                delegate: Item{
+                    Text{
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: styleData.value
+                        renderType: Text.NativeRendering
+                        anchors.centerIn: parent
+                    }
+                }
+            }
+            TableViewColumn {
+                id:columnFullname
+                role: "fname"
+                title: "Наименование"
+                width: idTable.width - columnNum.width - columnInn.width
+                horizontalAlignment: Text.AlignHCenter
+            }
+            TableViewColumn {
+                id:columnInn
+                role: "inn"
+                title: "ИНН"
+                width: 200
+                horizontalAlignment: Text.AlignHCenter
+            }
 
-    onActiveChanged: {
-        dataBase.loadMKontragent();
-        kontrForm.model = dataBase.modelKontr;
+            itemDelegate: Item {
+                Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    renderType: Text.NativeRendering
+                    color: styleData.textColor
+                    text: styleData.value
+                }
+            }
+
+            model: dataBase.modelKontr
+        }
+
+        Button {
+            id: buttonAdd
+            x: 41
+            y: 355
+            width: 118
+            height: 25
+            text: qsTr("Добавить")
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 14
+        }
     }
 }
 

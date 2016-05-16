@@ -7,7 +7,6 @@ Item {
     height: 394
     property alias model: idTable.model
 
-
     TableView {
         id: idTable;
         anchors.bottom: parent.bottom
@@ -35,6 +34,16 @@ Item {
             title: "ИНН"
             width: 200
             horizontalAlignment: Text.AlignHCenter
+        }
+
+        itemDelegate: Item {
+            Text {
+                anchors.verticalCenter: parent.verticalCenter
+                renderType: Text.NativeRendering
+                color: styleData.textColor
+                text: styleData.value
+//                anchors.right: parent.right
+            }
         }
     }
 

@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
 //        engine.load(QUrl(QStringLiteral("qrc:/Login.qml")));
 //        engine.load(QUrl(QStringLiteral("qrc:/MainWND.qml")));
         engine.load(QUrl(QStringLiteral("qrc:/Kontragent.qml")));
+        sourceDB.loadMKontragent();
     }
     else
         qDebug() << sourceDB.getLastError();
