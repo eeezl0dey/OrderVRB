@@ -10,11 +10,14 @@ SourceDB::SourceDB(QObject *parent)
     db.setDatabaseName("OrderVRB");
     db.setUserName("root");
     db.setPassword("kadet");
+    mKontr = new QSqlQueryModelKontragent(this);
 }
 
 SourceDB::~SourceDB()
 {
-
+    if(db.isOpen())
+        db.close();
+    delete mKontr;
 }
 
 bool SourceDB::connect()
@@ -51,3 +54,17 @@ QString SourceDB::getUserFullName()
 {
     return userFullName;
 }
+
+QSqlQueryModel* SourceDB::getModelKontr()
+{
+    return mKontr;
+}
+
+
+void SourceDB::loadMKontragent()
+{
+    mKontr->setQuery("SELECT * FROM OrderVRB.сontragent;");
+    emit modelKontrChanged();
+    return;
+}
+

@@ -5,6 +5,7 @@ import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 
 Window{
+    id: winkontragent
     width: 400
     height: 400
     visible: true
@@ -33,6 +34,7 @@ Window{
 
     KontragentForm {
         anchors.fill: parent
+        model: dataBase.modelKontr
     }
 }
 

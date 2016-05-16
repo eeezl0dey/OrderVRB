@@ -5,7 +5,8 @@ QT += qml quick widgets sql core network
 CONFIG+=qml_debug
 
 SOURCES += main.cpp \
-    sourcedb.cpp
+    sourcedb.cpp \
+    qsqlquerymodelkontragent.cpp
 
 RESOURCES += qml.qrc
 
@@ -16,4 +17,5 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    sourcedb.h
+    sourcedb.h \
+    qsqlquerymodelkontragent.h
