@@ -49,6 +49,7 @@ Window{
                 width: 50
                 horizontalAlignment: Text.AlignHCenter
                 delegate: Item{
+
                     Text{
                         anchors.verticalCenter: parent.verticalCenter
                         text: styleData.value
@@ -70,6 +71,37 @@ Window{
                 title: "ИНН"
                 width: 200
                 horizontalAlignment: Text.AlignHCenter
+            }
+
+            headerDelegate: Rectangle
+            {
+                width: _textHeader.text.length*1.2
+                height: _textHeader.font.pixelSize*1.2
+                color: "skyblue"
+
+                border
+                {
+                    width: 1
+                    color: (styleData.pressed)?"red":"black"
+                }
+
+                Text
+                {
+                    id: _textHeader
+
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    renderType: Text.NativeRendering
+
+                    font.bold: true
+
+                    color: (styleData.pressed)?"red":"black"
+                    text: styleData.value
+
+//                    Component.onCompleted:
+//                    {
+//                        console.log(_textHeader.text.length)
+//                    }
+                }
             }
 
             itemDelegate: Item {

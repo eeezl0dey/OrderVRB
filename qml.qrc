@@ -5,6 +5,5 @@
         <file>LoginForm.ui.qml</file>
         <file>MainWND.qml</file>
         <file>Kontragent.qml</file>
-        <file>KontragentForm.ui.qml</file>
     </qresource>
 </RCC>
