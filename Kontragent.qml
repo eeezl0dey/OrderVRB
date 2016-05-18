@@ -6,7 +6,7 @@ import QtGraphicalEffects 1.0
 
 Window{
     id: winkontragent
-    width: 400
+    width: 800
     height: 400
     visible: true
     x: Screen.width / 2 - width / 2
@@ -62,7 +62,7 @@ Window{
                 id:columnFullname
                 role: "fname"
                 title: "Наименование"
-                width: idTable.width - columnNum.width - columnInn.width
+                width: idTable.width - columnNum.width - columnInn.width - idusers.width
                 horizontalAlignment: Text.AlignHCenter
             }
             TableViewColumn {
@@ -72,12 +72,33 @@ Window{
                 width: 200
                 horizontalAlignment: Text.AlignHCenter
             }
+            TableViewColumn {
+                id:idusers
+                role: "idusers"
+                title: "Создал"
+                width: 200
+                horizontalAlignment: Text.AlignHCenter
+            }
+
 
             headerDelegate: Rectangle
             {
                 width: _textHeader.text.length*1.2
-                height: _textHeader.font.pixelSize*1.2
-                color: "skyblue"
+                height: _textHeader.font.pixelSize*1.6
+                gradient: Gradient {
+                    GradientStop {
+                      position: 0.0
+                      color: "#F0F0F0"
+                    }
+                    GradientStop {
+                      position: 0.2
+                      color: "#A0A0A0"
+                    }
+                    GradientStop {
+                      position: 1.0
+                      color: "#F0F0F0"
+                    }
+                  }
 
                 border
                 {
@@ -90,9 +111,11 @@ Window{
                     id: _textHeader
 
                     anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.centerIn: parent
                     renderType: Text.NativeRendering
 
                     font.bold: true
+                    font.pointSize: 9
 
                     color: (styleData.pressed)?"red":"black"
                     text: styleData.value

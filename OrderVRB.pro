@@ -6,7 +6,8 @@ CONFIG+=qml_debug
 
 SOURCES += main.cpp \
     sourcedb.cpp \
-    qsqlquerymodelkontragent.cpp
+    qsqlquerymodelkontragent.cpp \
+    qsqlquerymodelusers.cpp
 
 RESOURCES += qml.qrc
 
@@ -18,4 +19,5 @@ include(deployment.pri)
 
 HEADERS += \
     sourcedb.h \
-    qsqlquerymodelkontragent.h
+    qsqlquerymodelkontragent.h \
+    qsqlquerymodelusers.h

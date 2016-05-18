@@ -1,12 +1,13 @@
-#include "qsqlquerymodelkontragent.h"
+#include "qsqlquerymodelusers.h"
 
-QSqlQueryModelKontragent::QSqlQueryModelKontragent(QObject *parent) :
+QSqlQueryModelUsers::QSqlQueryModelUsers(QObject *parent):
     QSqlQueryModel(parent)
 {
+
 }
 
 // Метод для получения данных из модели
-QVariant QSqlQueryModelKontragent::data(const QModelIndex & index, int role) const {
+QVariant QSqlQueryModelUsers::data(const QModelIndex & index, int role) const {
     // Определяем номер колонки, адрес так сказать, по номеру роли
      int columnId = role - Qt::UserRole - 1;
     // Создаём индекс с помощью новоиспечённого ID колонки
@@ -16,24 +17,18 @@ QVariant QSqlQueryModelKontragent::data(const QModelIndex & index, int role) con
      * вытаскиваем данные для таблицы из модели
      * */
     QVariant var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
-
-    if (role == IDUserCreateRole)
-    {
-        var = 45;
-    }
-
     return var;
 }
 
 // Метод для получения имен ролей через хешированную таблицу.
-QHash<int, QByteArray> QSqlQueryModelKontragent::roleNames() const {
+QHash<int, QByteArray> QSqlQueryModelUsers::roleNames() const {
     /* То есть сохраняем в хеш-таблицу названия ролей
      * по их номеру
      * */
     QHash<int, QByteArray> roles;
-    roles[IDRole] = "idcontragent";
-    roles[FullnameRole] = "fname";
-    roles[IDUserCreateRole] = "idusers";
-    roles[INNRole] = "inn";
+    roles[IDRole] = "idusers";
+    roles[UsernameRole] = "username";
+    roles[UserpassRole] = "userpass";
+    roles[FullnameRole] = "fullname";
     return roles;
 }
