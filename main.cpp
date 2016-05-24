@@ -17,14 +17,14 @@ int main(int argc, char *argv[])
     {
 //        engine.load(QUrl(QStringLiteral("qrc:/Login.qml")));
 //        engine.load(QUrl(QStringLiteral("qrc:/MainWND.qml")));
-        engine.load(QUrl(QStringLiteral("qrc:/Kontragent.qml")));
+        sourceDB.loadMUsers();
         sourceDB.loadMKontragent();
+        ctx = engine.rootContext();
+        ctx->setContextProperty("dataBase", &sourceDB);
+        engine.load(QUrl(QStringLiteral("qrc:/Kontragent.qml")));
     }
     else
         qDebug() << sourceDB.getLastError();
-
-    ctx = engine.rootContext();
-    ctx->setContextProperty("dataBase", &sourceDB);
 
     return app.exec();
 }

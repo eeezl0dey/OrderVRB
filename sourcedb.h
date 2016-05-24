@@ -10,6 +10,7 @@
 #include <QApplication>
 #include <QSqlDriver>
 #include "qsqlquerymodelkontragent.h"
+#include "qsqlquerymodelusers.h"
 
 class SourceDB: public QObject
 {
@@ -27,12 +28,16 @@ private:
     QSqlDatabase db;
     QString userFullName;
     QSqlQueryModelKontragent *mKontr;
+    QSqlQueryModelUsers *mUsers;
+
 signals:
     void modelKontrChanged();
+    void modelUsersChanged();
 public slots:
     QString getLastError();
     bool login(QString username, QString pass);
     void loadMKontragent();
+    void loadMUsers();
 };
 
 #endif // SOURCEDB_H

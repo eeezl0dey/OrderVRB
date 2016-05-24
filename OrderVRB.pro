@@ -3,11 +3,13 @@ TEMPLATE = app
 QT += qml quick widgets sql core network
 
 CONFIG+=qml_debug
+CONFIG+= c++11
 
 SOURCES += main.cpp \
     sourcedb.cpp \
     qsqlquerymodelkontragent.cpp \
-    qsqlquerymodelusers.cpp
+    qsqlquerymodelusers.cpp \
+    qlistmodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -20,4 +22,5 @@ include(deployment.pri)
 HEADERS += \
     sourcedb.h \
     qsqlquerymodelkontragent.h \
-    qsqlquerymodelusers.h
+    qsqlquerymodelusers.h \
+    qlistmodel.h

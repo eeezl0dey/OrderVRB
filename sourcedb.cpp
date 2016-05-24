@@ -11,6 +11,7 @@ SourceDB::SourceDB(QObject *parent)
     db.setUserName("root");
     db.setPassword("kadet");
     mKontr = new QSqlQueryModelKontragent(this);
+    mUsers = new QSqlQueryModelUsers(this);
 }
 
 SourceDB::~SourceDB()
@@ -67,4 +68,12 @@ void SourceDB::loadMKontragent()
     emit modelKontrChanged();
     return;
 }
+
+void SourceDB::loadMUsers()
+{
+    mUsers->setQuery("SELECT * FROM OrderVRB.users;");
+    emit modelUsersChanged();
+    return;
+}
+
 
