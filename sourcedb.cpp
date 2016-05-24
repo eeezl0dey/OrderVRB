@@ -1,54 +1,54 @@
 #include "sourcedb.h"
 #include <QPluginLoader>
+#include <QSqlRecord>
 
 SourceDB::SourceDB(QObject *parent)
 {
 
     this->setParent(parent);
-    db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("localhost");
-    db.setDatabaseName("OrderVRB");
-    db.setUserName("root");
-    db.setPassword("kadet");
-    mKontr = new QSqlQueryModelKontragent(this);
-    mUsers = new QSqlQueryModelUsers(this);
+
 }
 
 SourceDB::~SourceDB()
 {
-    if(db.isOpen())
-        db.close();
-    delete mKontr;
-}
-
-bool SourceDB::connect()
-{
-    bool ok = db.open();
-    qDebug()<< QString("Connect is ") + QString((bool)ok?"accept":"error");
-    //    qDebug() << QSqlDatabase::drivers();
-    //    qDebug() << QApplication::libraryPaths();
-    return ok;
-}
-
-QString SourceDB::getLastError()
-{
-    return db.lastError().text();
 }
 
 bool SourceDB::login(QString username, QString pass)
 {
-    QSqlQuery query;
     bool isFind = false;
-    query.prepare("select * from users where username = :login and userpass = :pass");
-    query.bindValue(":login", username);
-    query.bindValue(":pass", pass);
-    query.exec();
-    if(query.next() > 0)
+    QSqlQueryModelUsers* mUsers;
+
+    mUsers = (QSqlQueryModelUsers*)getModelUsers();
+    int rowCount;
+    rowCount = mUsers->rowCount();
+    int columnCount = mUsers->columnCount();
+    for(int a=0; a < rowCount; a++)
     {
-       userFullName = query.value("fullname").toString();
-       isFind = true;
+        QSqlRecord sr = mUsers->record(1);
+        QString str = sr.value(1).toString();
+        if(sr.value(sr.indexOf("username")).toString() == username &&
+                sr.value(sr.indexOf("userpass")).toString() == pass)
+        {
+            userFullName = sr.value(sr.indexOf("fullname")).toString();
+            isFind = true;
+        }
+
     }
+
     return isFind;
+
+//    QSqlQuery query;
+//    bool isFind = false;
+//    query.prepare("select * from users where username = :login and userpass = :pass");
+//    query.bindValue(":login", username);
+//    query.bindValue(":pass", pass);
+//    query.exec();
+//    if(query.next() > 0)
+//    {
+//       userFullName = query.value("fullname").toString();
+//       isFind = true;
+//    }
+//    return isFind;
 }
 
 QString SourceDB::getUserFullName()
@@ -58,22 +58,11 @@ QString SourceDB::getUserFullName()
 
 QSqlQueryModel* SourceDB::getModelKontr()
 {
-    return mKontr;
+    return QListModels::getInstance()->getModel(QListModels::mtype::kontr);
 }
 
-
-void SourceDB::loadMKontragent()
+QSqlQueryModel* SourceDB::getModelUsers()
 {
-    mKontr->setQuery("SELECT * FROM OrderVRB.сontragent;");
-    emit modelKontrChanged();
-    return;
+    return QListModels::getInstance()->getModel(QListModels::mtype::users);
 }
-
-void SourceDB::loadMUsers()
-{
-    mUsers->setQuery("SELECT * FROM OrderVRB.users;");
-    emit modelUsersChanged();
-    return;
-}
-
 

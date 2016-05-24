@@ -18,6 +18,7 @@ public:
 
     explicit QSqlQueryModelKontragent(QObject *parent = 0);
 
+
     // Переопределяем метод, который будет возвращать данные
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 

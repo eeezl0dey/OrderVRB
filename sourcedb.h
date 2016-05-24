@@ -11,6 +11,7 @@
 #include <QSqlDriver>
 #include "qsqlquerymodelkontragent.h"
 #include "qsqlquerymodelusers.h"
+#include "qlistmodels.h"
 
 class SourceDB: public QObject
 {
@@ -21,23 +22,16 @@ class SourceDB: public QObject
 public:
     explicit SourceDB(QObject *parent = 0);
     virtual ~SourceDB();
-    bool connect();
     QString getUserFullName();
     QSqlQueryModel* getModelKontr();
+    QSqlQueryModel* getModelUsers();
 private:
-    QSqlDatabase db;
     QString userFullName;
-    QSqlQueryModelKontragent *mKontr;
-    QSqlQueryModelUsers *mUsers;
-
 signals:
     void modelKontrChanged();
     void modelUsersChanged();
 public slots:
-    QString getLastError();
     bool login(QString username, QString pass);
-    void loadMKontragent();
-    void loadMUsers();
 };
 
 #endif // SOURCEDB_H

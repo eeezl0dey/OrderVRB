@@ -9,7 +9,7 @@ SOURCES += main.cpp \
     sourcedb.cpp \
     qsqlquerymodelkontragent.cpp \
     qsqlquerymodelusers.cpp \
-    qlistmodel.cpp
+    qlistmodels.cpp
 
 RESOURCES += qml.qrc
 
@@ -23,4 +23,4 @@ HEADERS += \
     sourcedb.h \
     qsqlquerymodelkontragent.h \
     qsqlquerymodelusers.h \
-    qlistmodel.h
+    qlistmodels.h
