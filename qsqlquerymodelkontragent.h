@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QSqlQueryModel>
+#include "qlistmodels.h"
 
 class QSqlQueryModelKontragent : public QSqlQueryModel
 {

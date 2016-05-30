@@ -24,7 +24,7 @@ ApplicationWindow {
             title: qsTr("&Справочники")
             MenuItem {
                 text: qsTr("&Контрагенты")
-                onTriggered: messageDialog.show(qsTr("Open action triggered"));
+                onTriggered: kontragent.show();
             }
         }
     }
@@ -44,5 +44,10 @@ ApplicationWindow {
             messageDialog.text = caption;
             messageDialog.open();
         }
+    }
+
+    Kontragent {
+        id: kontragent
+        visible: false;
     }
 }

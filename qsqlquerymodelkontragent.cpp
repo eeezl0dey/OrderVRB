@@ -19,7 +19,20 @@ QVariant QSqlQueryModelKontragent::data(const QModelIndex & index, int role) con
 
     if (role == IDUserCreateRole)
     {
-        var = 45;
+        int id = var.toInt();
+        QSqlQuery query = QListModels::getInstance()->getModel(QListModels::users)->query();
+        if(query.first())
+        {
+            do{
+                if(query.value("idusers").toInt() == id)
+                {
+                 var = query.value("fullname").toString();
+                 break;
+                }
+
+            }
+            while(query.next());
+        }
     }
 
     return var;

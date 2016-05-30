@@ -15,40 +15,24 @@ SourceDB::~SourceDB()
 
 bool SourceDB::login(QString username, QString pass)
 {
-    bool isFind = false;
     QSqlQueryModelUsers* mUsers;
-
     mUsers = (QSqlQueryModelUsers*)getModelUsers();
-    int rowCount;
-    rowCount = mUsers->rowCount();
-    int columnCount = mUsers->columnCount();
-    for(int a=0; a < rowCount; a++)
+    QSqlQuery query = mUsers->query();
+    bool isFind = false;
+    if(query.first())
     {
-        QSqlRecord sr = mUsers->record(1);
-        QString str = sr.value(1).toString();
-        if(sr.value(sr.indexOf("username")).toString() == username &&
-                sr.value(sr.indexOf("userpass")).toString() == pass)
-        {
-            userFullName = sr.value(sr.indexOf("fullname")).toString();
+        do{
+           if(query.value("username").toString() == username &&
+                   query.value("userpass").toString() == pass)
+           {
+            userFullName = query.value("fullname").toString();
             isFind = true;
+            break;
+           }
         }
-
+        while(query.next());
     }
-
     return isFind;
-
-//    QSqlQuery query;
-//    bool isFind = false;
-//    query.prepare("select * from users where username = :login and userpass = :pass");
-//    query.bindValue(":login", username);
-//    query.bindValue(":pass", pass);
-//    query.exec();
-//    if(query.next() > 0)
-//    {
-//       userFullName = query.value("fullname").toString();
-//       isFind = true;
-//    }
-//    return isFind;
 }
 
 QString SourceDB::getUserFullName()

@@ -42,6 +42,11 @@ Window {
         buttonOk.onClicked: acceptPass();
         textFieldPass.onAccepted: acceptPass();
         textFieldLogin.onAccepted: acceptPass();
+        textFieldPass.onActiveFocusChanged: {
+            if(textFieldPass.focus)
+                textFieldPass.text = "";
+        }
+
         focus: true
 //loginForm.labelWelcome.text = dataBase.login(textLogin,textPass);
 //        button1.onClicked: messageDialog.show(qsTr("Button 1 pressed"))
@@ -50,15 +55,15 @@ Window {
 
     }
 
-    MessageDialog {
-        id: messageDialog
-        title: qsTr("May I have your attention, please?")
+//    MessageDialog {
+//        id: messageDialog
+//        title: qsTr("May I have your attention, please?")
 
-        function show(caption) {
-            messageDialog.text = caption;
-            messageDialog.open();
-        }
-    }
+//        function show(caption) {
+//            messageDialog.text = caption;
+//            messageDialog.open();
+//        }
+//    }
 
     MainWND{
         id: mainWND;
