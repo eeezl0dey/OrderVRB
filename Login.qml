@@ -5,14 +5,16 @@ import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 
 Window {
+    property alias loginForm: loginForm;
     width: 640
     height: loginForm.implicitHeight
     visible: true
-//    flags: Qt.FramelessWindowHint
+    flags: Qt.FramelessWindowHint
     x: Screen.width / 2 - width / 2
     y: Screen.height / 2 - height / 2
-    title: qsTr("Авторизация")
+//    title: qsTr("Авторизация")
     id:loginApp
+    modality: Qt.ApplicationModal
 
 
     LinearGradient {
@@ -65,20 +67,6 @@ Window {
 //        }
 //    }
 
-    MainWND{
-        id: mainWND;
-        visible: false;
-    }
-
     signal acceptPass()
-    onAcceptPass: {
-        if(dataBase.login(loginForm.textLogin,loginForm.textPass))
-        {
-            mainWND.show();
-            mainWND.title = "OrderVRB (" + dataBase.userFullName + ")";
-            loginApp.hide();
-        }
-        else
-            loginForm.labelWelcome.text = qsTr("Имя пользователя или пароль введены не корректно");
-    }
+
 }

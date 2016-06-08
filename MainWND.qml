@@ -10,7 +10,7 @@ ApplicationWindow {
     visible: true
     x: Screen.width / 2 - width / 2
     y: Screen.height / 2 - height / 2
-    id: main
+    id: mainApp
 
     menuBar: MenuBar {
         Menu {
@@ -30,6 +30,8 @@ ApplicationWindow {
     }
 
     MainForm {
+        id: mainForm
+        visible: false
         anchors.fill: parent
         button1.onClicked: messageDialog.show(qsTr("Button 1 pressed"))
         button2.onClicked: messageDialog.show(qsTr("Button 2 pressed"))
@@ -50,4 +52,20 @@ ApplicationWindow {
         id: kontragent
         visible: false;
     }
+
+    Login {
+        id:loginApp
+        visible: true;
+        onAcceptPass: {
+            if(dataBase.login(loginForm.textLogin,loginForm.textPass))
+            {
+                mainApp.title = "OrderVRB (" + dataBase.userFullName + ")";
+                mainForm.visible = true;
+                loginApp.hide();
+            }
+            else
+                loginForm.labelWelcome.text = qsTr("Имя пользователя или пароль введены не корректно");
+        }
+    }
+
 }

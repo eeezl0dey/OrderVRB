@@ -17,8 +17,8 @@ int main(int argc, char *argv[])
     ctx->setContextProperty("dataBase", &sourceDB);
 
 //    engine.load(QUrl(QStringLiteral("qrc:/Login.qml")));
-//        engine.load(QUrl(QStringLiteral("qrc:/MainWND.qml")));
-        engine.load(QUrl(QStringLiteral("qrc:/Kontragent.qml")));
+        engine.load(QUrl(QStringLiteral("qrc:/MainWND.qml")));
+//        engine.load(QUrl(QStringLiteral("qrc:/Kontragent.qml")));
 
     return app.exec();
 }
