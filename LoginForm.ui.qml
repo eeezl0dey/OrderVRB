@@ -48,6 +48,7 @@ Column {
 
             Label {
                 id: labelLogin
+                width: 130
                 Layout.preferredWidth: 150
                 Layout.preferredHeight: 30
                 text: qsTr("Пользователь:")
@@ -58,6 +59,7 @@ Column {
 
             TextField {
                 id: textFieldLogin
+                x: 142
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 placeholderText: qsTr("имя пользователя")
@@ -68,6 +70,7 @@ Column {
 
             Label {
                 id: labelPass
+                width: 130
                 Layout.preferredWidth: 150
                 Layout.preferredHeight: 30
                 text: qsTr("Пароль:")
@@ -78,6 +81,7 @@ Column {
 
             TextField {
                 id: textFieldPass
+                x: 142
                 inputMask: qsTr("")
                 Layout.fillWidth: true
                 Layout.fillHeight: true

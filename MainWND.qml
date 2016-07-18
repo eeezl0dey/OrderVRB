@@ -1,7 +1,8 @@
-import QtQuick 2.4
-import QtQuick.Controls 1.3
-import QtQuick.Window 2.2
+import QtQuick 2.6
+import QtQuick.Controls 1.4
+import QtQuick.Window 2.0
 import QtQuick.Dialogs 1.2
+
 
 ApplicationWindow {
     title: qsTr("OrderVRB")
@@ -12,20 +13,35 @@ ApplicationWindow {
     y: Screen.height / 2 - height / 2
     id: mainApp
 
+    Action {
+        id: exitAction
+        text: qsTr("Выход")
+//        iconSource: "images/textitalic.png"
+//        iconName: "format-text-italic"
+        onTriggered: Qt.quit();
+//        checkable: true
+//        checked: document.italic
+    }
+
+    Action {
+        id: contragentAction
+        text: qsTr("&Контрагенты")
+//        iconSource: "images/textitalic.png"
+//        iconName: "format-text-italic"
+        onTriggered: kontragent.show()
+//        checkable: true
+//        checked: document.italic
+    }
+
+
     menuBar: MenuBar {
         Menu {
             title: qsTr("Файл")
-            MenuItem {
-                text: qsTr("Выход")
-                onTriggered: Qt.quit();
-            }
+            MenuItem { action: exitAction }
         }
         Menu {
             title: qsTr("&Справочники")
-            MenuItem {
-                text: qsTr("&Контрагенты")
-                onTriggered: kontragent.show();
-            }
+            MenuItem { action: contragentAction}
         }
     }
 
@@ -55,7 +71,8 @@ ApplicationWindow {
 
     Login {
         id:loginApp
-        visible: true;
+//        visible: true;
+        visible: false;
         onAcceptPass: {
             if(dataBase.login(loginForm.textLogin,loginForm.textPass))
             {
