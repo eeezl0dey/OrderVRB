@@ -16,7 +16,8 @@ QVariant QSqlQueryModelUsers::data(const QModelIndex & index, int role) const {
     /* И с помощью уже метода data() базового класса
      * вытаскиваем данные для таблицы из модели
      * */
-    QVariant var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+//    QVariant var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+    QVariant var = QSqlQueryModel::data(index, role);
     return var;
 }
 

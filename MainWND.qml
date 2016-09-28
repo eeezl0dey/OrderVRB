@@ -13,6 +13,8 @@ ApplicationWindow {
     y: Screen.height / 2 - height / 2
     id: mainApp
 
+
+
     Action {
         id: exitAction
         text: qsTr("Выход")
@@ -47,7 +49,7 @@ ApplicationWindow {
 
     MainForm {
         id: mainForm
-        visible: false
+//        visible: false
         anchors.fill: parent
         button1.onClicked: messageDialog.show(qsTr("Button 1 pressed"))
         button2.onClicked: messageDialog.show(qsTr("Button 2 pressed"))
@@ -70,19 +72,19 @@ ApplicationWindow {
     }
 
     Login {
-        id:loginApp
-//        visible: true;
-        visible: false;
-        onAcceptPass: {
-            if(dataBase.login(loginForm.textLogin,loginForm.textPass))
-            {
-                mainApp.title = "OrderVRB (" + dataBase.userFullName + ")";
-                mainForm.visible = true;
-                loginApp.hide();
-            }
-            else
-                loginForm.labelWelcome.text = qsTr("Имя пользователя или пароль введены не корректно");
+        id:loginDlg
+        visible: true;
+//        visible: false;
+        onSignalAcceptPass: {
+            mainApp.title = "OrderVRB (" + dataBase.userFullName + ")";
+            mainApp.show();
+            loginDlg.hide();
         }
+    }
+
+    onSceneGraphInitialized: {
+        loginDlg.show();
+        mainApp.hide();
     }
 
 }

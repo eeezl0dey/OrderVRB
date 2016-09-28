@@ -2,7 +2,6 @@
     <qresource prefix="/">
         <file>MainForm.ui.qml</file>
         <file>Login.qml</file>
-        <file>LoginForm.ui.qml</file>
         <file>MainWND.qml</file>
         <file>Kontragent.qml</file>
         <file>AddKontragent.qml</file>
