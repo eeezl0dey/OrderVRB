@@ -4,15 +4,11 @@ import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 
-Window{
+SwipeScreen{
     id: winkontragent
-    width: 800
-    height: 400
-    visible: true
-    x: Screen.width / 2 - width / 2
-    y: Screen.height / 2 - height / 2
-    modality: Qt.ApplicationModal
-    title: qsTr("Контрагенты")
+    anchors.fill: parent;
+//    modality: Qt.ApplicationModal
+//    title: qsTr("Контрагенты")
 
     LinearGradient {
            anchors.fill: parent

@@ -5,5 +5,8 @@
         <file>MainWND.qml</file>
         <file>Kontragent.qml</file>
         <file>AddKontragent.qml</file>
+        <file>SwipeView.qml</file>
+        <file>SwipeScreen.qml</file>
+        <file>SwipeMain.qml</file>
     </qresource>
 </RCC>
