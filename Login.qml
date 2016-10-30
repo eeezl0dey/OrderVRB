@@ -2,7 +2,6 @@ import QtQuick 2.4
 import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
-import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.1
 
 Window {
@@ -17,25 +16,8 @@ Window {
 //    modality: Qt.ApplicationModal
     signal signalAcceptPass   // Задаём сигнал выхода
 
-    LinearGradient {
-           anchors.fill: parent
-           start: Qt.point(0, 0)
-           end: Qt.point(parent.height, parent.width)
-           gradient: Gradient {
-               GradientStop {
-                 position: 0.0
-                 color: "#F0F0F0"
-               }
-               GradientStop {
-                 position: 0.2
-                 color: "#A0A0A0"
-               }
-               GradientStop {
-                 position: 1.0
-                 color: "#F0F0F0"
-               }
-             }
-    }
+    WindowFone{}
+
 
     Column {
         id: loginForm
@@ -83,9 +65,7 @@ Window {
 
                 Label {
                     id: labelLogin
-                    width: 130
                     Layout.preferredWidth: 150
-                    Layout.preferredHeight: 30
                     text: qsTr("Пользователь:")
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignRight
@@ -102,13 +82,12 @@ Window {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     onAccepted:  checkAccess();
+                    text: "admin"
                 }
 
                 Label {
                     id: labelPass
-                    width: 130
-                    Layout.preferredWidth: 150
-                    Layout.preferredHeight: 30
+                    Layout.preferredWidth: labelLogin.width
                     text: qsTr("Пароль:")
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignRight
@@ -128,6 +107,7 @@ Window {
                     horizontalAlignment: Text.AlignHCenter
                     echoMode: TextInput.Password;
                     onAccepted:  checkAccess();
+                    text: "admin"
                 }
 
             }

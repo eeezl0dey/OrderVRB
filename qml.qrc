@@ -1,12 +1,12 @@
 <RCC>
     <qresource prefix="/">
-        <file>MainForm.ui.qml</file>
         <file>Login.qml</file>
         <file>MainWND.qml</file>
         <file>Kontragent.qml</file>
-        <file>AddKontragent.qml</file>
         <file>SwipeView.qml</file>
         <file>SwipeScreen.qml</file>
         <file>SwipeMain.qml</file>
+        <file>EditContragent.qml</file>
+        <file>WindowFone.qml</file>
     </qresource>
 </RCC>

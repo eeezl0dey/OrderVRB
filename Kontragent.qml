@@ -3,6 +3,7 @@ import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.1
 
 SwipeScreen{
     id: winkontragent
@@ -35,11 +36,12 @@ SwipeScreen{
         anchors.fill: parent
         TableView {
             id: idTable;
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 45
+            anchors.bottom: editcontragent.top;
+//            anchors.bottomMargin: 45
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.top: parent.top
+
             TableViewColumn {
                 id: columnNum
                 role: "idcontragent"
@@ -101,7 +103,7 @@ SwipeScreen{
                 border
                 {
                     width: 1
-                    color: (styleData.pressed)?"red":"black"
+                    color: (styleData.pressed)?"blue":"black"
                 }
 
                 Text
@@ -115,7 +117,7 @@ SwipeScreen{
                     font.bold: true
                     font.pointSize: 9
 
-                    color: (styleData.pressed)?"red":"black"
+                    color: (styleData.pressed)?"blue":"black"
                     text: styleData.value
 
 //                    Component.onCompleted:
@@ -137,15 +139,75 @@ SwipeScreen{
             model: dataBase.modelKontr
         }
 
-        Button {
-            id: buttonAdd
-            x: 41
-            y: 355
-            width: 118
-            height: 25
-            text: qsTr("Добавить")
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 14
+//        Button {
+//            id: buttonAdd
+//            x: 41
+//            y: 355
+//            width: 118
+//            height: 25
+//            text: qsTr("Добавить")
+//            anchors.bottom: parent.bottom
+//            anchors.bottomMargin: 14
+//            onClicked: {
+//                editcontragent.show();
+//            }
+//        }
+
+        EditContragent{
+            id:editcontragent
+            enabled: false;
+            anchors.left: parent.left;
+            anchors.right: parent.right;
+            anchors.bottom: parent.bottom;
+            height: 0;
+            Behavior on y {
+                NumberAnimation {
+                    duration: 300
+                }
+            }
+
+            Behavior on height {
+                NumberAnimation {
+                    duration: 300
+                }
+            }
+
+//            Behavior on visible {
+//                NumberAnimation {
+//                    duration: visible?0:500;
+//                }
+//            }
+
+            onEnabledChanged: {
+                if(enabled){
+                    editcontragent.height = 200;
+                    editcontragent.forceActiveFocus();
+                }
+                else
+                    editcontragent.height = 0;
+            }
+
+
+            function checkAccess(){
+                console.log("checkAccess");
+                editcontragent.enabled = false;
+                idTable.forceActiveFocus();
+            }
+
+            function cancelEdit(){
+                console.log("cancelEdit");
+                editcontragent.enabled = false;
+                idTable.forceActiveFocus();
+            }
+        }
+
+    }
+
+    Keys.onPressed: {
+        if (event.key == Qt.Key_Down && idTable.focus && idTable.currentRow == idTable.rowCount - 1)
+        {
+            console.log("NEW!!!");
+            editcontragent.enabled = true;
         }
     }
 
