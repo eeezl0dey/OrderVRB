@@ -5,11 +5,21 @@ QT += qml quick widgets sql core network
 CONFIG+=qml_debug
 CONFIG+= c++11
 
-SOURCES += main.cpp \
-    sourcedb.cpp \
-    qsqlquerymodelkontragent.cpp \
-    qsqlquerymodelusers.cpp \
-    qlistmodels.cpp
+#UI_SOURCES_DIR = ../OrderVRB/Source
+#UI_HEADERS_DIR = ../OrderVRB/Source
+
+INCLUDE_DIR = Include
+
+INCLUDEPATH += $${INCLUDE_DIR} \
+DEPENDPATH += $$INCLUDEPATH
+
+SOURCE_DIR = Source
+
+SOURCES += $${SOURCE_DIR}/main.cpp \
+    $${SOURCE_DIR}/sourcedb.cpp \
+    $${SOURCE_DIR}/qsqlquerymodelkontragent.cpp \
+    $${SOURCE_DIR}/qsqlquerymodelusers.cpp \
+    $${SOURCE_DIR}/qlistmodels.cpp
 
 RESOURCES += qml.qrc
 
@@ -20,7 +30,7 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    sourcedb.h \
-    qsqlquerymodelkontragent.h \
-    qsqlquerymodelusers.h \
-    qlistmodels.h
+    $${INCLUDE_DIR}/sourcedb.h \
+    $${INCLUDE_DIR}/qsqlquerymodelkontragent.h \
+    $${INCLUDE_DIR}/qsqlquerymodelusers.h \
+    $${INCLUDE_DIR}/qlistmodels.h

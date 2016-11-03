@@ -1,12 +1,23 @@
 <RCC>
     <qresource prefix="/">
-        <file>Login.qml</file>
-        <file>MainWND.qml</file>
-        <file>Kontragent.qml</file>
-        <file>SwipeView.qml</file>
-        <file>SwipeScreen.qml</file>
-        <file>SwipeMain.qml</file>
-        <file>EditContragent.qml</file>
-        <file>WindowFone.qml</file>
+        <file>Image/48/Document 2 Add.png</file>
+        <file>Image/48/Document 2 Delete.png</file>
+        <file>Image/48/Document 2 Edit.png</file>
+        <file>Image/48/Find.png</file>
+        <file>Image/48/Printer 2.png</file>
+        <file>Image/48/Symbol Check 2.png</file>
+        <file>Image/48/Symbol Restricted 2.png</file>
+        <file>Image/48/Symbol Stop 2.png</file>
+        <file>QML/Style/ProjectButtonStyle.qml</file>
+        <file>QML/EditContragent.qml</file>
+        <file>QML/Kontragent.qml</file>
+        <file>QML/Login.qml</file>
+        <file>QML/main.qml</file>
+        <file>QML/MainWND.qml</file>
+        <file>QML/MainWnd.qml</file>
+        <file>QML/SwipeMain.qml</file>
+        <file>QML/SwipeScreen.qml</file>
+        <file>QML/SwipeView.qml</file>
+        <file>QML/WindowFone.qml</file>
     </qresource>
 </RCC>

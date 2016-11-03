@@ -79,8 +79,6 @@ ApplicationWindow {
     }
 
 
-
-
     Login {
         id:loginDlg
         visible: true;
