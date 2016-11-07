@@ -14,10 +14,12 @@
         <file>QML/Login.qml</file>
         <file>QML/main.qml</file>
         <file>QML/MainWND.qml</file>
-        <file>QML/MainWnd.qml</file>
         <file>QML/SwipeMain.qml</file>
         <file>QML/SwipeScreen.qml</file>
         <file>QML/SwipeView.qml</file>
         <file>QML/WindowFone.qml</file>
+        <file>Image/vrbpay.jpg</file>
+        <file>QML/Bank.qml</file>
+        <file>QML/EditBank.qml</file>
     </qresource>
 </RCC>

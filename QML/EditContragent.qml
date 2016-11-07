@@ -2,8 +2,9 @@ import QtQuick 2.1
 import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.0
 import QtQuick.Window 2.0
+import "Style"
 
-Column {
+ColumnLayout {
     id: maincolumn
     property int margin: 12
     property  int rowId: 0
@@ -115,13 +116,12 @@ Column {
             Button {
                 id: buttonOk
                 text: qsTr("Принять")
-                Layout.fillWidth: false
-                z: 1
                 anchors.right: parent.right
                 anchors.rightMargin: 148
-                tooltip: qsTr("Вход в программу")
 //                isDefault: false
-                checkable: false
+                iconSource: "qrc:/Image/48/Symbol Check 2.png"
+                style: ProjectButtonStyle {
+                }
                 onClicked:  checkAccess();
             }
 
@@ -130,12 +130,9 @@ Column {
                 text: qsTr("Отмена")
                 anchors.right: parent.right
                 anchors.rightMargin: 42
-                z: 0
-                rotation: 0
-                antialiasing: false
-                transformOrigin: Item.Center
-                clip: false
-                tooltip: qsTr("Завершение программы")
+                iconSource: "qrc:/Image/48/Symbol Stop 2.png"
+                style: ProjectButtonStyle {
+                }
                 onClicked: cancelEdit();
             }
         }

@@ -14,7 +14,11 @@ public:
         IDRole = Qt::UserRole + 1,  // код
         FullnameRole,               // наименование
         IDUserCreateRole,           // пользователь создавший
-        INNRole                     // код налогоплательщика
+        INNRole,                     // код налогоплательщика
+        IDBankRole,                 // код банка
+        NAccountRole,               //Номер счета в банке
+        IsBeneficiaryRole,          //1 - бинефициар, 0 - нет
+        CreatorNameRole             // имя создавшего запись пользователя
     };
 
     explicit QSqlQueryModelKontragent(QObject *parent = 0);

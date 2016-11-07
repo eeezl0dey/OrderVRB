@@ -12,17 +12,6 @@ QListModels::QListModels(QObject *parent)
     db.setPassword("kadet");
 
     connect();
-
-    QSqlQueryModelKontragent *mKontr;
-    mKontr = new QSqlQueryModelKontragent(this);
-    mKontr->setQuery("SELECT * FROM OrderVRB.сontragent;");
-    hashlist.insert(mtype::kontr, mKontr);
-
-    QSqlQueryModelUsers *mUsers;
-    mUsers = new QSqlQueryModelUsers(this);
-    mUsers->setQuery("SELECT * FROM OrderVRB.users;");
-    hashlist.insert(mtype::users, mUsers);
-
 }
 
 QListModels::~QListModels()
@@ -57,5 +46,20 @@ void QListModels::connect()
 
 QSqlQueryModel* QListModels::getModel( mtype mt)
 {
-    return *(thisClass->hashlist.find(mt));
+    QSqlQueryModel* sqlmodel;
+    switch (mt) {
+    case mtype::kontr:
+        sqlmodel = new QSqlQueryModelKontragent(this);
+        sqlmodel->setQuery("SELECT c.*, u.fullname as creatorname FROM OrderVRB.сontragent as c join OrderVRB.users as u on c.idusers = u.idusers");
+        break;
+    case mtype::users:
+        sqlmodel = new QSqlQueryModelUsers(this);
+        sqlmodel->setQuery("SELECT * FROM OrderVRB.users;");
+
+        break;
+    default:
+        sqlmodel = NULL;
+        break;
+    }
+    return sqlmodel;
 }

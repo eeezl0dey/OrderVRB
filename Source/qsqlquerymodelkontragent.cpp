@@ -15,24 +15,16 @@ QVariant QSqlQueryModelKontragent::data(const QModelIndex & index, int role) con
     /* И с помощью уже метода data() базового класса
      * вытаскиваем данные для таблицы из модели
      * */
-    QVariant var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+    QVariant var;
 
-    if (role == IDUserCreateRole)
-    {
-        int id = var.toInt();
-        QSqlQuery query = QListModels::getInstance()->getModel(QListModels::users)->query();
-        if(query.first())
-        {
-            do{
-                if(query.value("idusers").toInt() == id)
-                {
-                 var = query.value("fullname").toString();
-                 break;
-                }
-
-            }
-            while(query.next());
-        }
+    switch (role) {
+    case IsBeneficiaryRole:
+        var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+        var = (var == 1) ? "Да":"Нет";
+        break;
+    default:
+        var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+        break;
     }
 
     return var;
@@ -48,5 +40,9 @@ QHash<int, QByteArray> QSqlQueryModelKontragent::roleNames() const {
     roles[FullnameRole] = "fname";
     roles[IDUserCreateRole] = "idusers";
     roles[INNRole] = "inn";
+    roles[IDBankRole] = "idbank";
+    roles[NAccountRole] = "naccount";
+    roles[IsBeneficiaryRole] = "is_beneficiary";
+    roles[CreatorNameRole] = "creatorname";
     return roles;
 }

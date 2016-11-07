@@ -8,10 +8,10 @@ SwipeView {
             source: "Kontragent.qml"
         }
 
-//        ListElement {
-//            title: "Register"
-//            source: "RegisterScreen.qml"
-//        }
+        ListElement {
+            title: qsTr("Банки")
+            source: "Bank.qml"
+        }
 
 //        ListElement {
 //            title: "Restore Password"
