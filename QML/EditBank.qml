@@ -8,6 +8,7 @@ ColumnLayout {
     id: mainColumn
     property int margin: 12
     property  int rowId: 0
+    height: 230
 
     Label {
         id: labelInfo
@@ -96,10 +97,7 @@ ColumnLayout {
     GroupBox {
         id: groupBoxBottom
         flat: true
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.topMargin: 2 * mainColumn.margin
-        anchors.bottomMargin: mainColumn.margin
+        Layout.fillWidth: true
 
         RowLayout {
             id: rowLayout1
@@ -132,6 +130,6 @@ ColumnLayout {
     }
 
     onFocusChanged:
-        if(focus)textContrName.forceActiveFocus();
+        if(focus)textBankName.forceActiveFocus();
 }
 

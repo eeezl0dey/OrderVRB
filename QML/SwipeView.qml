@@ -79,7 +79,7 @@ Item {
 
                 Behavior on x {
                     NumberAnimation {
-                        duration: 300
+                        duration: 290
                     }
                 }
 

@@ -12,6 +12,7 @@
 #include <QApplication>
 #include "qsqlquerymodelkontragent.h"
 #include "qsqlquerymodelusers.h"
+#include "qsqlquerymodelbank.h"
 
 
 class QListModels: public QObject
@@ -20,7 +21,8 @@ class QListModels: public QObject
 public:   
     enum mtype{
         users,
-        kontr
+        kontr,
+        banks
     };
 
     static QListModels* getInstance();

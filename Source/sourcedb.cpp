@@ -50,6 +50,12 @@ QSqlQueryModel* SourceDB::getModelUsers()
     return QListModels::getInstance()->getModel(QListModels::mtype::users);
 }
 
+QSqlQueryModel* SourceDB::getModelBank()
+{
+    return QListModels::getInstance()->getModel(QListModels::mtype::banks);
+}
+
+
 bool SourceDB::acceptKontr(int rowId){
     return true;
 }

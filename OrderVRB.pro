@@ -19,7 +19,8 @@ SOURCES += $${SOURCE_DIR}/main.cpp \
     $${SOURCE_DIR}/sourcedb.cpp \
     $${SOURCE_DIR}/qsqlquerymodelkontragent.cpp \
     $${SOURCE_DIR}/qsqlquerymodelusers.cpp \
-    $${SOURCE_DIR}/qlistmodels.cpp
+    $${SOURCE_DIR}/qlistmodels.cpp \
+    Source/qsqlquerymodelbank.cpp
 
 RESOURCES += qml.qrc
 
@@ -33,4 +34,5 @@ HEADERS += \
     $${INCLUDE_DIR}/sourcedb.h \
     $${INCLUDE_DIR}/qsqlquerymodelkontragent.h \
     $${INCLUDE_DIR}/qsqlquerymodelusers.h \
-    $${INCLUDE_DIR}/qlistmodels.h
+    $${INCLUDE_DIR}/qlistmodels.h \
+    Include/qsqlquerymodelbank.h

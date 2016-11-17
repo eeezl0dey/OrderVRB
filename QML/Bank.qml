@@ -64,7 +64,7 @@ SwipeScreen {
                 }
                 TableViewColumn {
                     id: columnBankUser
-                    role: "idusers"
+                    role: "creatorname"
                     title: "Создал"
                     width: 150
                     horizontalAlignment: Text.AlignHCenter
@@ -126,7 +126,7 @@ SwipeScreen {
                 model: dataBase.modelBank
 
                 onActivated: {
-                    editcontragent.enabled = true
+                    editBank.enabled = true
                 }
             }
             ColumnLayout {
@@ -180,10 +180,10 @@ SwipeScreen {
 
                 if (enabled) {
                     Layout.preferredHeight = 200
-                    editcontragent.forceActiveFocus()
+                    editBank.forceActiveFocus()
                 } else {
                     Layout.preferredHeight = 0
-                    idTable.forceActiveFocus()
+                    idTableBank.forceActiveFocus()
                 }
             }
 

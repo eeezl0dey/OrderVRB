@@ -30,6 +30,7 @@ ColumnLayout {
         checked: false
         anchors.left: parent.left
         anchors.right: parent.right
+        height: 250
 
         GridLayout {
             id: gridLayoutInput
@@ -103,15 +104,14 @@ ColumnLayout {
     GroupBox {
         id: groupBoxBottom
         flat: true
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.topMargin: 2 * maincolumn.margin
-        anchors.bottomMargin: maincolumn.margin
+        Layout.fillWidth: true
+
 
         RowLayout {
             id: rowLayout1
             anchors.fill: parent
             spacing: 5
+            anchors.bottomMargin: 20
 
             Button {
                 id: buttonOk

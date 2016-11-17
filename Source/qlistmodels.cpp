@@ -55,7 +55,10 @@ QSqlQueryModel* QListModels::getModel( mtype mt)
     case mtype::users:
         sqlmodel = new QSqlQueryModelUsers(this);
         sqlmodel->setQuery("SELECT * FROM OrderVRB.users;");
-
+        break;
+    case mtype::banks:
+        sqlmodel = new QSqlQueryModelBank(this);
+        sqlmodel->setQuery("SELECT b.*, u.fullname as creatorname FROM OrderVRB.bank as b left outer join OrderVRB.users as u on u.idusers = b.idusers");
         break;
     default:
         sqlmodel = NULL;
