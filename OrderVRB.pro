@@ -7,20 +7,20 @@ CONFIG+= c++11
 
 #UI_SOURCES_DIR = ../OrderVRB/Source
 #UI_HEADERS_DIR = ../OrderVRB/Source
-
-INCLUDE_DIR = Include
-
-INCLUDEPATH += $${INCLUDE_DIR} \
-DEPENDPATH += $$INCLUDEPATH
-
 SOURCE_DIR = Source
+MODELS_DIR = $${SOURCE_DIR}/Models
+
+INCLUDEPATH += $${SOURCE_DIR} \
+            $${MODELS_DIR} \
+
+DEPENDPATH += $$INCLUDEPATH
 
 SOURCES += $${SOURCE_DIR}/main.cpp \
     $${SOURCE_DIR}/sourcedb.cpp \
-    $${SOURCE_DIR}/qsqlquerymodelkontragent.cpp \
-    $${SOURCE_DIR}/qsqlquerymodelusers.cpp \
+    $${MODELS_DIR}/qsqlquerymodelkontragent.cpp \
+    $${MODELS_DIR}/qsqlquerymodelusers.cpp \
     $${SOURCE_DIR}/qlistmodels.cpp \
-    Source/qsqlquerymodelbank.cpp
+    $${MODELS_DIR}/qsqlquerymodelbank.cpp
 
 RESOURCES += qml.qrc
 
@@ -31,8 +31,8 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    $${INCLUDE_DIR}/sourcedb.h \
-    $${INCLUDE_DIR}/qsqlquerymodelkontragent.h \
-    $${INCLUDE_DIR}/qsqlquerymodelusers.h \
-    $${INCLUDE_DIR}/qlistmodels.h \
-    Include/qsqlquerymodelbank.h
+    Source/Models/qsqlquerymodelbank.h \
+    Source/Models/qsqlquerymodelkontragent.h \
+    Source/Models/qsqlquerymodelusers.h \
+    Source/qlistmodels.h \
+    Source/sourcedb.h
