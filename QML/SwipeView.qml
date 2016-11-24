@@ -138,7 +138,16 @@ Item {
                 Component.onCompleted: {
                     item.isFirstScreen = (index === 0)
                     item.isLastScreen = (index === screensListView.count - 1)
+                    item.deactivated.connect(formDeactivated)
+                    item.activated.connect(formActivated)
                 }
+                function formDeactivated(){
+                    headersListView.enabled = false;
+                }
+                function formActivated(){
+                    headersListView.enabled = true;
+                }
+
             }
         }
     }

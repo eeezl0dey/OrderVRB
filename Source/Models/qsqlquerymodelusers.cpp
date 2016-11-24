@@ -11,14 +11,24 @@ QVariant QSqlQueryModelUsers::data(const QModelIndex & index, int role) const {
     // Определяем номер колонки, адрес так сказать, по номеру роли
      int columnId = role - Qt::UserRole - 1;
     // Создаём индекс с помощью новоиспечённого ID колонки
-//    QModelIndex modelIndex =
+    QModelIndex modelIndex =
             this->index(index.row(), columnId);
 
     /* И с помощью уже метода data() базового класса
      * вытаскиваем данные для таблицы из модели
      * */
-//    QVariant var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
-    QVariant var = QSqlQueryModel::data(index, role);
+    QVariant var;
+
+    switch (role) {
+    case IsAdminRole:
+        var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+        var = (var == 1) ? "Да":"Нет";
+        break;
+    default:
+        var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+        break;
+    }
+
     return var;
 }
 
@@ -32,5 +42,6 @@ QHash<int, QByteArray> QSqlQueryModelUsers::roleNames() const {
     roles[UsernameRole] = "username";
     roles[UserpassRole] = "userpass";
     roles[FullnameRole] = "fullname";
+    roles[IsAdminRole] = "isadmin";
     return roles;
 }

@@ -21,5 +21,7 @@
         <file>Image/vrbpay.jpg</file>
         <file>QML/Bank.qml</file>
         <file>QML/EditBank.qml</file>
+        <file>QML/User.qml</file>
+        <file>QML/EditUser.qml</file>
     </qresource>
 </RCC>

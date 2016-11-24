@@ -13,9 +13,9 @@ SwipeView {
             source: "Bank.qml"
         }
 
-//        ListElement {
-//            title: "Restore Password"
-//            source: "RestorePasswordScreen.qml"
-//        }
+        ListElement {
+            title: qsTr("Пользователи")
+            source: "User.qml"
+        }
     }
 }

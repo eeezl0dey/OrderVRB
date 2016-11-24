@@ -13,7 +13,8 @@ public:
         IDRole = Qt::UserRole + 1,  // код
         UsernameRole,               // логин
         UserpassRole,           // пароль
-        FullnameRole            // полное имя
+        FullnameRole,            // полное имя
+        IsAdminRole              // Администратор ли? (1 - да, 0 - нет)
     };
 
     explicit QSqlQueryModelUsers(QObject *parent = 0);

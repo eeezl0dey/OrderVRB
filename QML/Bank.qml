@@ -181,9 +181,11 @@ SwipeScreen {
                 if (enabled) {
                     Layout.preferredHeight = 200
                     editBank.forceActiveFocus()
+                    winbank.deactivated()
                 } else {
                     Layout.preferredHeight = 0
                     idTableBank.forceActiveFocus()
+                    winbank.activated()
                 }
             }
 
@@ -201,8 +203,8 @@ SwipeScreen {
     }
 
     Keys.onPressed: {
-        if (event.key == Qt.Key_Down && idTable.focus
-                && idTable.currentRow == idTable.rowCount - 1) {
+        if (event.key == Qt.Key_Down && idTableBank.focus
+                && idTableBank.currentRow == idTableBank.rowCount - 1) {
             console.log("NEW!!!")
             editBank.enabled = true
         }

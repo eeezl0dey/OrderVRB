@@ -4,6 +4,8 @@ Item {
     property bool isFirstScreen: false
     property bool isLastScreen: false
     signal selected()
+    signal activated()
+    signal deactivated()
 
     WindowFone{}
 }

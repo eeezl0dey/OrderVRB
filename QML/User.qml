@@ -7,14 +7,14 @@ import QtQuick.Layouts 1.1
 import "Style"
 
 SwipeScreen {
-    id: winkontragent
+    id: winUser
     anchors.fill: parent
 
     WindowFone {
     }
 
     ColumnLayout {
-        id: kontrItem
+        id: userItem
         anchors.fill: parent
         RowLayout {
             id: rowView
@@ -22,7 +22,7 @@ SwipeScreen {
             Layout.leftMargin: 5
             Layout.rightMargin: 5
             TableView {
-                id: idTable
+                id: idTableUser
                 //                anchors.bottom: buttonAdd.top;
                 //    //            anchors.bottomMargin: 45
                 //                anchors.right: parent.right
@@ -31,14 +31,14 @@ SwipeScreen {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
+
                 TableViewColumn {
-                    id: columnNum
-                    role: "idcontragent"
+                    id: columnUsersNum
+                    role: "idusers"
                     title: "#"
                     width: 50
                     horizontalAlignment: Text.AlignHCenter
                     delegate: Item {
-
                         Text {
                             anchors.verticalCenter: parent.verticalCenter
                             text: styleData.value
@@ -48,26 +48,33 @@ SwipeScreen {
                     }
                 }
                 TableViewColumn {
+                    id: columnUserName
+                    role: "username"
+                    title: "Логин"
+                    width: 150
+                    horizontalAlignment: Text.AlignHCenter
+                }
+                TableViewColumn {
                     id: columnFullname
-                    role: "fname"
-                    title: "Наименование"
-                    width: idTable.width - columnNum.width - columnInn.width - creatorName.width
+                    role: "fullname"
+                    title: "Полное Ф.И.О."
+                    width: idTableUser.width - columnUsersNum.width - columnUserName.width - columnIsAdmin.width
                     horizontalAlignment: Text.AlignHCenter
                 }
                 TableViewColumn {
-                    id: columnInn
-                    role: "inn"
-                    title: "ИНН"
-                    width: 150
+                    id: columnIsAdmin
+                    role: "isadmin"
+                    title: "Админ"
+                    width: 70
                     horizontalAlignment: Text.AlignHCenter
-                }
-                TableViewColumn {
-                    id: creatorName
-                    role: "creatorname"
-                    title: "Создал"
-                    width: 150
-                    horizontalAlignment: Text.AlignHCenter
-//                    delegate: Text { text: model.creatorname }
+                    delegate: Item {
+                        Text {
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: styleData.value
+                            renderType: Text.NativeRendering
+                            anchors.centerIn: parent
+                        }
+                    }
                 }
 
                 headerDelegate: Rectangle {
@@ -113,7 +120,6 @@ SwipeScreen {
                     }
                 }
 
-
                 itemDelegate: Item {
                     Text {
                         anchors.verticalCenter: parent.verticalCenter
@@ -124,47 +130,47 @@ SwipeScreen {
                     }
                 }
 
-                model: dataBase.modelKontr
+                model: dataBase.modelUsers
 
                 onActivated: {
-                    editcontragent.enabled = true
+                    editUser.enabled = true
                 }
             }
-
             ColumnLayout {
                 Layout.fillHeight: true
-                Layout.alignment: Qt.AlignTop
                 Layout.preferredWidth: 150
                 Layout.fillWidth: false
+                Layout.alignment: Qt.AlignTop
                 Button {
-                    id: buttonAdd
+                    id: buttonUserAdd
+                    anchors.left: parent.left
+                    anchors.right: parent.right
                     Layout.fillWidth: true
                     text: qsTr("Добавить")
-                    tooltip: qsTr("Добавление нового контрагента в базу")
                     iconSource: "qrc:/Image/48/Document 2 Add.png"
                     style: ProjectButtonStyle {
                     }
                     onClicked: {
-                        editcontragent.enabled = true
+                        editUser.enabled = true
                     }
                 }
                 Button {
-                    id: buttonEdit
+                    id: buttonUserEdit
                     Layout.fillWidth: true
                     text: qsTr("Редактирование")
                     iconSource: "qrc:/Image/48/Document 2 Edit.png"
                     style: ProjectButtonStyle {
                     }
                     onClicked: {
-                        editcontragent.enabled = true
+                        editUser.enabled = true
                     }
                 }
 
             }
         }
 
-        EditContragent {
-            id: editcontragent
+        EditUser {
+            id: editUser
             Layout.alignment: Qt.AlignCenter
             enabled: false
             Layout.preferredHeight: 0
@@ -181,33 +187,33 @@ SwipeScreen {
 
                 if (enabled) {
                     Layout.preferredHeight = 200
-                    editcontragent.forceActiveFocus()
-                    winkontragent.deactivated()
+                    editUser.forceActiveFocus()
+                    winUser.deactivated()
                 } else {
                     Layout.preferredHeight = 0
-                    idTable.forceActiveFocus()
-                    winkontragent.activated()
+                    idTableUser.forceActiveFocus()
+                    winUser.activated()
                 }
             }
 
             function checkAccess() {
                 console.log("checkAccess")
-                dataBase.acceptKontr(editcontragent.rowId)
-                editcontragent.enabled = false
+//                dataBase.acceptBank(editcontragent.rowId)
+                editUser.enabled = false
             }
 
             function cancelEdit() {
                 console.log("cancelEdit")
-                editcontragent.enabled = false
+                editUser.enabled = false
             }
         }
     }
 
     Keys.onPressed: {
-        if (event.key == Qt.Key_Down && idTable.focus
-                && idTable.currentRow == idTable.rowCount - 1) {
+        if (event.key == Qt.Key_Down && idTableUser.focus
+                && idTableUser.currentRow == idTableUser.rowCount - 1) {
             console.log("NEW!!!")
-            editcontragent.enabled = true
+            editUser.enabled = true
         }
     }
 }
