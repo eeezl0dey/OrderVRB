@@ -31,17 +31,28 @@ QListModels* QListModels::getInstance()
 
 void QListModels::connect()
 {
-    //    qDebug() << QSqlDatabase::drivers();
-    //    qDebug() << QApplication::libraryPaths();
+    qDebug() << QSqlDatabase::drivers();
+    qDebug() << QApplication::libraryPaths();
 
-    bool ok = db.open();
-    qDebug()<< QString("Connect is ") + QString((bool)ok?"accept":"error");
-    if(!ok)
+    connectdb = db.open();
+    qDebug()<< QString("Connect is ") + QString((bool)connectdb?"accept":"error");
+    if(!connectdb)
     {
-        qDebug() << db.lastError().text();
+        connectError = db.lastError().text();
+        qDebug() << connectError;
         QApplication::quit();
     }
     return;
+}
+
+bool QListModels::isConnected()
+{
+    return connectdb;
+}
+
+QString QListModels::getConnectError()
+{
+    return connectError;
 }
 
 QSqlQueryModel* QListModels::getModel( mtype mt)

@@ -27,13 +27,17 @@ public:
 
     static QListModels* getInstance();
     QSqlQueryModel* getModel( mtype);
-private:
+    bool isConnected();
+    QString getConnectError();
+protected:
     static QListModels* thisClass;
     explicit QListModels(QObject *parent = 0);
     ~QListModels();
     QHash<mtype,QSqlQueryModel*> hashlist;
     QSqlDatabase db;
     void connect();
+    bool connectdb;
+    QString connectError="";
 };
 
 #endif // QLISTMODET_H
