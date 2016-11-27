@@ -13,6 +13,22 @@ SourceDB::~SourceDB()
 {
 }
 
+bool SourceDB::setConnect(QString hostName, QString databaseName, QString userName, QString password)
+{
+    return QListModels::getInstance()->setConnect(hostName, databaseName, userName, password);
+}
+
+
+bool SourceDB::isConnected()
+{
+    return QListModels::getInstance()->isConnected();
+}
+
+QString SourceDB::getConnectError()
+{
+    return QListModels::getInstance()->getConnectError();
+}
+
 bool SourceDB::login(QString username, QString pass)
 {
     QSqlQueryModelUsers* mUsers;

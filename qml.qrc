@@ -23,5 +23,6 @@
         <file>QML/EditBank.qml</file>
         <file>QML/User.qml</file>
         <file>QML/EditUser.qml</file>
+        <file>QML/SetConnectDb.qml</file>
     </qresource>
 </RCC>

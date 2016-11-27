@@ -37,6 +37,12 @@ signals:
 public slots:
     bool login(QString username, QString pass);
     bool acceptKontr(int rowId);
+    bool isConnected();
+    QString getConnectError();
+    bool setConnect(QString hostName,      // ip или имя хоста
+                    QString databaseName,  // наименование базы
+                    QString userName,      // имя пользователя
+                    QString password);     // пароль
 };
 
 #endif // SOURCEDB_H

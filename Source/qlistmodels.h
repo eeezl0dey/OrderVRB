@@ -29,13 +29,18 @@ public:
     QSqlQueryModel* getModel( mtype);
     bool isConnected();
     QString getConnectError();
+
+    /*Коннект с базой*/
+    bool setConnect(QString hostName,      // ip или имя хоста
+                    QString databaseName,  // наименование базы
+                    QString userName,      // имя пользователя
+                    QString password);     // пароль
 protected:
     static QListModels* thisClass;
     explicit QListModels(QObject *parent = 0);
     ~QListModels();
     QHash<mtype,QSqlQueryModel*> hashlist;
     QSqlDatabase db;
-    void connect();
     bool connectdb;
     QString connectError="";
 };

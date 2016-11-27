@@ -6,12 +6,10 @@ QListModels::QListModels(QObject *parent)
 {
     this->setParent(parent);
     db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("localhost");
-    db.setDatabaseName("OrderVRB");
-    db.setUserName("root");
-    db.setPassword("kadet");
-
-    connect();
+//    db.setHostName("localhost");
+//    db.setDatabaseName("OrderVRB");
+//    db.setUserName("root");
+//    db.setPassword("kadet");
 }
 
 QListModels::~QListModels()
@@ -20,17 +18,18 @@ QListModels::~QListModels()
         db.close();
 }
 
-QListModels* QListModels::getInstance()
+bool QListModels::setConnect(QString hostName, QString databaseName, QString userName, QString password)
 {
-    if(thisClass == nullptr)
-    {
-        thisClass = new QListModels();
-    }
-    return thisClass;
-}
+//    db.setHostName("localhost");
+//    db.setDatabaseName("OrderVRB");
+//    db.setUserName("root");
+//    db.setPassword("kadet");
 
-void QListModels::connect()
-{
+    db.setHostName(hostName);
+    db.setDatabaseName(databaseName);
+    db.setUserName(userName);
+    db.setPassword(password);
+
     qDebug() << QSqlDatabase::drivers();
     qDebug() << QApplication::libraryPaths();
 
@@ -40,9 +39,17 @@ void QListModels::connect()
     {
         connectError = db.lastError().text();
         qDebug() << connectError;
-        QApplication::quit();
     }
-    return;
+    return connectdb;
+}
+
+QListModels* QListModels::getInstance()
+{
+    if(thisClass == nullptr)
+    {
+        thisClass = new QListModels();
+    }
+    return thisClass;
 }
 
 bool QListModels::isConnected()
