@@ -28,10 +28,29 @@ ApplicationWindow {
         property alias dbpasswd: mainApp.passwd
     }
 
+    ListModel {
+        id: listModelWindow
+        ListElement {
+            title: qsTr("Контрагенты")
+            source: "Kontragent.qml"
+        }
+
+        ListElement {
+            title: qsTr("Банки")
+            source: "Bank.qml"
+        }
+
+        ListElement {
+            title: qsTr("Пользователи")
+            source: "User.qml"
+        }
+    }
+
 
     WindowFone{}
 
     SwipeMain{
+        id: swipeMain
         anchors.fill: parent;
     }
 
@@ -41,6 +60,7 @@ ApplicationWindow {
 //        visible: true;
         visible: false;
         onSignalAcceptPass: {
+            swipeMain.model = listModelWindow;
             mainApp.title = "OrderVRB (" + dataBase.userFullName + ")";
             mainApp.show();
             loginDlg.hide();
@@ -79,5 +99,4 @@ ApplicationWindow {
             mainApp.hide();
         }
     }
-
 }
