@@ -72,7 +72,16 @@ QSqlQueryModel* SourceDB::getModelBank()
 }
 
 
-bool SourceDB::acceptKontr(int rowId){
+bool SourceDB::acceptKontr(int rowId, QString fname, int idusers, QString  inn, int idbank, QString  naccount, int is_beneficiary){
+    QSqlQuery query;
+    QString script;
+    if(rowId == 0)
+    {
+        script = "insert into OrderVRB.сontragent(\
+                    fname, idusers, idbank, naccount) \
+                    values (?,?,?,?)";
+    }
+
     return true;
 }
 

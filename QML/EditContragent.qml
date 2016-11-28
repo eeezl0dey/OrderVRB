@@ -78,25 +78,25 @@ ColumnLayout {
             }
 
             Label {
-                id: labelINN
+                id: labelBank
                 Layout.preferredWidth: labelID.width
-                text: qsTr("Код нологоплательщика:")
+                text: qsTr("Банк:")
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignRight
                 font.bold: true
             }
 
-            TextField {
-                id: textINN
+
+            ComboBox {
+                id: comboBoxBank
                 x: 142
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                font.pixelSize: 12
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignLeft
+                model: dataBase.modelBank
+                textRole: 'name'
+
                 onAccepted:  checkAccess();
             }
-
         }
     }
 

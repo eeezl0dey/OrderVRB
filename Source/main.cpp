@@ -7,6 +7,8 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+    app.setOrganizationName("Home Soft");
+    app.setApplicationName("Order VRB");
 
     QQmlApplicationEngine engine;
 
