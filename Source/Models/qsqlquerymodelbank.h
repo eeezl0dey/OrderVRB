@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QSqlQueryModel>
 #include "qlistmodels.h"
+#include <QSqlRecord>
 
 class QSqlQueryModelBank : public QSqlQueryModel
 {
@@ -34,6 +35,7 @@ protected:
 signals:
 
 public slots:
+    QVariant getData(int row, QString colName);
 
 };
 

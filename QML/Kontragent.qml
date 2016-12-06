@@ -192,7 +192,7 @@ SwipeScreen {
 
             function checkAccess() {
                 console.log("checkAccess")
-                dataBase.acceptKontr(editcontragent.rowId)
+                dataBase.acceptKontr(editcontragent.rowId, editcontragent.contrName, dataBase.modelBank.getData(editcontragent.bankIndex, 'idbank'), editcontragent.accNum)
                 editcontragent.enabled = false
             }
 

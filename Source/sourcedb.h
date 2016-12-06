@@ -36,7 +36,7 @@ signals:
     void modelBankChanged();
 public slots:
     bool login(QString username, QString pass);
-    bool acceptKontr(int rowId, QString fname, int idusers, QString  inn, int idbank, QString  naccount, int is_beneficiary);
+    bool acceptKontr(int rowId, QString fname, int idbank, QString  naccount, int is_beneficiary = 1);
     bool isConnected();
     QString getConnectError();
     bool setConnect(QString hostName,      // ip или имя хоста

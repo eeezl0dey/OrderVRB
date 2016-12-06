@@ -31,6 +31,13 @@ QVariant QSqlQueryModelBank::data(const QModelIndex & index, int role) const {
     return var;
 }
 
+// Значение по номеру строки и столбца таблицы
+QVariant QSqlQueryModelBank::getData(int row, QString colName){
+//TODO
+    return record(row).value(colName);
+
+}
+
 // Метод для получения имен ролей через хешированную таблицу.
 QHash<int, QByteArray> QSqlQueryModelBank::roleNames() const {
     /* То есть сохраняем в хеш-таблицу названия ролей

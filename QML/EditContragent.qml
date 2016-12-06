@@ -8,6 +8,10 @@ ColumnLayout {
     id: maincolumn
     property int margin: 12
     property  int rowId: 0
+    property alias contrName: textContrName.text
+    property alias bankIndex: comboBoxBank.currentIndex
+    property alias accNum: textAcc.text
+
 
     Label {
         id: labelInfo
@@ -97,6 +101,29 @@ ColumnLayout {
 
                 onAccepted:  checkAccess();
             }
+
+            Label {
+                id: labelAcc
+                Layout.preferredWidth: labelID.width
+                text: qsTr("Счет:")
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignRight
+                font.bold: true
+            }
+
+
+            TextField {
+                id: textAcc
+                x: 142
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                font.pixelSize: 12
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignLeft
+                onAccepted:  checkAccess();
+//                validator: RegExpValidator { regExp: /\d{10,}\s\D\D\D/ }
+            }
+
         }
     }
 
