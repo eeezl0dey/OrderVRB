@@ -123,7 +123,7 @@ Item {
             orientation: ListView.Horizontal
             snapMode: ListView.SnapOneItem
             highlightRangeMode: ListView.StrictlyEnforceRange
-            highlightMoveVelocity: 2000
+            highlightMoveVelocity: 1000
             clip: true
             model: swipeView.model
             onCurrentItemChanged: {

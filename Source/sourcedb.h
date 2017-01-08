@@ -28,15 +28,12 @@ public:
     QSqlQueryModel* getModelKontr();
     QSqlQueryModel* getModelUsers();
     QSqlQueryModel* getModelBank();
-private:
-    QString userFullName;
 signals:
     void modelKontrChanged();
     void modelUsersChanged();
     void modelBankChanged();
 public slots:
     bool login(QString username, QString pass);
-    bool acceptKontr(int rowId, QString fname, int idbank, QString  naccount, int is_beneficiary = 1);
     bool isConnected();
     QString getConnectError();
     bool setConnect(QString hostName,      // ip или имя хоста

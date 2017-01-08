@@ -6,17 +6,18 @@ import "Style"
 
 ColumnLayout {
     id: maincolumn
-    property int margin: 12
-    property  int rowId: 0
+    property int margin: 5
+    property alias rowId: labelIDNumber.text
     property alias contrName: textContrName.text
     property alias bankIndex: comboBoxBank.currentIndex
+    property alias bankComboBox: comboBoxBank
     property alias accNum: textAcc.text
+    property bool isNew: false
 
 
     Label {
         id: labelInfo
-        height: 50
-        text: qsTr("Введите данные нового контрагента")
+        height: 40
         anchors.left: parent.left
         anchors.right: parent.right
         font.bold: true
@@ -24,6 +25,7 @@ ColumnLayout {
         font.family: "Tahoma"
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
+        text: isNew ? qsTr("Введите данные нового контрагента") : qsTr("Редактирование контрагента");
     }
 
 
@@ -121,7 +123,7 @@ ColumnLayout {
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignLeft
                 onAccepted:  checkAccess();
-//                validator: RegExpValidator { regExp: /\d{10,}\s\D\D\D/ }
+                validator: RegExpValidator { regExp: /\d{10,}\s\D\D\D/ }
             }
 
         }

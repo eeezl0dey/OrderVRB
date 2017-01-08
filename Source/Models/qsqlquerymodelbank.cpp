@@ -33,8 +33,12 @@ QVariant QSqlQueryModelBank::data(const QModelIndex & index, int role) const {
 
 // Значение по номеру строки и столбца таблицы
 QVariant QSqlQueryModelBank::getData(int row, QString colName){
-//TODO
-    return record(row).value(colName);
+    QVariant var;
+    int role = roleNames().key(colName.toUtf8());
+    int numColumn = role - Qt::UserRole - 1;
+    QModelIndex modelIndex = this->index(row , numColumn);
+    var = data(modelIndex,role);
+    return var;
 
 }
 

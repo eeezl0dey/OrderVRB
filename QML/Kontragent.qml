@@ -22,12 +22,7 @@ SwipeScreen {
             Layout.leftMargin: 5
             Layout.rightMargin: 5
             TableView {
-                id: idTable
-                //                anchors.bottom: buttonAdd.top;
-                //    //            anchors.bottomMargin: 45
-                //                anchors.right: parent.right
-                //                anchors.left: parent.left
-                //                anchors.top: parent.top
+                id: idTableContr
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
@@ -51,13 +46,13 @@ SwipeScreen {
                     id: columnFullname
                     role: "fname"
                     title: "Наименование"
-                    width: idTable.width - columnNum.width - columnInn.width - creatorName.width
+                    width: idTableContr.width - columnNum.width - columnAccount.width - creatorName.width
                     horizontalAlignment: Text.AlignHCenter
                 }
                 TableViewColumn {
-                    id: columnInn
-                    role: "inn"
-                    title: "ИНН"
+                    id: columnAccount
+                    role: "naccount"
+                    title: "Счет"
                     width: 150
                     horizontalAlignment: Text.AlignHCenter
                 }
@@ -71,7 +66,7 @@ SwipeScreen {
                 }
 
                 headerDelegate: Rectangle {
-                    width: _textHeader.text.length * 1.2
+//                    width: _textHeader.text.length * 1.2
                     height: _textHeader.font.pixelSize * 1.6
                     gradient: Gradient {
                         GradientStop {
@@ -127,7 +122,9 @@ SwipeScreen {
                 model: dataBase.modelKontr
 
                 onActivated: {
+                    editcontragent.isNew = false
                     editcontragent.enabled = true
+
                 }
             }
 
@@ -145,6 +142,7 @@ SwipeScreen {
                     style: ProjectButtonStyle {
                     }
                     onClicked: {
+                        editcontragent.isNew = true
                         editcontragent.enabled = true
                     }
                 }
@@ -156,7 +154,10 @@ SwipeScreen {
                     style: ProjectButtonStyle {
                     }
                     onClicked: {
-                        editcontragent.enabled = true
+                        if(idTableContr.currentRow >= 0){
+                            editcontragent.isNew = false
+                            editcontragent.enabled = true
+                        }
                     }
                 }
 
@@ -180,19 +181,35 @@ SwipeScreen {
                 rowView.enabled = !enabled
 
                 if (enabled) {
+                    if(!isNew)
+                    {
+                        contrName = dataBase.modelKontr.getData(idTableContr.currentRow, 'fname')
+                        accNum = dataBase.modelKontr.getData(idTableContr.currentRow, 'naccount')
+                        bankIndex = bankComboBox.find(dataBase.modelKontr.getData(idTableContr.currentRow, 'bankname'))
+                        rowId = dataBase.modelKontr.getData(idTableContr.currentRow, 'idcontragent')
+                    }
+                    else{
+                        contrName = ""
+                        accNum = ""
+                        bankIndex = 0
+                        rowId = ""
+                    }
+
                     Layout.preferredHeight = 200
                     editcontragent.forceActiveFocus()
                     winkontragent.deactivated()
                 } else {
                     Layout.preferredHeight = 0
-                    idTable.forceActiveFocus()
+                    idTableContr.forceActiveFocus()
                     winkontragent.activated()
                 }
             }
 
             function checkAccess() {
                 console.log("checkAccess")
-                dataBase.acceptKontr(editcontragent.rowId, editcontragent.contrName, dataBase.modelBank.getData(editcontragent.bankIndex, 'idbank'), editcontragent.accNum)
+                dataBase.modelKontr.acceptKontr(editcontragent.rowId, editcontragent.contrName, dataBase.modelBank.getData(editcontragent.bankIndex, 'idbank'), editcontragent.accNum)
+                idTableContr.model = dataBase.modelKontr
+                idTableContr.update()
                 editcontragent.enabled = false
             }
 
@@ -204,8 +221,8 @@ SwipeScreen {
     }
 
     Keys.onPressed: {
-        if (event.key == Qt.Key_Down && idTable.focus
-                && idTable.currentRow == idTable.rowCount - 1) {
+        if (event.key == Qt.Key_Down && idTableContr.focus
+                && idTableContr.currentRow == idTableContr.rowCount - 1) {
             console.log("NEW!!!")
             editcontragent.enabled = true
         }

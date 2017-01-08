@@ -62,13 +62,35 @@ QString QListModels::getConnectError()
     return connectError;
 }
 
+
+QString QListModels::getUserFullName()
+{
+    return userFullName;
+}
+
+int QListModels::getUserId()
+{
+    return idUser;
+}
+
+
+void QListModels::setUserFullName(int id, QString fname)
+{
+    idUser = id;
+    userFullName = fname;
+    return ;
+}
+
 QSqlQueryModel* QListModels::getModel( mtype mt)
 {
     QSqlQueryModel* sqlmodel;
     switch (mt) {
     case mtype::kontr:
         sqlmodel = new QSqlQueryModelKontragent(this);
-        sqlmodel->setQuery("SELECT c.*, u.fullname as creatorname FROM OrderVRB.сontragent as c join OrderVRB.users as u on c.idusers = u.idusers");
+        sqlmodel->setQuery("SELECT c.*, u.fullname as creatorname, b.name as bankname \
+                            FROM OrderVRB.сontragent as c join OrderVRB.users as u on c.idusers = u.idusers \
+                                                          join OrderVRB.bank as b on b.idbank = c.idbank \
+                            order by c.idсontragent desc");
         break;
     case mtype::users:
         sqlmodel = new QSqlQueryModelUsers(this);

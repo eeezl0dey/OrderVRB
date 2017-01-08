@@ -29,6 +29,10 @@ public:
     QSqlQueryModel* getModel( mtype);
     bool isConnected();
     QString getConnectError();
+    void setUserFullName(int id, QString fname);
+    QString getUserFullName();
+    int getUserId();
+
 
     /*Коннект с базой*/
     bool setConnect(QString hostName,      // ip или имя хоста
@@ -43,6 +47,10 @@ protected:
     QSqlDatabase db;
     bool connectdb;
     QString connectError="";
+
+private:
+    QString userFullName;
+    int idUser;
 };
 
 #endif // QLISTMODET_H

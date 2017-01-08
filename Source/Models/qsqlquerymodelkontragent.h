@@ -18,7 +18,8 @@ public:
         IDBankRole,                 // код банка
         NAccountRole,               //Номер счета в банке
         IsBeneficiaryRole,          //1 - бинефициар, 0 - нет
-        CreatorNameRole             // имя создавшего запись пользователя
+        CreatorNameRole,             // имя создавшего запись пользователя
+        BankName                     // наименование банка
     };
 
     explicit QSqlQueryModelKontragent(QObject *parent = 0);
@@ -37,6 +38,8 @@ protected:
 signals:
 
 public slots:
+    QVariant getData(int row, QString colName);
+    bool acceptKontr(int rowId, QString fname, int idbank, QString  naccount, int is_beneficiary = 1);
 
 };
 

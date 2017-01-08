@@ -41,9 +41,11 @@ bool SourceDB::login(QString username, QString pass)
            if(query.value("username").toString() == username &&
                    query.value("userpass").toString() == pass)
            {
-            userFullName = query.value("fullname").toString();
-            isFind = true;
-            break;
+              QString userFullName = query.value("fullname").toString();
+              int idUser = query.value("idusers").toInt();
+              QListModels::getInstance()->setUserFullName(idUser, userFullName);
+              isFind = true;
+              break;
            }
         }
         while(query.next());
@@ -53,8 +55,9 @@ bool SourceDB::login(QString username, QString pass)
 
 QString SourceDB::getUserFullName()
 {
-    return userFullName;
+    return QListModels::getInstance()->getUserFullName();
 }
+
 
 QSqlQueryModel* SourceDB::getModelKontr()
 {
@@ -70,20 +73,3 @@ QSqlQueryModel* SourceDB::getModelBank()
 {
     return QListModels::getInstance()->getModel(QListModels::mtype::banks);
 }
-
-
-bool SourceDB::acceptKontr(int rowId, QString fname, int idbank, QString  naccount, int is_beneficiary){
-    QSqlQuery query;
-    QString script;
-
-    qDebug() << idbank;
-    if(rowId == 0)
-    {
-        script = "insert into OrderVRB.сontragent(\
-                    fname, idusers, idbank, naccount) \
-                    values (?,?,?,?)";
-    }
-
-    return true;
-}
-

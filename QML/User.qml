@@ -17,7 +17,7 @@ SwipeScreen {
         id: userItem
         anchors.fill: parent
         RowLayout {
-            id: rowView
+            id: rowViewUser
             Layout.fillHeight: true
             Layout.leftMargin: 5
             Layout.rightMargin: 5
@@ -78,7 +78,7 @@ SwipeScreen {
                 }
 
                 headerDelegate: Rectangle {
-                    width: _textHeader.text.length * 1.2
+//                    width: _textHeader.text.length * 1.2
                     height: _textHeader.font.pixelSize * 1.6
                     gradient: Gradient {
                         GradientStop {
@@ -183,7 +183,7 @@ SwipeScreen {
             }
 
             onEnabledChanged: {
-                rowView.enabled = !enabled
+                rowViewUser.enabled = !enabled
 
                 if (enabled) {
                     Layout.preferredHeight = 200
