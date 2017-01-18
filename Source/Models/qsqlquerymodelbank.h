@@ -36,6 +36,7 @@ signals:
 
 public slots:
     QVariant getData(int row, QString colName);
+    bool acceptBank(int rowId, QString name, QString  address);
 
 };
 

@@ -222,7 +222,9 @@ Window {
         if (dataBase.setConnect(hostName, dbName, dbUserName, dbPasswd)) {
             signalAcceptDbPass()
         } else
+        {
             errInfo = dataBase.getConnectError();
+        }
     }
 
     onActiveChanged: {

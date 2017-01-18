@@ -8,12 +8,15 @@ ColumnLayout {
     id: mainColumn
     property int margin: 12
     property  int rowId: 0
+    property alias bname: textBankName.text
+    property alias baddress: textAddress.text
+    property bool isNew: false
     height: 230
 
     Label {
         id: labelInfo
         height: 50
-        text: qsTr("Введите данные нового банка")
+        text: isNew ? qsTr("Введите данные нового банка") : qsTr("Редактирование банка");
         anchors.left: parent.left
         anchors.right: parent.right
         font.bold: true

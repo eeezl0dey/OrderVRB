@@ -55,3 +55,41 @@ QHash<int, QByteArray> QSqlQueryModelBank::roleNames() const {
     roles[CreatorNameRole] = "creatorname";
     return roles;
 }
+
+// Добавление/редактирование банка
+bool QSqlQueryModelBank::acceptBank(int rowId, QString name, QString  address)
+{
+    QSqlQuery query;
+    QString script;
+
+    QString querystr;
+    if(rowId > 0)
+    {
+        querystr = "UPDATE `OrderVRB`.`bank`  \
+                SET                                 \
+                `name` = :name,                   \
+                `address` = :address            \
+                WHERE `idbank` = :idbank; ";
+        query.prepare(querystr);
+        query.bindValue(":idbank", rowId);
+    }
+    else
+    {
+        querystr = "INSERT INTO `OrderVRB`.`bank` \
+                (`name`,                               \
+                `idusers`,                               \
+                `address`)                              \
+                VALUES                                  \
+                (:name,                                \
+                :idusers,                               \
+                :address);";
+        query.prepare(querystr);
+        query.bindValue(":idusers", QListModels::getInstance()->getUserId());
+    }
+    qDebug() << querystr;
+    query.bindValue(":name", name);
+    query.bindValue(":address", address);
+    if(!query.exec())
+        qDebug() << query.lastError();
+    return true;
+}

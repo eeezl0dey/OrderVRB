@@ -144,6 +144,7 @@ SwipeScreen {
                     style: ProjectButtonStyle {
                     }
                     onClicked: {
+                        editBank.isNew = true
                         editBank.enabled = true
                     }
                 }
@@ -155,6 +156,7 @@ SwipeScreen {
                     style: ProjectButtonStyle {
                     }
                     onClicked: {
+                        editBank.isNew = false
                         editBank.enabled = true
                     }
                 }
@@ -179,6 +181,18 @@ SwipeScreen {
                 rowViewBank.enabled = !enabled
 
                 if (enabled) {
+                    if(!isNew)
+                    {
+                        bname = dataBase.modelBank.getData(idTableBank.currentRow, 'name')
+                        baddress = dataBase.modelBank.getData(idTableBank.currentRow, 'address')
+                        rowId = dataBase.modelBank.getData(idTableBank.currentRow, 'idbank')
+                    }
+                    else{
+                        bname = ""
+                        baddress = ""
+                        rowId = ""
+                    }
+
                     Layout.preferredHeight = 200
                     editBank.forceActiveFocus()
                     winbank.deactivated()
@@ -191,7 +205,10 @@ SwipeScreen {
 
             function checkAccess() {
                 console.log("checkAccess")
-//                dataBase.acceptBank(editcontragent.rowId)
+                dataBase.modelBank.acceptBank(editBank.rowId, editBank.bname, editBank.baddress)
+                idTableBank.model = dataBase.modelBank
+                idTableBank.update()
+                idTableBank.selection.select(0)
                 editBank.enabled = false
             }
 
