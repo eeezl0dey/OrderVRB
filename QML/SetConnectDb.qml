@@ -17,7 +17,7 @@ Window {
     title: qsTr("Соединение с базой данных")
     signal signalAcceptDbPass
     property alias errInfo: labelInfo.text
-    property alias hostName: textFieldHostName.text
+    property alias hostAddress: textFieldHostName.text
     property alias dbName: textFieldBaseName.text
     property alias dbUserName: textFieldLogin.text
     property alias dbPasswd: textFieldPass.text
@@ -219,7 +219,7 @@ Window {
     }
 
     function checkAccess() {
-        if (dataBase.setConnect(hostName, dbName, dbUserName, dbPasswd)) {
+        if (dataBase.setConnect(hostAddress, dbName, dbUserName, dbPasswd)) {
             signalAcceptDbPass()
         } else
         {

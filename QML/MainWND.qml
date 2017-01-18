@@ -72,7 +72,7 @@ ApplicationWindow {
         visible: true;
 //        visible: false;
         onSignalAcceptDbPass: {
-            hostName = connectDlg.hostName;
+            hostName = connectDlg.hostAddress;
             databaseName = connectDlg.dbName;
             userName = connectDlg.dbUserName;
             passwd = connectDlg.dbPasswd;
@@ -89,7 +89,7 @@ ApplicationWindow {
             mainApp.hide();
         }
         else{
-            connectDlg.hostName = hostName;
+            connectDlg.hostAddress = hostName;
             connectDlg.dbName = databaseName;
             connectDlg.dbUserName = userName;
             connectDlg.dbPasswd = passwd;
