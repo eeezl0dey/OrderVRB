@@ -18,6 +18,7 @@ class SourceDB: public QObject
     Q_OBJECT
 //    Q_PROPERTY(QString userFullName READ getUserFullName WRITE setUserFullName NOTIFY userFullNameChanged)
       Q_PROPERTY(QString userFullName READ getUserFullName)
+      Q_PROPERTY(bool isAdmin READ getUserIsAdmin)
       Q_PROPERTY(QSqlQueryModel* modelKontr READ getModelKontr NOTIFY modelKontrChanged)
       Q_PROPERTY(QSqlQueryModel* modelBank READ getModelBank NOTIFY modelBankChanged)
       Q_PROPERTY(QSqlQueryModel* modelUsers READ getModelUsers NOTIFY modelUsersChanged)
@@ -25,6 +26,7 @@ public:
     explicit SourceDB(QObject *parent = 0);
     virtual ~SourceDB();
     QString getUserFullName();
+    bool getUserIsAdmin();
     QSqlQueryModel* getModelKontr();
     QSqlQueryModel* getModelUsers();
     QSqlQueryModel* getModelBank();

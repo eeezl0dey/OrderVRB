@@ -9,12 +9,17 @@ ColumnLayout {
     id: mainColumn
     property int margin: 12
     property  int rowId: 0
+    property bool isNew: false
+    property alias uname: textLogin.text
+    property alias upass: textPass.text
+    property alias ufname: textFullName.text
+    property alias isadm: checkIsAdmin.checked
     height: 230
 
     Label {
         id: labelInfo
         height: 50
-        text: qsTr("Введите данные нового пользователя")
+        text: isNew ? qsTr("Введите данные нового пользователя") : qsTr("Редактирование пользователя");
         anchors.left: parent.left
         anchors.right: parent.right
         font.bold: true
@@ -113,7 +118,6 @@ ColumnLayout {
                 font.pixelSize: 12
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignLeft
-                echoMode: TextInput.Password
                 onAccepted:  checkAccess();
             }
 

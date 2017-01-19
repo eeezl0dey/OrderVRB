@@ -29,9 +29,10 @@ public:
     QSqlQueryModel* getModel( mtype);
     bool isConnected();
     QString getConnectError();
-    void setUserFullName(int id, QString fname);
+    void setUser(int id, QString fname, bool isadmin);
     QString getUserFullName();
     int getUserId();
+    bool getUserIsAdmin();
 
 
     /*Коннект с базой*/
@@ -50,6 +51,7 @@ protected:
 
 private:
     QString userFullName;
+    bool isAdmin;
     int idUser;
 };
 

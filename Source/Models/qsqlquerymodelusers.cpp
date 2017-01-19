@@ -45,3 +45,56 @@ QHash<int, QByteArray> QSqlQueryModelUsers::roleNames() const {
     roles[IsAdminRole] = "isadmin";
     return roles;
 }
+
+// Значение по номеру строки и столбца таблицы
+QVariant QSqlQueryModelUsers::getData(int row, QString colName){
+    QVariant var;
+    int role = roleNames().key(colName.toUtf8());
+    int numColumn = role - Qt::UserRole - 1;
+    QModelIndex modelIndex = this->index(row , numColumn);
+    var = data(modelIndex,role);
+    return var;
+
+}
+
+// Добавление/редактирование пользователя
+bool QSqlQueryModelUsers::acceptUser(int rowId, QString username, QString  userpass, QString fullname, bool isadmin)
+{
+    QSqlQuery query;
+    QString script;
+
+    QString querystr;
+    if(rowId > 0)
+    {
+        querystr = "UPDATE `OrderVRB`.`users`  \
+                SET                                 \
+                `username` = :username,                   \
+                `userpass` = :userpass,            \
+                `fullname` = :fullname            \
+                WHERE `idusers` = :idusers; ";
+        query.prepare(querystr);
+        query.bindValue(":idusers", rowId);
+    }
+    else
+    {
+        querystr = "INSERT INTO `OrderVRB`.`users` \
+                (`username`,                               \
+                `userpass`,                               \
+                `fullname`,                              \
+                `isadmin`)                              \
+                VALUES                                  \
+                (:username,                                \
+                :userpass,                               \
+                :fullname,                               \
+                :isadmin);";
+        query.prepare(querystr);
+    }
+    qDebug() << querystr;
+    query.bindValue(":username", username);
+    query.bindValue(":userpass", userpass);
+    query.bindValue(":fullname", fullname);
+    query.bindValue(":isadmin", isadmin);
+    if(!query.exec())
+        qDebug() << query.lastError();
+    return true;
+}

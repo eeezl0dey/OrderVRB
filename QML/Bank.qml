@@ -208,7 +208,8 @@ SwipeScreen {
                 dataBase.modelBank.acceptBank(editBank.rowId, editBank.bname, editBank.baddress)
                 idTableBank.model = dataBase.modelBank
                 idTableBank.update()
-                idTableBank.selection.select(0)
+                if(idTableBank.rowCount > 0)
+                    idTableBank.selection.select(0)
                 editBank.enabled = false
             }
 

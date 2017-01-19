@@ -39,11 +39,6 @@ ApplicationWindow {
             title: qsTr("Банки")
             source: "Bank.qml"
         }
-
-        ListElement {
-            title: qsTr("Пользователи")
-            source: "User.qml"
-        }
     }
 
 
@@ -60,6 +55,13 @@ ApplicationWindow {
 //        visible: true;
         visible: false;
         onSignalAcceptPass: {
+            if(dataBase.isAdmin)
+            {
+                listModelWindow.append({"title": qsTr("Пользователи"), "source": "User.qml"});
+
+                {"cost": 5.95, "name":"Pizza"}
+            }
+
             swipeMain.model = listModelWindow;
             mainApp.title = "OrderVRB (" + dataBase.userFullName + ")";
             mainApp.show();

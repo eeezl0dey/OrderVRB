@@ -151,6 +151,7 @@ SwipeScreen {
                     style: ProjectButtonStyle {
                     }
                     onClicked: {
+                        editUser.isNew = true
                         editUser.enabled = true
                     }
                 }
@@ -162,6 +163,7 @@ SwipeScreen {
                     style: ProjectButtonStyle {
                     }
                     onClicked: {
+                        editUser.isNew = false
                         editUser.enabled = true
                     }
                 }
@@ -185,7 +187,26 @@ SwipeScreen {
             onEnabledChanged: {
                 rowViewUser.enabled = !enabled
 
+
+
                 if (enabled) {
+
+                    if(!isNew)
+                    {
+                        rowId = dataBase.modelUsers.getData(idTableUser.currentRow, 'idusers')
+                        uname = dataBase.modelUsers.getData(idTableUser.currentRow, 'username')
+                        upass = dataBase.modelUsers.getData(idTableUser.currentRow, 'userpass')
+                        ufname = dataBase.modelUsers.getData(idTableUser.currentRow, 'fullname')
+                        isadm = dataBase.modelUsers.getData(idTableUser.currentRow, 'isadmin')
+                    }
+                    else{
+                        uname = ""
+                        upass = ""
+                        ufname = ""
+                        isadm = false
+                        rowId = ""
+                    }
+
                     Layout.preferredHeight = 200
                     editUser.forceActiveFocus()
                     winUser.deactivated()
@@ -198,7 +219,11 @@ SwipeScreen {
 
             function checkAccess() {
                 console.log("checkAccess")
-//                dataBase.acceptBank(editcontragent.rowId)
+                dataBase.modelUsers.acceptUser(editUser.rowId, editUser.uname, editUser.upass, editUser.ufname, editUser.isadm)
+                idTableUser.model = dataBase.modelUsers
+                idTableUser.update()
+                if(idTableUser.rowCount > 0)
+                    idTableUser.selection.select(0);
                 editUser.enabled = false
             }
 

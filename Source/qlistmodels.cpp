@@ -73,11 +73,17 @@ int QListModels::getUserId()
     return idUser;
 }
 
+bool QListModels::getUserIsAdmin()
+{
+    return isAdmin;
+}
 
-void QListModels::setUserFullName(int id, QString fname)
+
+void QListModels::setUser(int id, QString fname, bool isadmin)
 {
     idUser = id;
     userFullName = fname;
+    isAdmin = isadmin;
     return ;
 }
 

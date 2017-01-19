@@ -43,7 +43,7 @@ bool SourceDB::login(QString username, QString pass)
            {
               QString userFullName = query.value("fullname").toString();
               int idUser = query.value("idusers").toInt();
-              QListModels::getInstance()->setUserFullName(idUser, userFullName);
+              QListModels::getInstance()->setUser(idUser, userFullName, query.value("isadmin").toBool());
               isFind = true;
               break;
            }
@@ -72,4 +72,9 @@ QSqlQueryModel* SourceDB::getModelUsers()
 QSqlQueryModel* SourceDB::getModelBank()
 {
     return QListModels::getInstance()->getModel(QListModels::mtype::banks);
+}
+
+bool SourceDB::getUserIsAdmin()
+{
+    QListModels::getInstance()->getUserIsAdmin();
 }

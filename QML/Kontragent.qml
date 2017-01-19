@@ -210,7 +210,8 @@ SwipeScreen {
                 dataBase.modelKontr.acceptKontr(editcontragent.rowId, editcontragent.contrName, dataBase.modelBank.getData(editcontragent.bankIndex, 'idbank'), editcontragent.accNum)
                 idTableContr.model = dataBase.modelKontr
                 idTableContr.update()
-                idTableContr.selection.select(0)
+                if(idTableContr.rowCount > 0)
+                    idTableContr.selection.select(0);
                 editcontragent.enabled = false
             }
 

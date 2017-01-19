@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QSqlQueryModel>
+#include "qlistmodels.h"
 
 class QSqlQueryModelUsers : public QSqlQueryModel
 {
@@ -29,6 +30,12 @@ protected:
      * от которого наследован класс QSqlQueryModel
      * */
     QHash<int, QByteArray> roleNames() const;
+
+signals:
+
+public slots:
+    QVariant getData(int row, QString colName);
+    bool acceptUser(int rowId, QString username, QString  userpass, QString fullname, bool isadmin);
 };
 
 #endif // QSQLQUERYMODELUSERS_H
