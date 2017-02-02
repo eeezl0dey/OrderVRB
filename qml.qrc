@@ -8,21 +8,22 @@
         <file>Image/48/Symbol Check 2.png</file>
         <file>Image/48/Symbol Restricted 2.png</file>
         <file>Image/48/Symbol Stop 2.png</file>
-        <file>QML/Style/ProjectButtonStyle.qml</file>
         <file>QML/EditContragent.qml</file>
         <file>QML/Kontragent.qml</file>
         <file>QML/Login.qml</file>
-        <file>QML/main.qml</file>
         <file>QML/MainWND.qml</file>
-        <file>QML/SwipeMain.qml</file>
-        <file>QML/SwipeScreen.qml</file>
-        <file>QML/SwipeView.qml</file>
-        <file>QML/WindowFone.qml</file>
         <file>Image/vrbpay.jpg</file>
         <file>QML/Bank.qml</file>
         <file>QML/EditBank.qml</file>
         <file>QML/User.qml</file>
         <file>QML/EditUser.qml</file>
         <file>QML/SetConnectDb.qml</file>
+        <file>QML/Order.qml</file>
+        <file>QML/Basic/ProjectButtonStyle.qml</file>
+        <file>QML/Basic/SwipeMain.qml</file>
+        <file>QML/Basic/SwipeScreen.qml</file>
+        <file>QML/Basic/SwipeView.qml</file>
+        <file>QML/Basic/WindowFone.qml</file>
+        <file>QML/Basic/BaseTableView.qml</file>
     </qresource>
 </RCC>

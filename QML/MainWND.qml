@@ -4,6 +4,7 @@ import QtQuick.Window 2.0
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 import Qt.labs.settings 1.0
+import "Basic"
 
 
 ApplicationWindow {
@@ -31,13 +32,18 @@ ApplicationWindow {
     ListModel {
         id: listModelWindow
         ListElement {
+            title: qsTr("Счета")
+            source: "qrc:/QML/Order.qml"
+        }
+
+        ListElement {
             title: qsTr("Контрагенты")
-            source: "Kontragent.qml"
+            source: "qrc:/QML/Kontragent.qml"
         }
 
         ListElement {
             title: qsTr("Банки")
-            source: "Bank.qml"
+            source: "qrc:/QML/Bank.qml"
         }
     }
 
@@ -57,7 +63,7 @@ ApplicationWindow {
         onSignalAcceptPass: {
             if(dataBase.isAdmin)
             {
-                listModelWindow.append({"title": qsTr("Пользователи"), "source": "User.qml"});
+                listModelWindow.append({"title": qsTr("Пользователи"), "source": "qrc:/QML/User.qml"});
 
                 {"cost": 5.95, "name":"Pizza"}
             }

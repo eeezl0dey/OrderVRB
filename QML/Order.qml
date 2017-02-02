@@ -7,26 +7,34 @@ import QtQuick.Layouts 1.1
 import "Basic"
 
 SwipeScreen {
-    id: winkontragent
+    id: winbank
     anchors.fill: parent
 
     WindowFone {
     }
 
     ColumnLayout {
-        id: kontrItem
+        id: bankItem
         anchors.fill: parent
         RowLayout {
-            id: rowView
+            id: rowViewBank
             Layout.fillHeight: true
             Layout.leftMargin: 5
             Layout.rightMargin: 5
             BaseTableView {
-                id: idTableContr
+                id: idTableBank
+                //                anchors.bottom: buttonAdd.top;
+                //    //            anchors.bottomMargin: 45
+                //                anchors.right: parent.right
+                //                anchors.left: parent.left
+                //                anchors.top: parent.top
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
 
                 TableViewColumn {
-                    id: columnNum
-                    role: "idcontragent"
+                    id: columnBankNum
+                    role: "idbank"
                     title: "#"
                     width: 50
                     horizontalAlignment: Text.AlignHCenter
@@ -41,75 +49,70 @@ SwipeScreen {
                     }
                 }
                 TableViewColumn {
-                    id: columnFullname
-                    role: "fname"
+                    id: columnBankName
+                    role: "name"
                     title: "Наименование"
-                    width: idTableContr.width - columnNum.width - columnAccount.width - creatorName.width
+                    width: 200
                     horizontalAlignment: Text.AlignHCenter
                 }
                 TableViewColumn {
-                    id: columnAccount
-                    role: "naccount"
-                    title: "Счет"
-                    width: 150
+                    id: columnAddress
+                    role: "address"
+                    title: "Адрес"
+                    width: idTableBank.width - columnBankNum.width - columnBankName.width - columnBankUser.width
                     horizontalAlignment: Text.AlignHCenter
                 }
                 TableViewColumn {
-                    id: creatorName
+                    id: columnBankUser
                     role: "creatorname"
                     title: "Создал"
                     width: 150
                     horizontalAlignment: Text.AlignHCenter
-//                    delegate: Text { text: model.creatorname }
                 }
 
-                model: dataBase.modelKontr
+                model: dataBase.modelBank
 
                 onActivated: {
-                    editcontragent.isNew = false
-                    editcontragent.enabled = true
-
+                    editBank.enabled = true
                 }
             }
-
             ColumnLayout {
                 Layout.fillHeight: true
-                Layout.alignment: Qt.AlignTop
                 Layout.preferredWidth: 150
                 Layout.fillWidth: false
+                Layout.alignment: Qt.AlignTop
                 Button {
-                    id: buttonAdd
+                    id: buttonBankAdd
+                    anchors.left: parent.left
+                    anchors.right: parent.right
                     Layout.fillWidth: true
                     text: qsTr("Добавить")
-                    tooltip: qsTr("Добавление нового контрагента в базу")
                     iconSource: "qrc:/Image/48/Document 2 Add.png"
                     style: ProjectButtonStyle {
                     }
                     onClicked: {
-                        editcontragent.isNew = true
-                        editcontragent.enabled = true
+                        editBank.isNew = true
+                        editBank.enabled = true
                     }
                 }
                 Button {
-                    id: buttonEdit
+                    id: buttonBankEdit
                     Layout.fillWidth: true
                     text: qsTr("Редактирование")
                     iconSource: "qrc:/Image/48/Document 2 Edit.png"
                     style: ProjectButtonStyle {
                     }
                     onClicked: {
-                        if(idTableContr.currentRow >= 0){
-                            editcontragent.isNew = false
-                            editcontragent.enabled = true
-                        }
+                        editBank.isNew = false
+                        editBank.enabled = true
                     }
                 }
 
             }
         }
 
-        EditContragent {
-            id: editcontragent
+        EditBank {
+            id: editBank
             Layout.alignment: Qt.AlignCenter
             enabled: false
             Layout.preferredHeight: 0
@@ -122,55 +125,53 @@ SwipeScreen {
             }
 
             onEnabledChanged: {
-                rowView.enabled = !enabled
+                rowViewBank.enabled = !enabled
 
                 if (enabled) {
                     if(!isNew)
                     {
-                        contrName = dataBase.modelKontr.getData(idTableContr.currentRow, 'fname')
-                        accNum = dataBase.modelKontr.getData(idTableContr.currentRow, 'naccount')
-                        bankIndex = bankComboBox.find(dataBase.modelKontr.getData(idTableContr.currentRow, 'bankname'))
-                        rowId = dataBase.modelKontr.getData(idTableContr.currentRow, 'idcontragent')
+                        bname = dataBase.modelBank.getData(idTableBank.currentRow, 'name')
+                        baddress = dataBase.modelBank.getData(idTableBank.currentRow, 'address')
+                        rowId = dataBase.modelBank.getData(idTableBank.currentRow, 'idbank')
                     }
                     else{
-                        contrName = ""
-                        accNum = ""
-                        bankIndex = 0
+                        bname = ""
+                        baddress = ""
                         rowId = ""
                     }
 
                     Layout.preferredHeight = 200
-                    editcontragent.forceActiveFocus()
-                    winkontragent.deactivated()
+                    editBank.forceActiveFocus()
+                    winbank.deactivated()
                 } else {
                     Layout.preferredHeight = 0
-                    idTableContr.forceActiveFocus()
-                    winkontragent.activated()
+                    idTableBank.forceActiveFocus()
+                    winbank.activated()
                 }
             }
 
             function checkAccess() {
                 console.log("checkAccess")
-                dataBase.modelKontr.acceptKontr(editcontragent.rowId, editcontragent.contrName, dataBase.modelBank.getData(editcontragent.bankIndex, 'idbank'), editcontragent.accNum)
-                idTableContr.model = dataBase.modelKontr
-                idTableContr.update()
-                if(idTableContr.rowCount > 0)
-                    idTableContr.selection.select(0);
-                editcontragent.enabled = false
+                dataBase.modelBank.acceptBank(editBank.rowId, editBank.bname, editBank.baddress)
+                idTableBank.model = dataBase.modelBank
+                idTableBank.update()
+                if(idTableBank.rowCount > 0)
+                    idTableBank.selection.select(0)
+                editBank.enabled = false
             }
 
             function cancelEdit() {
                 console.log("cancelEdit")
-                editcontragent.enabled = false
+                editBank.enabled = false
             }
         }
     }
 
     Keys.onPressed: {
-        if (event.key == Qt.Key_Down && idTableContr.focus
-                && idTableContr.currentRow == idTableContr.rowCount - 1) {
+        if (event.key == Qt.Key_Down && idTableBank.focus
+                && idTableBank.currentRow == idTableBank.rowCount - 1) {
             console.log("NEW!!!")
-            editcontragent.enabled = true
+            editBank.enabled = true
         }
     }
 }

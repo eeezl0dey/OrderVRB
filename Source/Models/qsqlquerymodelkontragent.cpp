@@ -47,12 +47,6 @@ bool QSqlQueryModelKontragent::acceptKontr(int rowId, QString fname, int idbank,
 
     qDebug() << idbank;
     QString querystr;
-//    QString("INSERT INTO OrderVRB.сontragent(\
-//            idcontragent, fname, idusers, idbank, naccount, is_beneficiary) \
-//            values (%1,%2,%3,%4,%5,%6) \
-//            ON DUPLICATE KEY UPDATE \
-//            name=\"fname\" = %2, name=\"idusers\" = %3, name=\"idbank\" = %4, name=\"naccount\" = %5, name=\"is_beneficiary\" = %6;")
-//                    .arg(rowId).arg(fname).arg(QListModels::getInstance()->getUserId()).arg(idbank).arg(naccount).arg(is_beneficiary)
     if(rowId > 0)
     {
         querystr = "UPDATE `OrderVRB`.`сontragent`  \

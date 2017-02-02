@@ -76,5 +76,5 @@ QSqlQueryModel* SourceDB::getModelBank()
 
 bool SourceDB::getUserIsAdmin()
 {
-    QListModels::getInstance()->getUserIsAdmin();
+    return QListModels::getInstance()->getUserIsAdmin();
 }
