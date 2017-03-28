@@ -9,8 +9,8 @@ import "Basic"
 
 ApplicationWindow {
     title: qsTr("OrderVRB")
-    width: 640
-    height: 480
+    width: 775
+    height: 700
     minimumWidth: 640
     minimumHeight: 400
     visible: true

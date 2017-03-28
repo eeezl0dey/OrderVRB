@@ -1,6 +1,7 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.0
+import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 import "Basic"
 
@@ -8,6 +9,7 @@ ColumnLayout {
     id: maincolumn
     property int margin: 5
     property alias rowId: labelIDNumber.text
+    property alias isBeneficiary: checkIsBeneficiary.checked
     property alias contrName: textContrName.text
     property alias bankIndex: comboBoxBank.currentIndex
     property alias bankComboBox: comboBoxBank
@@ -53,14 +55,24 @@ ColumnLayout {
                 font.bold: true
             }
 
-            Label {
-                id: labelIDNumber
+            RowLayout {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                text: qsTr("№")
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-                font.bold: true
+                Label {
+                    id: labelIDNumber
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    text: qsTr("№")
+//                    vertvicalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignLeft
+                    font.bold: true
+                }
+                CheckBox {
+                    id: checkIsBeneficiary
+                    Layout.fillHeight: true
+                    width: 100
+                    text: qsTr("Получатель")
+                }
             }
 
             Label {

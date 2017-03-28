@@ -43,24 +43,45 @@ SwipeScreen {
                 TableViewColumn {
                     id: columnFullname
                     role: "fname"
-                    title: "Наименование"
-                    width: idTableContr.width - columnNum.width - columnAccount.width - creatorName.width
+                    title: qsTr("Наименование")
+                    width: idTableContr.width - columnNum.width - columnAccount.width - creatorName.width - beneficiary.width
                     horizontalAlignment: Text.AlignHCenter
                 }
                 TableViewColumn {
                     id: columnAccount
                     role: "naccount"
-                    title: "Счет"
-                    width: 150
+                    title: qsTr("Счет")
+                    width: 125
                     horizontalAlignment: Text.AlignHCenter
                 }
                 TableViewColumn {
                     id: creatorName
                     role: "creatorname"
-                    title: "Создал"
-                    width: 150
+                    title: qsTr("Создал")
+                    width: 125
                     horizontalAlignment: Text.AlignHCenter
 //                    delegate: Text { text: model.creatorname }
+                }
+                TableViewColumn {
+                    id: beneficiary
+                    role: "is_beneficiary"
+                    title: qsTr("Получатель")
+                    width: 100
+                    horizontalAlignment: Text.AlignHCenter
+                    delegate: Item {
+                        Text {
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: {
+                                if(styleData.value === 1)
+                                    qsTr("Да");
+                                else
+                                    qsTr("Нет");
+                            }
+
+                            renderType: Text.NativeRendering
+                            anchors.centerIn: parent
+                        }
+                    }
                 }
 
                 model: dataBase.modelKontr
@@ -131,11 +152,13 @@ SwipeScreen {
                         accNum = dataBase.modelKontr.getData(idTableContr.currentRow, 'naccount')
                         bankIndex = bankComboBox.find(dataBase.modelKontr.getData(idTableContr.currentRow, 'bankname'))
                         rowId = dataBase.modelKontr.getData(idTableContr.currentRow, 'idcontragent')
+                        isBeneficiary = dataBase.modelKontr.getData(idTableContr.currentRow, 'is_beneficiary')
                     }
                     else{
                         contrName = ""
                         accNum = ""
                         bankIndex = 0
+                        isBeneficiary = true
                         rowId = ""
                     }
 
@@ -151,11 +174,15 @@ SwipeScreen {
 
             function checkAccess() {
                 console.log("checkAccess")
-                dataBase.modelKontr.acceptKontr(editcontragent.rowId, editcontragent.contrName, dataBase.modelBank.getData(editcontragent.bankIndex, 'idbank'), editcontragent.accNum)
+                var curRow = idTableContr.currentRow
+                dataBase.modelKontr.acceptKontr(editcontragent.rowId, editcontragent.contrName, dataBase.modelBank.getData(editcontragent.bankIndex, 'idbank'), editcontragent.accNum, editcontragent.isBeneficiary)
                 idTableContr.model = dataBase.modelKontr
                 idTableContr.update()
-                if(idTableContr.rowCount > 0)
-                    idTableContr.selection.select(0);
+                if(idTableContr.rowCount > 0 && curRow < idTableContr.rowCount)
+                {
+                    idTableContr.currentRow = curRow;
+                    idTableContr.selection.select(curRow);
+                }
                 editcontragent.enabled = false
             }
 

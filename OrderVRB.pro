@@ -3,7 +3,7 @@ TEMPLATE = app
 QT += qml quick widgets sql core network
 
 CONFIG+=qml_debug
-CONFIG+= c++1y
+CONFIG+= c++1y #на будущее, возможно потребуется
 
 #UI_SOURCES_DIR = ../OrderVRB/Source
 #UI_HEADERS_DIR = ../OrderVRB/Source
@@ -20,7 +20,8 @@ SOURCES += $${SOURCE_DIR}/main.cpp \
     $${MODELS_DIR}/qsqlquerymodelkontragent.cpp \
     $${MODELS_DIR}/qsqlquerymodelusers.cpp \
     $${SOURCE_DIR}/qlistmodels.cpp \
-    $${MODELS_DIR}/qsqlquerymodelbank.cpp
+    $${MODELS_DIR}/qsqlquerymodelbank.cpp \
+    Source/Models/qsqlquerymodelorder.cpp
 
 RESOURCES += qml.qrc
 
@@ -35,4 +36,5 @@ HEADERS += \
     Source/Models/qsqlquerymodelkontragent.h \
     Source/Models/qsqlquerymodelusers.h \
     Source/qlistmodels.h \
-    Source/sourcedb.h
+    Source/sourcedb.h \
+    Source/Models/qsqlquerymodelorder.h

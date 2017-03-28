@@ -19,10 +19,11 @@ class QListModels: public QObject
 {
     Q_OBJECT
 public:   
-    enum mtype{
+    enum  mtype {
         users,
         kontr,
-        banks
+        banks,
+        order
     };
 
     static QListModels* getInstance();

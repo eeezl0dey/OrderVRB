@@ -95,8 +95,11 @@ SwipeScreen {
                     style: ProjectButtonStyle {
                     }
                     onClicked: {
-                        editBank.isNew = false
-                        editBank.enabled = true
+                        if(idTableBank.currentRow >=0)
+                        {
+                            editBank.isNew = false
+                            editBank.enabled = true
+                        }
                     }
                 }
 
@@ -144,11 +147,15 @@ SwipeScreen {
 
             function checkAccess() {
                 console.log("checkAccess")
+                var curRow = idTableBank.currentRow
                 dataBase.modelBank.acceptBank(editBank.rowId, editBank.bname, editBank.baddress)
                 idTableBank.model = dataBase.modelBank
                 idTableBank.update()
-                if(idTableBank.rowCount > 0)
-                    idTableBank.selection.select(0)
+                if(idTableBank.rowCount > 0 && curRow < idTableBank.rowCount)
+                {
+                    idTableBank.currentRow = curRow;
+                    idTableBank.selection.select(curRow);
+                }
                 editBank.enabled = false
             }
 

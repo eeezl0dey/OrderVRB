@@ -110,8 +110,10 @@ SwipeScreen {
                     style: ProjectButtonStyle {
                     }
                     onClicked: {
-                        editUser.isNew = false
-                        editUser.enabled = true
+                        if(idTableUser.currentRow >= 0){
+                            editUser.isNew = false
+                            editUser.enabled = true
+                        }
                     }
                 }
 
@@ -166,11 +168,15 @@ SwipeScreen {
 
             function checkAccess() {
                 console.log("checkAccess")
+                var curRow = idTableUser
                 dataBase.modelUsers.acceptUser(editUser.rowId, editUser.uname, editUser.upass, editUser.ufname, editUser.isadm)
                 idTableUser.model = dataBase.modelUsers
                 idTableUser.update()
-                if(idTableUser.rowCount > 0)
-                    idTableUser.selection.select(0);
+                if(idTableUser.rowCount > 0 && curRow < idTableUser.rowCount)
+                {
+                    idTableUser.currentRow = curRow;
+                    idTableUser.selection.select(curRow);
+                }
                 editUser.enabled = false
             }
 

@@ -18,10 +18,10 @@ QVariant QSqlQueryModelKontragent::data(const QModelIndex & index, int role) con
     QVariant var;
 
     switch (role) {
-    case IsBeneficiaryRole:
-        var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
-        var = (var == 1) ? "Да":"Нет";
-        break;
+//    case IsBeneficiaryRole:
+//        var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+//        var = (var == 1) ? "Да":"Нет";
+//        break;
     default:
         var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
         break;
@@ -53,7 +53,8 @@ bool QSqlQueryModelKontragent::acceptKontr(int rowId, QString fname, int idbank,
                 SET                                 \
                 `fname` = :fname,                   \
                 `idbank` = :idbank,                 \
-                `naccount` = :naccount              \
+                `naccount` = :naccount,              \
+                `is_beneficiary` = :is_beneficiary    \
                 WHERE `idсontragent` = :idcontragent; ";
         query.prepare(querystr);
         query.bindValue(":idcontragent", rowId);
@@ -64,12 +65,14 @@ bool QSqlQueryModelKontragent::acceptKontr(int rowId, QString fname, int idbank,
                 (`fname`,                               \
                 `idusers`,                              \
                 `idbank`,                               \
-                `naccount`)                             \
+                `naccount`,                             \
+                `is_beneficiary`)                       \
                 VALUES                                  \
                 (:fname,                                \
                 :idusers,                               \
                 :idbank,                                \
-                :naccount);";
+                :naccount,                              \
+                :is_beneficiary);";
         query.prepare(querystr);
         query.bindValue(":idusers", QListModels::getInstance()->getUserId());
     }
@@ -77,6 +80,7 @@ bool QSqlQueryModelKontragent::acceptKontr(int rowId, QString fname, int idbank,
     query.bindValue(":fname", fname);
     query.bindValue(":idbank", idbank);
     query.bindValue(":naccount", naccount);
+    query.bindValue(":is_beneficiary", is_beneficiary?1:0);
     if(!query.exec())
         qDebug() << query.lastError();
     return true;

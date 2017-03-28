@@ -87,7 +87,7 @@ void QListModels::setUser(int id, QString fname, bool isadmin)
     return ;
 }
 
-QSqlQueryModel* QListModels::getModel( mtype mt)
+QSqlQueryModel* QListModels::getModel ( mtype mt)
 {
     QSqlQueryModel* sqlmodel;
     switch (mt) {
