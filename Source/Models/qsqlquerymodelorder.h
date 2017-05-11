@@ -20,7 +20,9 @@ public:
         CommentRole,           // коментарий
         ChargeIncludRole,           // включена ли комиссия
         CreateDateRole,           // момент создания
-        IDBeneficiaryRole            // id контрагента бенефециара (плательщика)
+        IDBeneficiaryRole,            // id контрагента бенефециара (плательщика)
+        CreatorNameRole,            // имя создавшего запись пользователя
+        NContragentRole            // имя контрагента
     };
 
     explicit QSqlQueryModelOrder(QObject *parent = 0);

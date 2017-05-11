@@ -126,9 +126,18 @@ Item {
             highlightMoveVelocity: 1000
             clip: true
             model: swipeView.model
+            property int lastItemIndex: 0
             onCurrentItemChanged: {
-                if (isDesktopPlatform)
+                if(!headersListView.enabled){
+                    currentIndex = lastItemIndex;
+                }
+                else{
+                    lastItemIndex = currentIndex;
                     currentItem.item.selected()
+                }
+
+//                if (isDesktopPlatform)
+//                    currentItem.item.selected()
             }
             delegate: Loader {
                 width: screensListView.width

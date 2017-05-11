@@ -3,7 +3,7 @@ TEMPLATE = app
 QT += qml quick widgets sql core network
 
 CONFIG+=qml_debug
-CONFIG+= c++1y #на будущее, возможно потребуется
+CONFIG+= c++14 #на будущее, возможно потребуется
 
 #UI_SOURCES_DIR = ../OrderVRB/Source
 #UI_HEADERS_DIR = ../OrderVRB/Source

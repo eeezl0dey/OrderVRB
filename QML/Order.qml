@@ -14,13 +14,14 @@ SwipeScreen {
     }
 
     ColumnLayout {
-        id: bankItem
+        id: orderItem
         anchors.fill: parent
         RowLayout {
             id: rowViewOrder
             Layout.fillHeight: true
             Layout.leftMargin: 5
-            Layout.rightMargin: 5
+            Layout.rightMargin: 5                   
+
             BaseTableView {
                 id: idTableOrder
                 //                anchors.bottom: buttonAdd.top;
@@ -28,9 +29,6 @@ SwipeScreen {
                 //                anchors.right: parent.right
                 //                anchors.left: parent.left
                 //                anchors.top: parent.top
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-
 
                 TableViewColumn {
                     id: columnOrderNum
@@ -49,31 +47,31 @@ SwipeScreen {
                     }
                 }
                 TableViewColumn {
-                    id: columnBankName
-                    role: "name"
-                    title: "Наименование"
+                    id: columnContragentName
+                    role: "ncontragent"
+                    title: qsTr("Контрагент")
+                    width: idTableOrder.width - columnOrderNum.width - columnOrderSumm.width - columnOrderCreator.width
+                    horizontalAlignment: Text.AlignHCenter
+                }
+                TableViewColumn {
+                    id: columnOrderSumm
+                    role: "summ"
+                    title: qsTr("Сумма")
                     width: 200
                     horizontalAlignment: Text.AlignHCenter
                 }
                 TableViewColumn {
-                    id: columnAddress
-                    role: "address"
-                    title: "Адрес"
-                    width: idTableOrder.width - columnOrderNum.width - columnOrderName.width - columnOrderUser.width
-                    horizontalAlignment: Text.AlignHCenter
-                }
-                TableViewColumn {
-                    id: columnBankUser
+                    id: columnOrderCreator
                     role: "creatorname"
-                    title: "Создал"
+                    title: qsTr("Создал")
                     width: 150
                     horizontalAlignment: Text.AlignHCenter
                 }
 
-                model: dataBase.modelBank
+                model: dataBase.modelOrder
 
                 onActivated: {
-                    editBank.enabled = true
+                    editOrder.enabled = true
                 }
             }
             ColumnLayout {
@@ -96,9 +94,9 @@ SwipeScreen {
                     }
                 }
                 Button {
-                    id: buttonOrderEdit
+                    id: buttonOrderPrint
                     Layout.fillWidth: true
-                    text: qsTr("Редактирование")
+                    text: qsTr("Печать")
                     iconSource: "qrc:/Image/48/Document 2 Edit.png"
                     style: ProjectButtonStyle {
                     }
@@ -113,7 +111,7 @@ SwipeScreen {
             }
         }
 ///TODO
-        EditBank {
+        EditOrder {
             id: editOrder
             Layout.alignment: Qt.AlignCenter
             enabled: false
@@ -127,57 +125,61 @@ SwipeScreen {
             }
 
             onEnabledChanged: {
-                rowViewBank.enabled = !enabled
+                rowViewOrder.enabled = !enabled
 
                 if (enabled) {
                     if(!isNew)
                     {
-                        bname = dataBase.modelBank.getData(idTableBank.currentRow, 'name')
-                        baddress = dataBase.modelBank.getData(idTableBank.currentRow, 'address')
-                        rowId = dataBase.modelBank.getData(idTableBank.currentRow, 'idbank')
+// TODO загрузка данных из базы
+//                        bname = dataBase.modelBank.getData(idTableBank.currentRow, 'name')
+//                        baddress = dataBase.modelBank.getData(idTableBank.currentRow, 'address')
+//                        rowId = dataBase.modelBank.getData(idTableBank.currentRow, 'idbank')
                     }
                     else{
-                        bname = ""
-                        baddress = ""
-                        rowId = ""
+//                        bname = ""
+//                        baddress = ""
+//                        rowId = ""
                     }
-
-                    Layout.preferredHeight = 200
-                    editBank.forceActiveFocus()
-                    winbank.deactivated()
+//                    rowViewOrder.visible = false
+                    Layout.preferredHeight = orderItem.height
+                    rowViewOrder.visible = false
+                    editOrder.forceActiveFocus()
+                    winorder.deactivated()
                 } else {
                     Layout.preferredHeight = 0
-                    idTableBank.forceActiveFocus()
-                    winbank.activated()
+                    idTableOrder.forceActiveFocus()
+                    winorder.activated()
                 }
             }
 
             function checkAccess() {
                 console.log("checkAccess")
-                var curRow = idTableBank.currentRow
-                dataBase.modelBank.acceptBank(editBank.rowId, editBank.bname, editBank.baddress)
-                idTableBank.model = dataBase.modelBank
-                idTableBank.update()
-                if(idTableBank.rowCount > 0 && curRow < idTableBank.rowCount)
+                var curRow = idTableOrder.currentRow
+//                dataBase.modelBank.acceptBank(editBank.rowId, editBank.bname, editBank.baddress)
+                idTableOrder.model = dataBase.modelOrder
+                idTableOrder.update()
+                if(idTableOrder.rowCount > 0 && curRow < idTableOrder.rowCount)
                 {
-                    idTableBank.currentRow = curRow;
-                    idTableBank.selection.select(curRow);
+                    idTableOrder.currentRow = curRow;
+                    idTableOrder.selection.select(curRow);
                 }
-                editBank.enabled = false
+                editOrder.enabled = false
+                rowViewOrder.visible = true
             }
 
             function cancelEdit() {
                 console.log("cancelEdit")
-                editBank.enabled = false
+                editOrder.enabled = false
+                rowViewOrder.visible = true
             }
         }
     }
 
     Keys.onPressed: {
-        if (event.key == Qt.Key_Down && idTableBank.focus
-                && idTableBank.currentRow == idTableBank.rowCount - 1) {
+        if (event.key == Qt.Key_Down && idTableOrder.focus
+                && idTableOrder.currentRow == idTableOrder.rowCount - 1) {
             console.log("NEW!!!")
-            editBank.enabled = true
+            editOrder.enabled = true
         }
     }
 }

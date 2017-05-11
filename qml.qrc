@@ -25,5 +25,7 @@
         <file>QML/Basic/SwipeView.qml</file>
         <file>QML/Basic/WindowFone.qml</file>
         <file>QML/Basic/BaseTableView.qml</file>
+        <file>QML/EditOrder.qml</file>
+        <file>QML/Basic/DragText.qml</file>
     </qresource>
 </RCC>

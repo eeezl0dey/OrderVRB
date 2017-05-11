@@ -22,6 +22,7 @@ class SourceDB: public QObject
       Q_PROPERTY(QSqlQueryModel* modelKontr READ getModelKontr NOTIFY modelKontrChanged)
       Q_PROPERTY(QSqlQueryModel* modelBank READ getModelBank NOTIFY modelBankChanged)
       Q_PROPERTY(QSqlQueryModel* modelUsers READ getModelUsers NOTIFY modelUsersChanged)
+      Q_PROPERTY(QSqlQueryModel* modelOrder READ getModelOrder NOTIFY modelOrderChanged)
 public:
     explicit SourceDB(QObject *parent = 0);
     virtual ~SourceDB();
@@ -30,10 +31,12 @@ public:
     QSqlQueryModel* getModelKontr();
     QSqlQueryModel* getModelUsers();
     QSqlQueryModel* getModelBank();
+    QSqlQueryModel* getModelOrder();
 signals:
     void modelKontrChanged();
     void modelUsersChanged();
     void modelBankChanged();
+    void modelOrderChanged();
 public slots:
     bool login(QString username, QString pass);
     bool isConnected();

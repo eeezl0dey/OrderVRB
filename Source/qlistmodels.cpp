@@ -94,9 +94,9 @@ QSqlQueryModel* QListModels::getModel ( mtype mt)
     case mtype::kontr:
         sqlmodel = new QSqlQueryModelKontragent(this);
         sqlmodel->setQuery("SELECT c.*, u.fullname as creatorname, b.name as bankname \
-                            FROM OrderVRB.сontragent as c join OrderVRB.users as u on c.idusers = u.idusers \
-                                                          join OrderVRB.bank as b on b.idbank = c.idbank \
-                            order by c.idсontragent desc");
+                            FROM OrderVRB.сontragent AS c JOIN OrderVRB.users as u ON c.idusers = u.idusers \
+                                                          JOIN OrderVRB.bank as b ON b.idbank = c.idbank \
+                            ORDER BY c.idсontragent DESC");
         break;
     case mtype::users:
         sqlmodel = new QSqlQueryModelUsers(this);
@@ -104,7 +104,16 @@ QSqlQueryModel* QListModels::getModel ( mtype mt)
         break;
     case mtype::banks:
         sqlmodel = new QSqlQueryModelBank(this);
-        sqlmodel->setQuery("SELECT b.*, u.fullname as creatorname FROM OrderVRB.bank as b left outer join OrderVRB.users as u on u.idusers = b.idusers");
+        sqlmodel->setQuery("SELECT b.*, u.fullname AS creatorname FROM OrderVRB.bank as b LEFT OUTER JOIN OrderVRB.users as u ON u.idusers = b.idusers");
+        break;
+    case mtype::order:
+        sqlmodel = new QSqlQueryModelOrder(this);
+        sqlmodel->setQuery("SELECT o.*, u.fullname AS creatorname, ct.fname AS ncontragent  \
+                           FROM OrderVRB.order o \
+                           LEFT OUTER JOIN OrderVRB.users u \
+                           ON (u.idusers = o.idusers) \
+                           LEFT OUTER JOIN OrderVRB.сontragent ct   \
+                           ON (ct.`idсontragent` = o.`idсontragent`)");
         break;
     default:
         sqlmodel = NULL;

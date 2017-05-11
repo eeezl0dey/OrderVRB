@@ -19,9 +19,9 @@ QVariant QSqlQueryModelOrder::data(const QModelIndex & index, int role) const {
     QVariant var;
 
     switch (role) {
-//    case IsBeneficiaryRole:
-//        var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
-//        var = (var == 1) ? "Да":"Нет";
+    case IDContragentRole:
+        var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+        var = (var == 1) ? "Да":"Нет";
 //        break;
     default:
         var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
@@ -56,6 +56,8 @@ QHash<int, QByteArray> QSqlQueryModelOrder::roleNames() const {
     roles[ChargeIncludRole] = "chargeinclud";
     roles[CreateDateRole] = "createdate";
     roles[IDBeneficiaryRole] = "idbeneficiary";
+    roles[CreatorNameRole] = "creatorname";
+    roles[NContragentRole] = "ncontragent";
 
     return roles;
 }

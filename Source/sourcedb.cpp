@@ -74,6 +74,12 @@ QSqlQueryModel* SourceDB::getModelBank()
     return QListModels::getInstance()->getModel(QListModels::mtype::banks);
 }
 
+QSqlQueryModel* SourceDB::getModelOrder()
+{
+    return QListModels::getInstance()->getModel(QListModels::mtype::order);
+}
+
+
 bool SourceDB::getUserIsAdmin()
 {
     return QListModels::getInstance()->getUserIsAdmin();

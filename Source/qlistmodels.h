@@ -13,6 +13,7 @@
 #include "qsqlquerymodelkontragent.h"
 #include "qsqlquerymodelusers.h"
 #include "qsqlquerymodelbank.h"
+#include "qsqlquerymodelorder.h"
 
 
 class QListModels: public QObject

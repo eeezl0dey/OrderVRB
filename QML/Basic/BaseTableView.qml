@@ -8,43 +8,6 @@ TableView {
     Layout.fillWidth: true
     Layout.fillHeight: true
 
-//                TableViewColumn {
-//                    id: columnBankNum
-//                    role: "idbank"
-//                    title: "#"
-//                    width: 50
-//                    horizontalAlignment: Text.AlignHCenter
-//                    delegate: Item {
-//                        Text {
-//                            anchors.verticalCenter: parent.verticalCenter
-//                            text: styleData.value
-//                            renderType: Text.NativeRendering
-//                            anchors.centerIn: parent
-//                        }
-//                    }
-//                }
-//                TableViewColumn {
-//                    id: columnBankName
-//                    role: "name"
-//                    title: "Наименование"
-//                    width: 200
-//                    horizontalAlignment: Text.AlignHCenter
-//                }
-//                TableViewColumn {
-//                    id: columnAddress
-//                    role: "address"
-//                    title: "Адрес"
-//                    width: idTableBank.width - columnBankNum.width - columnBankName.width - columnBankUser.width
-//                    horizontalAlignment: Text.AlignHCenter
-//                }
-//                TableViewColumn {
-//                    id: columnBankUser
-//                    role: "creatorname"
-//                    title: "Создал"
-//                    width: 150
-//                    horizontalAlignment: Text.AlignHCenter
-//                }
-
     headerDelegate: Rectangle {
 //                    width: _textHeader.text.length * 1.2
         height: _textHeader.font.pixelSize * 1.6
@@ -67,7 +30,6 @@ TableView {
             width: 1
         }
 
-//        width: 1
         color: (styleData.pressed) ? "blue" : "black"
         Text {
             id: _textHeader
