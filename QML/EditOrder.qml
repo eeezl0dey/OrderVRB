@@ -47,6 +47,11 @@ ColumnLayout {
                         parent.forceActiveFocus();
                     }
 
+                    drag.target: {
+                        rectangleOrder.ctrlPressed?imageOrder:null;
+                    }
+
+
                     onWheel:
                     {
                         if (rectangleOrder.ctrlPressed){
@@ -67,8 +72,9 @@ ColumnLayout {
             DragText{
                 id: dragTest
                 isMoveMode: rectangleOrder.ctrlPressed
-                height: 20
-                width: 100
+                height: 16
+                width: 200
+//                borderEnable: false
             }
         }
     }

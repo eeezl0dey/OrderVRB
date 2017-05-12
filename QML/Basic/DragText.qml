@@ -5,27 +5,31 @@ Item {
     property Component rootComp: root
     property alias text: textEdit.text
     property bool isMoveMode: true
+    property bool borderEnable: true
+    property var regExpValid:/^\S+$/;
 
-    width: 300; height: 300
+    width: 300; height: 15
 
 //! [0]
         TextEdit {
             id: textEdit
             text: "sdfsf"
-            width: 200; height: 30
-
+//            font.pointSize: 7
+            width: root.width
+            height: root.height
 
             Rectangle {
                 id: tile
+                visible: (borderEnable & !regExpValid.test(textEdit.text))?true:false;
 
-                    width: textEdit.width;
-                    height: textEdit.height;
+                    width: Math.max(textEdit.contentWidth, textEdit.width)
+                    height: textEdit.contentHeight
 
 //anchors.fill: parent
 //            anchors.verticalCenter: parent.verticalCenter
         //            anchors.horizontalCenter: parent.horizontalCenter
 
-                border.color: "black"
+                border.color: "red"
                 color: "transparent"
             }
 
@@ -41,16 +45,16 @@ Item {
 
             }
 
-            Keys.onPressed: {
-                if(event.key === Qt.Key_Left)
-                    textEdit.width++;
-                if(event.key === Qt.Key_Right)
-                    textEdit.width--
-                if(event.key === Qt.Key_Up)
-                    textEdit.height--;
-                if(event.key === Qt.Key_Down)
-                    textEdit.height++;
-            }
+//            Keys.onPressed: {
+//                if(event.key === Qt.Key_Left)
+//                    textEdit.width++;
+//                if(event.key === Qt.Key_Right)
+//                    textEdit.width--
+//                if(event.key === Qt.Key_Up)
+//                    textEdit.height--;
+//                if(event.key === Qt.Key_Down)
+//                    textEdit.height++;
+//            }
 
         }
 //! [1]
