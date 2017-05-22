@@ -11,71 +11,113 @@ ColumnLayout {
     property  int rowId: 0
     property bool isNew: false
 
-    property int pictureWidth: 300
+//    property int pictureWidth: 30
+    property int pictureX: 0
+    property int pictureY: 0
+
     Settings {
-        property alias editOrderPictureWidth: mainColumn.pictureWidth
+        category: "EditOrderPicture"
+        property alias editOrderPictureWidth: imageOrder.sourceSize.width
+        property alias editOrderPictureX: mainColumn.pictureX
+        property alias editOrderPictureY: mainColumn.pictureY
     }
 
-    GroupBox{
-        id: groupOrder
+
+    Rectangle{
+       id: rectangleOrder
         Layout.fillWidth: true
         Layout.fillHeight: true
-        Rectangle{
-            id: rectangleOrder
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            border.color: "black"
-            color: "transparent"
-            property bool ctrlPressed: false
-            Image {
-                id: imageOrder
-                sourceSize.width: mainColumn.pictureWidth
-//                sourceSize.height: 100
-                source: "qrc:/Image/vrbpay.jpg"
-                Keys.onPressed: {
-                    if(event.key === Qt.Key_Control)
-                        rectangleOrder.ctrlPressed = true;
+//        anchors.margins: 4
+//        border.color: "black"
+        color: "transparent"
+        property bool ctrlPressed: false
+        clip: true
+        Image {
+            id: imageOrder
+            x: pictureX
+            y: pictureY
+            sourceSize.width: 700
+            source: "qrc:/Image/vrbpay.jpg"
+            Keys.onPressed: {
+                if(event.key === Qt.Key_Control)
+                    rectangleOrder.ctrlPressed = true;
+            }
+            Keys.onReleased: {
+                if(event.key === Qt.Key_Control){
+                    rectangleOrder.ctrlPressed = false;
+                    pictureX = imageOrder.x;
+                    pictureY = imageOrder.y;
                 }
-                Keys.onReleased: {
-                    if(event.key === Qt.Key_Control)
-                        rectangleOrder.ctrlPressed = false;
+            }
+            MouseArea {
+                id: mouse
+                anchors.fill: parent
+                onEntered: {
+                    parent.forceActiveFocus();
                 }
-                MouseArea {
-                    id: mouse
-                    anchors.fill: parent
-                    onEntered: {
-                        parent.forceActiveFocus();
+
+                drag.target: {
+                    if(rectangleOrder.ctrlPressed){
+                        return imageOrder
                     }
-
-                    drag.target: {
-                        rectangleOrder.ctrlPressed?imageOrder:null;
+                    else{
+                        return null;
                     }
+                }
 
 
-                    onWheel:
-                    {
-                        if (rectangleOrder.ctrlPressed){
-                                    if (wheel.angleDelta.y > 0)
-                                    {
-                                        pictureWidth++;
-                                    }
-                                    else
-                                    {
-                                        pictureWidth--;
-                                    }
-                                    wheel.accepted=true
+                onWheel:
+                {
+                    if (rectangleOrder.ctrlPressed){
+                                if (wheel.angleDelta.y > 0)
+                                {
+                                    imageOrder.sourceSize.width++;
                                 }
-                    }
+                                else
+                                {
+                                    imageOrder.sourceSize.width--;
+                                }
+                                wheel.accepted=true
+                            }
                 }
             }
+        }
 
-            DragText{
-                id: dragTest
-                isMoveMode: rectangleOrder.ctrlPressed
-                height: 16
-                width: 200
-//                borderEnable: false
-            }
+        DragText{
+            id: summ
+            isMoveMode: rectangleOrder.ctrlPressed
+            settinsCategory: "EditOrderSum"
+            textVerticalAlignment: TextEdit.AlignRight
+            x: 159
+            y: 80
+            width: 220
+            height: 30
+//            borderEnable: false
+        }
+        DragText{
+            id: summTextCurrency
+            isMoveMode: rectangleOrder.ctrlPressed
+            settinsCategory: "EditOrderSumCurrency"
+            textVerticalAlignment: TextEdit.AlignHCenter
+            x: 381
+            y: 80
+            width: 53
+            height: 30
+            textEdit.font.capitalization: Font.AllUppercase
+            regExpValid:/^VND|USD$/i;
+            text: "VND"
+//            borderEnable: false
+        }
+        DragText{
+            id: summText
+            isMoveMode: rectangleOrder.ctrlPressed
+            settinsCategory: "EditOrderSumText"
+            textVerticalAlignment: TextEdit.AlignLeft
+            x: 120
+            y: 100
+            width: 53
+            height: 30
+//            borderEnable: false
         }
     }
 
