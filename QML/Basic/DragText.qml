@@ -11,7 +11,8 @@ Item {
     property string settinsCategory: "null_category"
     property bool isMoveMode: true
     property bool borderEnable: true
-    property var regExpValid:/^\S+$/;
+    property var regExpString:/^\S+$/;
+    property bool regExpValid: regExpString.test(textEdit.text)
 
     x: 0;
     y: 0;
@@ -45,7 +46,7 @@ Item {
 //            anchors.verticalCenter: parent.verticalCenter
         //            anchors.horizontalCenter: parent.horizontalCenter
 
-                border.color: (borderEnable & !regExpValid.test(textEdit.text))?"red":"blue";
+                border.color: !regExpValid ? "red" : "blue";
                 color: "transparent"
             }
 

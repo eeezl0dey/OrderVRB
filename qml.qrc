@@ -12,7 +12,6 @@
         <file>QML/Kontragent.qml</file>
         <file>QML/Login.qml</file>
         <file>QML/MainWND.qml</file>
-        <file>Image/vrbpay.jpg</file>
         <file>QML/Bank.qml</file>
         <file>QML/EditBank.qml</file>
         <file>QML/User.qml</file>
@@ -27,5 +26,7 @@
         <file>QML/Basic/BaseTableView.qml</file>
         <file>QML/EditOrder.qml</file>
         <file>QML/Basic/DragText.qml</file>
+        <file>Image/vrbpay.png</file>
+        <file>Script/digit2vn.js</file>
     </qresource>
 </RCC>

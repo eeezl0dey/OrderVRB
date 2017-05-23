@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Window 2.0
 import Qt.labs.settings 1.0
 import "Basic"
+import "qrc:/Script/digit2vn.js" as Digit2vn
 
 ColumnLayout {
     id: mainColumn
@@ -37,7 +38,7 @@ ColumnLayout {
             x: pictureX
             y: pictureY
             sourceSize.width: 700
-            source: "qrc:/Image/vrbpay.jpg"
+            source: "qrc:/Image/vrbpay.png"
             Keys.onPressed: {
                 if(event.key === Qt.Key_Control)
                     rectangleOrder.ctrlPressed = true;
@@ -92,7 +93,15 @@ ColumnLayout {
             y: 80
             width: 220
             height: 30
+            regExpString:/^\d+$/;
 //            borderEnable: false
+
+            textEdit.onTextChanged: {
+                if(regExpString.test(textEdit.text))
+                    summText.text = Digit2vn.transform(text);
+
+            }
+
         }
         DragText{
             id: summTextCurrency
@@ -104,7 +113,7 @@ ColumnLayout {
             width: 53
             height: 30
             textEdit.font.capitalization: Font.AllUppercase
-            regExpValid:/^VND|USD$/i;
+            regExpString:/^VND|USD$/i;
             text: "VND"
 //            borderEnable: false
         }
@@ -113,9 +122,9 @@ ColumnLayout {
             isMoveMode: rectangleOrder.ctrlPressed
             settinsCategory: "EditOrderSumText"
             textVerticalAlignment: TextEdit.AlignLeft
-            x: 120
+            x: 118
             y: 100
-            width: 53
+            width: 425
             height: 30
 //            borderEnable: false
         }
