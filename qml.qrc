@@ -28,5 +28,6 @@
         <file>QML/Basic/DragText.qml</file>
         <file>Image/vrbpay.png</file>
         <file>Script/digit2vn.js</file>
+        <file>QML/Basic/ComboText.qml</file>
     </qresource>
 </RCC>
