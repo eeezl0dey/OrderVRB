@@ -130,5 +130,5 @@ function transform(digitStr) {
         if(separateDigit[j] > 0)
             returnStr = separateString[j] + " " + returnStr;
 
-    return returnStr
+    return returnStr.charAt(0).toUpperCase() + returnStr.slice(1);
 }

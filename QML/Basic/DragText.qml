@@ -4,15 +4,15 @@ import Qt.labs.settings 1.0
 Item {
     id: root
 //    property Component rootComp: root
-    property alias textEdit: textEdit
-    property alias text: textEdit.text
-    property alias textVerticalAlignment: textEdit.verticalAlignment
-    property alias textHorisontalAlignment: textEdit.horizontalAlignment
+    property alias textInput: textInput
+    property alias text: textInput.text
+    property alias textVerticalAlignment: textInput.verticalAlignment
+    property alias textHorisontalAlignment: textInput.horizontalAlignment
     property string settinsCategory: "null_category"
     property bool isMoveMode: true
     property bool borderEnable: true
     property var regExpString:/^\S+$/;
-    property bool regExpValid: regExpString.test(textEdit.text)
+    property bool regExpValid: regExpString.test(textInput.text)
 
     x: 0;
     y: 0;
@@ -21,26 +21,27 @@ Item {
 
     Settings {
         category: settinsCategory
-        property alias textX: textEdit.x
-        property alias textY: textEdit.y
+        property alias textX: textInput.x
+        property alias textY: textInput.y
         property alias textWidth: root.width
         property alias textHeihgt: root.height
     }
 
 //! [0]
-        TextEdit {
-            id: textEdit
+        TextInput {
+            id: textInput
 //            text: "sdfsf"
             font.pointSize: 12
             width: root.width
             height: root.height
+            wrapMode: Text.WordWrap
 
             Rectangle {
                 id: tile
                 visible: borderEnable
 
-                    width: Math.max(textEdit.contentWidth, textEdit.width)
-                    height: textEdit.contentHeight
+                    width: Math.max(textInput.contentWidth, textInput.width)
+                    height: root.height
 
 //anchors.fill: parent
 //            anchors.verticalCenter: parent.verticalCenter
@@ -56,7 +57,7 @@ Item {
                 anchors.fill: parent
 
 
-                drag.target: textEdit
+                drag.target: textInput
 
                 onWheel:
                 {

@@ -88,16 +88,17 @@ ColumnLayout {
             id: summ
             isMoveMode: rectangleOrder.ctrlPressed
             settinsCategory: "EditOrderSum"
-            textVerticalAlignment: TextEdit.AlignRight
-            x: 159
-            y: 80
-            width: 220
-            height: 30
+//            textVerticalAlignment: TextInput.AlignVCenter
+            textHorisontalAlignment: TextInput.AlignRight
+            x: 150
+            y: 70
+            width: 230
+            height: 20
             regExpString:/^\d+$/;
 //            borderEnable: false
 
-            textEdit.onTextChanged: {
-                if(regExpString.test(textEdit.text))
+            textInput.onTextChanged: {
+                if(regExpString.test(textInput.text))
                     summText.text = Digit2vn.transform(text);
 
             }
@@ -107,12 +108,12 @@ ColumnLayout {
             id: summTextCurrency
             isMoveMode: rectangleOrder.ctrlPressed
             settinsCategory: "EditOrderSumCurrency"
-            textVerticalAlignment: TextEdit.AlignHCenter
-            x: 381
-            y: 80
-            width: 53
-            height: 30
-            textEdit.font.capitalization: Font.AllUppercase
+            textHorisontalAlignment: TextInput.AlignHCenter
+            x: 380
+            y: 70
+            width: 60
+            height: 20
+            textInput.font.capitalization: Font.AllUppercase
             regExpString:/^VND|USD$/i;
             text: "VND"
 //            borderEnable: false
@@ -121,11 +122,13 @@ ColumnLayout {
             id: summText
             isMoveMode: rectangleOrder.ctrlPressed
             settinsCategory: "EditOrderSumText"
-            textVerticalAlignment: TextEdit.AlignLeft
-            x: 118
-            y: 100
-            width: 425
-            height: 30
+//            textVerticalAlignment: TextInput.AlignVCenter
+            textHorisontalAlignment: TextInput.AlignLeft
+            regExpString:/^\D+$/;
+            x: 20
+            y: 90
+            width: 520
+            height: 40
 //            borderEnable: false
         }
     }

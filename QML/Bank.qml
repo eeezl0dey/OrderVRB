@@ -43,21 +43,21 @@ SwipeScreen {
                 TableViewColumn {
                     id: columnBankName
                     role: "name"
-                    title: "Наименование"
+                    title: qsTr("Наименование")
                     width: 200
                     horizontalAlignment: Text.AlignHCenter
                 }
                 TableViewColumn {
                     id: columnAddress
                     role: "address"
-                    title: "Адрес"
+                    title: qsTr("Адрес")
                     width: idTableBank.width - columnBankNum.width - columnBankName.width - columnBankUser.width
                     horizontalAlignment: Text.AlignHCenter
                 }
                 TableViewColumn {
                     id: columnBankUser
                     role: "creatorname"
-                    title: "Создал"
+                    title: qsTr("Создал")
                     width: 150
                     horizontalAlignment: Text.AlignHCenter
                 }
