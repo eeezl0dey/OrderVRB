@@ -2,7 +2,7 @@
 #define QLISTMODET_H
 
 #include <QObject>
-#include <QSql>
+//#include <QSql>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QSqlDatabase>
