@@ -85,14 +85,14 @@ function transform(digitStr) {
                 else
                     separateString[i] = digitArr[separateDigit[i]]
                 break
-            case 1:
-                if (separateDigit[i] === 1 && level > 3)
-                    separateString[i] = "và"
-                else
-                    separateString[i] = digitArr[separateDigit[i]]
-                if (level > 2 && separateDigit[2] > 0 && separateDigit[i] === 7)
-                    separateString[i] = "và " + separateString[i]
-                break
+//            case 1:
+//                if (separateDigit[i] === 1 && level > 3)
+//                    separateString[i] = "và"
+//                else
+//                    separateString[i] = digitArr[separateDigit[i]]
+//                if (level > 2 && separateDigit[2] > 0 && separateDigit[i] === 7)
+//                    separateString[i] = "và " + separateString[i]
+//                break
             default:
                 separateString[i] = digitArr[separateDigit[i]]
             }

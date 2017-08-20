@@ -20,10 +20,10 @@ QVariant QSqlQueryModelUsers::data(const QModelIndex & index, int role) const {
     QVariant var;
 
     switch (role) {
-    case IsAdminRole:
-        var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
-        var = (var == 1) ? "Да":"Нет";
-        break;
+//    case IsAdminRole:
+//        var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+//        var = (var == 1) ? tr("Да"):tr("Нет");
+//        break;
     default:
         var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
         break;
