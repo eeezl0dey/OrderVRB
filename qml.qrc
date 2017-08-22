@@ -29,5 +29,6 @@
         <file>Image/vrbpay.png</file>
         <file>Script/digit2vn.js</file>
         <file>QML/Basic/ComboText.qml</file>
+        <file>QML/WaitPlease.qml</file>
     </qresource>
 </RCC>

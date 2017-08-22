@@ -77,8 +77,8 @@ ApplicationWindow {
 
     SetConnectDb {
         id:connectDlg
-        visible: true;
-//        visible: false;
+//        visible: true;
+        visible: false;
         onSignalAcceptDbPass: {
             hostName = connectDlg.hostAddress;
             databaseName = connectDlg.dbName;
@@ -90,8 +90,18 @@ ApplicationWindow {
 
     }
 
-    onSceneGraphInitialized: {
-        if(dataBase.setConnect(hostName, databaseName, userName, passwd)){
+    WaitPlease {
+        id:waitDlg
+        visible: true;
+//        visible: false;
+    }
+
+
+    onSceneGraphAboutToStop:  {
+//    onSceneGraphInitialized: {
+        mainApp.hide();
+        waitDlg.show()
+        if(dataBase.setConnect(hostName, databaseName, userName, passwd)){           
             loginDlg.show();
             connectDlg.hide();
             mainApp.hide();
@@ -102,9 +112,9 @@ ApplicationWindow {
             connectDlg.dbUserName = userName;
             connectDlg.dbPasswd = passwd;
             connectDlg.errInfo = dataBase.getConnectError();
-            connectDlg.show();
+            connectDlg.show();           
             loginDlg.hide();
-            mainApp.hide();
         }
+        waitDlg.hide()
     }
 }
