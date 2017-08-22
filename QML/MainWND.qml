@@ -4,19 +4,20 @@ import QtQuick.Window 2.0
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 import Qt.labs.settings 1.0
+import QtQuick.Layouts 1.1
 import "Basic"
 
 
 ApplicationWindow {
+    id: mainApp
     title: qsTr("OrderVRB")
     width: 775
     height: 700
     minimumWidth: 640
     minimumHeight: 400
-    visible: true
     x: Screen.width / 2 - width / 2
     y: Screen.height / 2 - height / 2
-    id: mainApp
+    visible: true
 
     property string hostName
     property string databaseName
@@ -98,8 +99,6 @@ ApplicationWindow {
 
 
     onSceneGraphAboutToStop:  {
-//    onSceneGraphInitialized: {
-        mainApp.hide();
         waitDlg.show()
         if(dataBase.setConnect(hostName, databaseName, userName, passwd)){           
             loginDlg.show();
