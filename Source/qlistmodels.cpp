@@ -33,6 +33,7 @@ bool QListModels::setConnect(QString hostName, QString databaseName, QString use
     qDebug() << QSqlDatabase::drivers();
     qDebug() << QApplication::libraryPaths();
 
+
     connectdb = db.open();
     qDebug()<< QString("Connect is ") + QString((bool)connectdb?"accept":"error");
     if(!connectdb)

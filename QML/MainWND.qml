@@ -19,6 +19,7 @@ ApplicationWindow {
     y: Screen.height / 2 - height / 2
     visible: true
 
+
     property string hostName
     property string databaseName
     property string userName
@@ -53,6 +54,7 @@ ApplicationWindow {
 
     SwipeMain{
         id: swipeMain
+        visible: true
         anchors.fill: parent;
     }
 
@@ -91,29 +93,26 @@ ApplicationWindow {
 
     }
 
-    WaitPlease {
-        id:waitDlg
-        visible: true;
-//        visible: false;
-    }
+//    function databaseConnect()
+//    {
+//        if(dataBase.setConnect(hostName, databaseName, userName, passwd)){
+//            loginDlg.show();
+//            connectDlg.hide();
+//        }
+//        else{
+//            connectDlg.hostAddress = hostName;
+//            connectDlg.dbName = databaseName;
+//            connectDlg.dbUserName = userName;
+//            connectDlg.dbPasswd = passwd;
+//            connectDlg.errInfo = dataBase.getConnectError();
+//            connectDlg.show();
+//            loginDlg.hide();
+//        }
+//        waitDlg.hide()
+//    }
 
-
-    onSceneGraphAboutToStop:  {
-        waitDlg.show()
-        if(dataBase.setConnect(hostName, databaseName, userName, passwd)){           
-            loginDlg.show();
-            connectDlg.hide();
-            mainApp.hide();
-        }
-        else{
-            connectDlg.hostAddress = hostName;
-            connectDlg.dbName = databaseName;
-            connectDlg.dbUserName = userName;
-            connectDlg.dbPasswd = passwd;
-            connectDlg.errInfo = dataBase.getConnectError();
-            connectDlg.show();           
-            loginDlg.hide();
-        }
-        waitDlg.hide()
+    onSceneGraphInitialized:  {
+        loginDlg.show();
+        mainApp.hide()
     }
 }

@@ -15,8 +15,7 @@ Window {
     x: Screen.width / 2 - width / 2
     y: Screen.height / 2 - height / 2
     title: qsTr("Авторизация")
-    signal //    modality: Qt.ApplicationModal
-    signalAcceptPass
+    signal signalAcceptPass
 
     // Задаём сигнал выхода
     WindowFone {
@@ -62,6 +61,7 @@ Window {
                 anchors.topMargin: loginForm.margin
                 columns: 2
                 anchors.fill: parent
+//                Layout.fillHeight: true
 
                 Label {
                     id: labelLogin
@@ -154,12 +154,26 @@ Window {
         }
     }
 
+
     function checkAccess() {
-        if (dataBase.login(textFieldLogin.text, textFieldPass.text)) {
-            signalAcceptPass()
-        } else
-            labelWelcome.text = qsTr(
-                        "Имя пользователя или пароль введены не корректно")
+        if(dataBase.setConnect(hostName, databaseName, userName, passwd))
+        {
+            if (dataBase.login(textFieldLogin.text, textFieldPass.text)) {
+                signalAcceptPass()
+            } else
+                labelWelcome.text = qsTr(
+                            "Имя пользователя или пароль введены не корректно")
+        }
+        else
+        {
+            connectDlg.hostAddress = hostName;
+            connectDlg.dbName = databaseName;
+            connectDlg.dbUserName = userName;
+            connectDlg.dbPasswd = passwd;
+            connectDlg.errInfo = dataBase.getConnectError();
+            connectDlg.show();
+            loginDlg.hide();
+        }
     }
 
     onActiveChanged: {
