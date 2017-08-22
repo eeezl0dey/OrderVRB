@@ -86,8 +86,6 @@ bool QSqlQueryModelKontragent::acceptKontr(int rowId, QString fname, int idbank,
     return true;
 }
 
-
-
 // Метод для получения имен ролей через хешированную таблицу.
 QHash<int, QByteArray> QSqlQueryModelKontragent::roleNames() const {
     /* То есть сохраняем в хеш-таблицу названия ролей

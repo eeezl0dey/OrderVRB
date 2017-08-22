@@ -153,11 +153,13 @@ ColumnLayout {
 //            textVerticalAlignment: TextInput.AlignVCenter
 //            extHorisontalAlignment: TextInput.AlignLeft
 //            regExpString:/^\D+$/;
+            model: dataBase.modelKontr
+            textRole: "fname"
             x: 94
             y: 172
             width: 270
             height: 20
-
+            editable: true
         }
 
         DragText{
@@ -195,6 +197,8 @@ ColumnLayout {
 //            textVerticalAlignment: TextInput.AlignVCenter
 //            extHorisontalAlignment: TextInput.AlignLeft
 //            regExpString:/^\D+$/;
+            model: dataBase.modelKontr
+            textRole: 'fname'
             x: 454
             y: 172
             width: 270

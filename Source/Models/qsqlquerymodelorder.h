@@ -9,7 +9,7 @@
 
 class QSqlQueryModelOrder : public QSqlQueryModel
 {
-    Q_OBJECT
+    Q_OBJECT  
 public:
     // Перечисляем все роли, которые будут использоваться в TableView
     enum Roles {

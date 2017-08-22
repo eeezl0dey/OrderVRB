@@ -50,27 +50,32 @@ SwipeScreen {
                 TableViewColumn {
                     id: columnUserName
                     role: "username"
-                    title: "Логин"
+                    title: qsTr("Логин")
                     width: 150
                     horizontalAlignment: Text.AlignHCenter
                 }
                 TableViewColumn {
                     id: columnFullname
                     role: "fullname"
-                    title: "Полное Ф.И.О."
+                    title: qsTr("Полное Ф.И.О.")
                     width: idTableUser.width - columnUsersNum.width - columnUserName.width - columnIsAdmin.width
                     horizontalAlignment: Text.AlignHCenter
                 }
                 TableViewColumn {
                     id: columnIsAdmin
                     role: "isadmin"
-                    title: "Админ"
+                    title: qsTr("Админ")
                     width: 70
                     horizontalAlignment: Text.AlignHCenter
                     delegate: Item {
                         Text {
                             anchors.verticalCenter: parent.verticalCenter
-                            text: styleData.value
+                            text: {
+                                if(styleData.value === 1)
+                                    qsTr("Да");
+                                else
+                                    qsTr("Нет");
+                            }
                             renderType: Text.NativeRendering
                             anchors.centerIn: parent
                         }

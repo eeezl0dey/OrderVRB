@@ -1,80 +1,123 @@
-import QtQuick 2.0
+import QtQuick 2.6
 import Qt.labs.settings 1.0
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.1
+import QtQml.Models 2.2
+//import QtQuick.Layouts 1.1
+//import QtQuick.Controls.Styles 1.4
 
-Item {
-    id: root
-//    property Component rootComp: root
-    property alias comboInput: comboInput
-//    property alias text: comboInput.te
-//    property alias textVerticalAlignment: textInput.verticalAlignment
-//    property alias textHorisontalAlignment: textInput.horizontalAlignment
+ComboBox{
+    id: comboInput
+
     property string settinsCategory: "null_category"
     property bool isMoveMode: true
     property bool borderEnable: true
-//    property var regExpString:/^\S+$/;
-//    property bool regExpValid: regExpString.test(comboInput.text)
 
-    x: 0;
-    y: 0;
-    width: 300;
-    height: 30;
+    font.pointSize: 10
 
     Settings {
         category: settinsCategory
         property alias textX: comboInput.x
         property alias textY: comboInput.y
-        property alias textWidth: root.width
-        property alias textHeihgt: root.height
+        property alias textWidth: comboInput.width
+        property alias textHeihgt: comboInput.height
     }
 
-//! [0]
-        ComboBox{
-            id: comboInput
-//            text: "sdfsf"
-            font.pointSize: 12
-            width: root.width
-            height: root.height
 
-            Rectangle {
-                id: tile
-                visible: borderEnable
+    background: Rectangle{
+      visible: borderEnable
+      id: rectCategory
+      border.width: 1
+      border.color: "blue";
+      color: "transparent"
+    }
 
-                    width: comboInput.width
-                    height: root.height
 
-//anchors.fill: parent
-//            anchors.verticalCenter: parent.verticalCenter
-        //            anchors.horizontalCenter: parent.horizontalCenter
+    delegate: ItemDelegate {
+              width: comboInput.width
+              contentItem: Text {
+                  text: fname
+                  font: comboInput.font
+                  elide: Text.ElideRight
+                  verticalAlignment: Text.AlignVCenter
+                  renderType: Text.NativeRendering
+              }
+              highlighted: comboInput.highlightedIndex == index
+          }
 
-                border.color: "blue";
-                color: "transparent"
+    indicator: Canvas {
+        id: canvas
+        x: comboInput.width - width// - comboInput.rightPadding
+        y: comboInput.topPadding + (comboInput.availableHeight - height) / 2
+        width: 12
+        height: 8
+        contextType: "2d"
+
+        Connections {
+            target: comboInput
+            onPressedChanged: canvas.requestPaint()
+        }
+
+        onPaint: {
+            context.reset();
+            context.moveTo(0, 0);
+            context.lineTo(width, 0);
+            context.lineTo(width / 2, height);
+            context.closePath();
+            context.fillStyle = comboInput.pressed ? "darkBlue" : "blue";
+            context.fill();
+        }
+
+    }
+
+    contentItem: TextInput {
+              id: textInput
+              leftPadding: 0
+              rightPadding: comboInput.indicator.width + comboInput.spacing
+
+              text: comboInput.displayText
+              font: comboInput.font
+//              color: comboInput.pressed ? "darkBlue" : "blue"
+              horizontalAlignment: Text.AlignLeft
+              verticalAlignment: Text.AlignVCenter
+              renderType: Text.NativeRendering
+//              onTextChanged: {
+//                  comboInput.popup.open()
+//              }
+
+//              elide: Text.ElideRight
+    }
+
+    onPressedChanged: {
+        textInput.text = ""
+    }
+
+//    onCurrentIndexChanged:  {
+//        textInput.text = currentText
+//    }
+
+    MouseArea {
+        id: mouseArea
+        enabled: isMoveMode
+        anchors.fill: parent
+
+
+        drag.target: comboInput
+
+        onWheel:
+        {
+            if (wheel.angleDelta.y > 0)
+            {
+                root.width++;
             }
-
-            MouseArea {
-                id: mouseArea
-                enabled: isMoveMode
-                anchors.fill: parent
-
-
-                drag.target: comboInput
-
-                onWheel:
-                {
-                    if (wheel.angleDelta.y > 0)
-                    {
-                        root.width++;
-                    }
-                    else
-                    {
-                        root.width--;
-                    }
-                    wheel.accepted=true
-                }
+            else
+            {
+                root.width--;
+            }
+            wheel.accepted=true
+        }
 
 //                onReleased: parent = tile.Drag.target !== null ? tile.Drag.target : rootComp
 
 
-            }
-        }
+    }
 }
