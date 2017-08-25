@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     QQmlContext *ctx;
 
     SourceDB sourceDB;
+
     ctx = engine.rootContext();
     ctx->setContextProperty("dataBase", &sourceDB);
 

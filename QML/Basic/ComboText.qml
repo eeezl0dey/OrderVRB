@@ -87,9 +87,6 @@ ComboBox{
 //              elide: Text.ElideRight
     }
 
-    onPressedChanged: {
-        textInput.text = ""
-    }
 
 //    onCurrentIndexChanged:  {
 //        textInput.text = currentText
