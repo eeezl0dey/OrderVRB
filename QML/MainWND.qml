@@ -67,8 +67,6 @@ ApplicationWindow {
             if(dataBase.isAdmin)
             {
                 listModelWindow.append({"title": qsTr("Пользователи"), "source": "qrc:/QML/User.qml"});
-
-                {"cost": 5.95, "name":"Pizza"}
             }
 
             swipeMain.model = listModelWindow;
@@ -92,24 +90,6 @@ ApplicationWindow {
         }
 
     }
-
-//    function databaseConnect()
-//    {
-//        if(dataBase.setConnect(hostName, databaseName, userName, passwd)){
-//            loginDlg.show();
-//            connectDlg.hide();
-//        }
-//        else{
-//            connectDlg.hostAddress = hostName;
-//            connectDlg.dbName = databaseName;
-//            connectDlg.dbUserName = userName;
-//            connectDlg.dbPasswd = passwd;
-//            connectDlg.errInfo = dataBase.getConnectError();
-//            connectDlg.show();
-//            loginDlg.hide();
-//        }
-//        waitDlg.hide()
-//    }
 
     onSceneGraphInitialized:  {
         loginDlg.show();
