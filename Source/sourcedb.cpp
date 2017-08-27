@@ -64,6 +64,7 @@ QSqlQueryModel* SourceDB::getModelKontr()
     return QListModels::getInstance()->getModel(QListModels::mtype::kontr);
 }
 
+
 QSqlQueryModel* SourceDB::getModelUsers()
 {
     return QListModels::getInstance()->getModel(QListModels::mtype::users);

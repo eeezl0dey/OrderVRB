@@ -155,11 +155,14 @@ ColumnLayout {
 //            regExpString:/^\D+$/;
             model: dataBase.modelKontr
             textRole: "fname"
-            x: 94
-            y: 172
+            x: 89
+            y: 162
             width: 270
             height: 20
-            editable: true
+//            editable: true
+            onCurrentIndexChanged:  {
+//                textInput.text = currentText
+            }
         }
 
         DragText{

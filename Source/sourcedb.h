@@ -34,6 +34,7 @@ public:
     QSqlQueryModel* getModelOrder();
 signals:
     void modelKontrChanged();
+    void modelKontrFilterChanged();
     void modelUsersChanged();
     void modelBankChanged();
     void modelOrderChanged();
