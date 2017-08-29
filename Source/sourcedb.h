@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QApplication>
 #include <QSqlDriver>
+#include <QSortFilterProxyModel>
 #include "qsqlquerymodelkontragent.h"
 #include "qsqlquerymodelusers.h"
 #include "qlistmodels.h"
@@ -19,25 +20,28 @@ class SourceDB: public QObject
 //    Q_PROPERTY(QString userFullName READ getUserFullName WRITE setUserFullName NOTIFY userFullNameChanged)
       Q_PROPERTY(QString userFullName READ getUserFullName)
       Q_PROPERTY(bool isAdmin READ getUserIsAdmin)
-      Q_PROPERTY(QSqlQueryModel* modelKontr READ getModelKontr NOTIFY modelKontrChanged)
-      Q_PROPERTY(QSqlQueryModel* modelBank READ getModelBank NOTIFY modelBankChanged)
-      Q_PROPERTY(QSqlQueryModel* modelUsers READ getModelUsers NOTIFY modelUsersChanged)
-      Q_PROPERTY(QSqlQueryModel* modelOrder READ getModelOrder NOTIFY modelOrderChanged)
+      Q_PROPERTY(QAbstractItemModel* modelKontr READ getModelKontr NOTIFY modelKontrChanged)
+      Q_PROPERTY(QAbstractItemModel* modelBank READ getModelBank NOTIFY modelBankChanged)
+      Q_PROPERTY(QAbstractItemModel* modelUsers READ getModelUsers NOTIFY modelUsersChanged)
+      Q_PROPERTY(QAbstractItemModel* modelOrder READ getModelOrder NOTIFY modelOrderChanged)
+      Q_PROPERTY(QAbstractItemModel* modelProxyKontr READ getModelProxyKontr NOTIFY modelProxyKontrChanged)
 public:
     explicit SourceDB(QObject *parent = 0);
     virtual ~SourceDB();
     QString getUserFullName();
     bool getUserIsAdmin();
-    QSqlQueryModel* getModelKontr();
-    QSqlQueryModel* getModelUsers();
-    QSqlQueryModel* getModelBank();
-    QSqlQueryModel* getModelOrder();
+    QAbstractItemModel* getModelKontr();
+    QAbstractItemModel* getModelUsers();
+    QAbstractItemModel* getModelBank();
+    QAbstractItemModel* getModelOrder();
+    QAbstractItemModel* getModelProxyKontr();
 signals:
     void modelKontrChanged();
     void modelKontrFilterChanged();
     void modelUsersChanged();
     void modelBankChanged();
     void modelOrderChanged();
+    void modelProxyKontrChanged();
 public slots:
     bool login(QString username, QString pass);
     bool isConnected();

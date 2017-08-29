@@ -3,7 +3,6 @@
 QSqlQueryModelKontragent::QSqlQueryModelKontragent(QObject *parent) :
     QSqlQueryModel(parent)
 {
-    filterModel = make_shared<QFilterProxyModel>(this);
 }
 
 // Метод для получения данных из модели
@@ -42,17 +41,7 @@ QVariant QSqlQueryModelKontragent::getData(int row, QString colName){
 
 }
 
-QSqlQueryModel* QSqlQueryModelKontragent::getProxyModel(){
 
-}
-
-void QSqlQueryModelKontragent::setFilterString(QString string){
-
-}
-
-void QSqlQueryModelKontragent::setSortOrder(bool checked){
-
-}
 
 bool QSqlQueryModelKontragent::acceptKontr(int rowId, QString fname, int idbank, QString  naccount, int is_beneficiary){
     QSqlQuery query;

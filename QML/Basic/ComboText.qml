@@ -69,7 +69,7 @@ ComboBox{
 
     }
 
-    contentItem: TextInput {
+    contentItem: Text {
               id: textInput
               leftPadding: 0
               rightPadding: comboInput.indicator.width + comboInput.spacing

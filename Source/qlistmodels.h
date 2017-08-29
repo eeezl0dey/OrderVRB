@@ -10,6 +10,7 @@
 #include <QHash>
 #include <QSqlQueryModel>
 #include <QApplication>
+#include <QSortFilterProxyModel>
 #include "qsqlquerymodelkontragent.h"
 #include "qsqlquerymodelusers.h"
 #include "qsqlquerymodelbank.h"
@@ -24,11 +25,12 @@ public:
         users,
         kontr,
         banks,
-        order
+        order,
+        proxyKontr
     };
 
     static QListModels* getInstance();
-    QSqlQueryModel* getModel( mtype);
+    QAbstractItemModel* getModel( mtype);
     bool isConnected();
     QString getConnectError();
     void setUser(int id, QString fname, bool isadmin);
@@ -46,7 +48,7 @@ protected:
     static QListModels* thisClass;
     explicit QListModels(QObject *parent = 0);
     ~QListModels();
-    QHash<mtype,QSqlQueryModel*> hashlist;
+    QHash<mtype,QAbstractItemModel*> hashlist;
     QSqlDatabase db;
     bool connectdb;
     QString connectError="";

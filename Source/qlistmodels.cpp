@@ -88,17 +88,34 @@ void QListModels::setUser(int id, QString fname, bool isadmin)
     return ;
 }
 
-QSqlQueryModel* QListModels::getModel ( mtype mt)
+QAbstractItemModel* QListModels::getModel ( mtype mt)
 {
-    QSqlQueryModel* sqlmodel;
+    //позаботимся о однократном выделении
+    auto it = hashlist.find(mt);
+    if(it != hashlist.end()){
+        return it.value();
+    }
+
+
+    //утечки памяти не будет, удалятся при удалении этого класса.
+    QSqlQueryModel*  sqlmodel;
+    QSortFilterProxyModel* filtermodel;
     switch (mt) {
     case mtype::kontr:
+    {
         sqlmodel = new QSqlQueryModelKontragent(this);
         sqlmodel->setQuery("SELECT c.*, u.fullname as creatorname, b.name as bankname \
                             FROM OrderVRB.сontragent AS c JOIN OrderVRB.users as u ON c.idusers = u.idusers \
                                                           JOIN OrderVRB.bank as b ON b.idbank = c.idbank \
                             ORDER BY c.idсontragent DESC");
+        auto it = hashlist.find(mtype::proxyKontr);
+        if(it!=hashlist.end()){
+            QSortFilterProxyModel *pm = (QSortFilterProxyModel*)it.value();
+            pm->setSourceModel(sqlmodel);
+        }
         break;
+    }
+
     case mtype::users:
         sqlmodel = new QSqlQueryModelUsers(this);
         sqlmodel->setQuery("SELECT * FROM OrderVRB.users;");
@@ -116,9 +133,23 @@ QSqlQueryModel* QListModels::getModel ( mtype mt)
                            LEFT OUTER JOIN OrderVRB.сontragent ct   \
                            ON (ct.`idсontragent` = o.`idсontragent`)");
         break;
+    case mtype::proxyKontr:
+        {
+            filtermodel = new QSortFilterProxyModel(this);
+            filtermodel->setDynamicSortFilter(true);
+            filtermodel->setFilterRole(QSqlQueryModelKontragent::IsBeneficiaryRole);
+            filtermodel->setFilterFixedString("0");
+            auto it = hashlist.find(mtype::kontr);
+            if(it!=hashlist.end()){
+                filtermodel->setSourceModel(it.value());
+            }
+            break;
+        }
+
     default:
         sqlmodel = NULL;
         break;
     }
-    return sqlmodel;
+    hashlist[mt] = (mt==mtype::proxyKontr)?filtermodel:(QAbstractItemModel*)sqlmodel;
+    return (QAbstractItemModel*)hashlist[mt];
 }

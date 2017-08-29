@@ -153,16 +153,16 @@ ColumnLayout {
 //            textVerticalAlignment: TextInput.AlignVCenter
 //            extHorisontalAlignment: TextInput.AlignLeft
 //            regExpString:/^\D+$/;
-            model: dataBase.modelKontr
+            model: dataBase.modelProxyKontr
             textRole: "fname"
             x: 89
             y: 162
             width: 270
             height: 20
-//            editable: true
             onCurrentIndexChanged:  {
 //                textInput.text = currentText
             }
+
         }
 
         DragText{
@@ -276,5 +276,6 @@ ColumnLayout {
 
 //    onFocusChanged:
 //        if(focus)textBankName.forceActiveFocus();
+
 }
 

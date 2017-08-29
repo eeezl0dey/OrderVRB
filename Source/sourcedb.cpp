@@ -59,26 +59,32 @@ QString SourceDB::getUserFullName()
 }
 
 
-QSqlQueryModel* SourceDB::getModelKontr()
+QAbstractItemModel* SourceDB::getModelKontr()
 {
     return QListModels::getInstance()->getModel(QListModels::mtype::kontr);
 }
 
 
-QSqlQueryModel* SourceDB::getModelUsers()
+QAbstractItemModel* SourceDB::getModelUsers()
 {
     return QListModels::getInstance()->getModel(QListModels::mtype::users);
 }
 
-QSqlQueryModel* SourceDB::getModelBank()
+QAbstractItemModel* SourceDB::getModelBank()
 {
     return QListModels::getInstance()->getModel(QListModels::mtype::banks);
 }
 
-QSqlQueryModel* SourceDB::getModelOrder()
+QAbstractItemModel* SourceDB::getModelOrder()
 {
     return QListModels::getInstance()->getModel(QListModels::mtype::order);
 }
+
+QAbstractItemModel* SourceDB::getModelProxyKontr()
+{
+    return QListModels::getInstance()->getModel(QListModels::mtype::proxyKontr);
+}
+
 
 
 bool SourceDB::getUserIsAdmin()
