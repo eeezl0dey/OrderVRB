@@ -44,6 +44,7 @@ signals:
 
 public slots:
     QVariant getData(int row, QString colName);
+    QVariant getDataFromKey(QString keyVal, QString keyName, QString colName);
     bool acceptKontr(int rowId, QString fname, int idbank, QString  naccount, int is_beneficiary = 1);
 
 };

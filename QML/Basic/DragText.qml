@@ -35,6 +35,8 @@ Item {
             width: root.width
             height: root.height
             wrapMode: Text.WordWrap
+            renderType: Text.NativeRendering
+            font.bold: true
 
             Rectangle {
                 id: tile

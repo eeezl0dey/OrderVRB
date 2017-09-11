@@ -136,9 +136,12 @@ SwipeScreen {
 //                        rowId = dataBase.modelBank.getData(idTableBank.currentRow, 'idbank')
                     }
                     else{
-//                        bname = ""
-//                        baddress = ""
-//                        rowId = ""
+                        aSumm = ""
+//                        aSummText = ""
+                        aTextCurrency = "VND"
+                        aDescription = ""
+                        aBeneficiaryIndex = 0
+                        aContragentIndex = 0
                     }
 //                    rowViewOrder.visible = false
                     Layout.preferredHeight = orderItem.height

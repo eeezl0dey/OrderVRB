@@ -12,7 +12,8 @@ ComboBox{
     property bool isMoveMode: true
     property bool borderEnable: true
 
-    font.pointSize: 10
+    font.pointSize: 12
+    font.bold: true
 
     Settings {
         category: settinsCategory

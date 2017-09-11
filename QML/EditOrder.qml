@@ -10,6 +10,14 @@ ColumnLayout {
     id: mainColumn
     property int margin: 12
     property  int rowId: 0
+
+    property alias aSumm: summ.text
+    property alias aSummText: summText.text
+    property alias aTextCurrency: summTextCurrency.text
+    property alias aDescription: discriptionText.text
+    property alias aBeneficiaryIndex: beneficiaryCombo.currentIndex
+    property alias aContragentIndex: contragentCombo.currentIndex
+
     property bool isNew: false
 
 //    property int pictureWidth: 30
@@ -99,7 +107,7 @@ ColumnLayout {
 
             textInput.onTextChanged: {
                 if(regExpString.test(textInput.text))
-                    summText.text = Digit2vn.transform(text);
+                    summText.text = Digit2vn.transform(text) + " " + summTextCurrency.text;
 
             }
 
@@ -124,7 +132,7 @@ ColumnLayout {
             settinsCategory: "EditOrderSumText"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
-            regExpString:/^\D+$/;
+            regExpString:/^(\D|\S|\s)+$/;
             x: 29
             y: 97
             width: 520
@@ -138,7 +146,7 @@ ColumnLayout {
             settinsCategory: "EditOrderDiscriptionText"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
-            regExpString:/^\D+$/;
+            regExpString:/^.+$/;
             x: 105
             y: 144
             width: 632
@@ -159,8 +167,15 @@ ColumnLayout {
             y: 162
             width: 270
             height: 20
-            onCurrentIndexChanged:  {
-//                textInput.text = currentText
+
+            onCurrentIndexChanged: {
+                bankBeneficiaryText.text = dataBase.modelKontr.getDataFromKey(beneficiaryCombo.textAt(currentText), textRole, 'bankname')
+                accBankBeneficiaryText.text = dataBase.modelKontr.getDataFromKey(currentText, textRole, 'naccount')
+
+//                bankBeneficiaryText.text = dataBase.modelProxyKontr.index(currentText,0x0100 + 8).data
+//                accBankBeneficiaryText.text = dataBase.modelProxyKontr.data(currentIndex,0x0100 + 5)
+//                bankBeneficiaryText.text = dataBase.modelKontr.getData(currentIndex, 'bankname')
+//                accBankBeneficiaryText.text = dataBase.modelKontr.getData(currentIndex,'naccount')
             }
 
         }
@@ -190,6 +205,7 @@ ColumnLayout {
             width: 286
             height: 20
             textInput.readOnly: true
+            regExpString:/^.+$/;
 //            borderEnable: false
         }
 
@@ -206,6 +222,11 @@ ColumnLayout {
             y: 172
             width: 270
             height: 20
+
+            onCurrentIndexChanged: {
+                bankcontragentText.text = dataBase.modelKontr.getData(currentIndex, 'bankname')
+                accBankcontragentText.text = dataBase.modelKontr.getData(currentIndex,'naccount')
+            }
 
         }
 
@@ -234,6 +255,7 @@ ColumnLayout {
             width: 286
             height: 20
             textInput.readOnly: true
+            regExpString:/^.+$/;
 //            borderEnable: false
         }
 
