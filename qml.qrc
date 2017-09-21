@@ -30,5 +30,6 @@
         <file>Script/digit2vn.js</file>
         <file>QML/Basic/ComboText.qml</file>
         <file>Image/loader.png</file>
+        <file>QML/Basic/HelpMoving.qml</file>
     </qresource>
 </RCC>

@@ -9,10 +9,11 @@ Item {
     property alias textVerticalAlignment: textInput.verticalAlignment
     property alias textHorisontalAlignment: textInput.horizontalAlignment
     property string settinsCategory: "null_category"
-    property bool isMoveMode: true
+    property int moveMode: 0
     property bool borderEnable: true
     property var regExpString:/^\S+$/;
     property bool regExpValid: regExpString.test(textInput.text)
+    property int pointDefaultSize: 12
 
     x: 0;
     y: 0;
@@ -31,7 +32,6 @@ Item {
         TextInput {
             id: textInput
 //            text: "sdfsf"
-            font.pointSize: 12
             width: root.width
             height: root.height
             wrapMode: Text.WordWrap
@@ -53,9 +53,15 @@ Item {
                 color: "transparent"
             }
 
+            onTextChanged: {
+
+                //TODO Размер шрифта, чтобы влезло в ячейку
+                textInput.font.pointSize = pointDefaultSize
+            }
+
             MouseArea {
                 id: mouseArea
-                enabled: isMoveMode
+                enabled: moveMode
                 anchors.fill: parent
 
 
@@ -63,14 +69,29 @@ Item {
 
                 onWheel:
                 {
-                    if (wheel.angleDelta.y > 0)
+                    if(moveMode & 1)
                     {
-                        root.width++;
+                        if (wheel.angleDelta.y > 0)
+                        {
+                            root.width++;
+                        }
+                        else
+                        {
+                            root.width--;
+                        }
                     }
-                    else
+                    if(moveMode & 2)
                     {
-                        root.width--;
+                        if (wheel.angleDelta.y > 0)
+                        {
+                            root.height++;
+                        }
+                        else
+                        {
+                            root.height--;
+                        }
                     }
+
                     wheel.accepted=true
                 }
 

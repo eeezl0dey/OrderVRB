@@ -39,7 +39,7 @@ ColumnLayout {
 //        anchors.margins: 4
 //        border.color: "black"
         color: "transparent"
-        property bool ctrlPressed: false
+        property int movePressed: 0 //  1 - нажата ctrl (горизонтальный масштаб); 2 - нажата shift (масштаб по вертикали); 3 - и вертикали и горизонтали
         clip: true
         Image {
             id: imageOrder
@@ -49,11 +49,13 @@ ColumnLayout {
             source: "qrc:/Image/vrbpay.png"
             Keys.onPressed: {
                 if(event.key === Qt.Key_Control)
-                    rectangleOrder.ctrlPressed = true;
+                    rectangleOrder.movePressed |= 1;
+                if(event.key === Qt.Key_Shift)
+                    rectangleOrder.movePressed |= 2;
             }
             Keys.onReleased: {
-                if(event.key === Qt.Key_Control){
-                    rectangleOrder.ctrlPressed = false;
+                if(event.key === Qt.Key_Control || event.key === Qt.Key_Shift){
+                    rectangleOrder.movePressed = 0;
                     pictureX = imageOrder.x;
                     pictureY = imageOrder.y;
                 }
@@ -66,7 +68,7 @@ ColumnLayout {
                 }
 
                 drag.target: {
-                    if(rectangleOrder.ctrlPressed){
+                    if(rectangleOrder.movePressed){
                         return imageOrder
                     }
                     else{
@@ -77,7 +79,7 @@ ColumnLayout {
 
                 onWheel:
                 {
-                    if (rectangleOrder.ctrlPressed){
+                    if (rectangleOrder.movePressed){
                                 if (wheel.angleDelta.y > 0)
                                 {
                                     imageOrder.sourceSize.width++;
@@ -94,7 +96,7 @@ ColumnLayout {
 
         DragText{
             id: summ
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderSum"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignRight
@@ -114,7 +116,7 @@ ColumnLayout {
         }
         DragText{
             id: summTextCurrency
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderSumCurrency"
             textHorisontalAlignment: TextInput.AlignHCenter
             x: 392
@@ -128,7 +130,7 @@ ColumnLayout {
         }
         DragText{
             id: summText
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderSumText"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
@@ -142,7 +144,7 @@ ColumnLayout {
 
         DragText{
             id: discriptionText
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderDiscriptionText"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
@@ -156,7 +158,7 @@ ColumnLayout {
 
         ComboText{
             id: beneficiaryCombo
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderBeneficiaryCombo"
 //            textVerticalAlignment: TextInput.AlignVCenter
 //            extHorisontalAlignment: TextInput.AlignLeft
@@ -182,7 +184,7 @@ ColumnLayout {
 
         DragText{
             id: accBankBeneficiaryText
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderAccBankBeneficiaryText"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
@@ -196,7 +198,7 @@ ColumnLayout {
 
         DragText{
             id: bankBeneficiaryText
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderBankBeneficiaryText"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
@@ -211,7 +213,7 @@ ColumnLayout {
 
         ComboText{
             id: contragentCombo
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderContragentCombo"
 //            textVerticalAlignment: TextInput.AlignVCenter
 //            extHorisontalAlignment: TextInput.AlignLeft
@@ -232,7 +234,7 @@ ColumnLayout {
 
         DragText{
             id: accBankcontragentText
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderAccBankContragentText"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
@@ -246,7 +248,7 @@ ColumnLayout {
 
         DragText{
             id: bankcontragentText
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderBankContragentText"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
@@ -271,6 +273,10 @@ ColumnLayout {
        Layout.alignment: Qt.AlignRight
        spacing: 20
 
+
+       HelpMoving{
+
+       }
 
 
        Button {

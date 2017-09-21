@@ -9,7 +9,7 @@ ComboBox{
     id: comboInput
 
     property string settinsCategory: "null_category"
-    property bool isMoveMode: true
+    property int moveMode: 0
     property bool borderEnable: true
 
     font.pointSize: 12
@@ -95,7 +95,7 @@ ComboBox{
 
     MouseArea {
         id: mouseArea
-        enabled: isMoveMode
+        enabled: moveMode
         anchors.fill: parent
 
 
@@ -103,13 +103,27 @@ ComboBox{
 
         onWheel:
         {
-            if (wheel.angleDelta.y > 0)
+            if(moveMode & 1)
             {
-                root.width++;
+                if (wheel.angleDelta.y > 0)
+                {
+                    comboInput.width++;
+                }
+                else
+                {
+                    comboInput.width--;
+                }
             }
-            else
+            if(moveMode & 2)
             {
-                root.width--;
+                if (wheel.angleDelta.y > 0)
+                {
+                    comboInput.height++;
+                }
+                else
+                {
+                    comboInput.height--;
+                }
             }
             wheel.accepted=true
         }
