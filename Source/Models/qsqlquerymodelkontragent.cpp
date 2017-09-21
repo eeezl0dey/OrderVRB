@@ -105,6 +105,10 @@ bool QSqlQueryModelKontragent::acceptKontr(int rowId, QString fname, int idbank,
     query.bindValue(":is_beneficiary", is_beneficiary?1:0);
     if(!query.exec())
         qDebug() << query.lastError();
+    else{
+        QSqlQueryModelKontragent *mk = static_cast<QSqlQueryModelKontragent*> (QListModels::getInstance()->getModel(QListModels::kontr));
+        mk->setQuery( mk->query().lastQuery() );
+    }
     return true;
 }
 

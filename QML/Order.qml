@@ -140,8 +140,8 @@ SwipeScreen {
 //                        aSummText = ""
                         aTextCurrency = "VND"
                         aDescription = ""
-                        aBeneficiaryIndex = 0
-                        aContragentIndex = 0
+//                        aBeneficiaryIndex = 0
+//                        aContragentIndex = 0
                     }
 //                    rowViewOrder.visible = false
                     Layout.preferredHeight = orderItem.height
@@ -159,8 +159,10 @@ SwipeScreen {
                 console.log("checkAccess")
                 var curRow = idTableOrder.currentRow
 //                dataBase.modelBank.acceptBank(editBank.rowId, editBank.bname, editBank.baddress)
-                idTableOrder.model = dataBase.modelOrder
-                idTableOrder.update()
+                var beneficiaryId = dataBase.modelKontr.getDataFromKey(editOrder.aBeneficiaryText, 'fname', 'idcontragent')
+                var contragentId = dataBase.modelKontr.getDataFromKey(editOrder.aContragentText, 'fname', 'idcontragent')
+                dataBase.modelOrder.acceptOrder(editOrder.rowId, contragentId, editOrder.aSumm, editOrder.aDescription, 0, beneficiaryId);
+
                 if(idTableOrder.rowCount > 0 && curRow < idTableOrder.rowCount)
                 {
                     idTableOrder.currentRow = curRow;

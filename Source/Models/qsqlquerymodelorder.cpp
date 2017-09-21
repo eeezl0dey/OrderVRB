@@ -66,39 +66,51 @@ QHash<int, QByteArray> QSqlQueryModelOrder::roleNames() const {
 bool QSqlQueryModelOrder::acceptOrder(int rowId, int idContragent, int summa, QString comment, short chargeInclude, int idBeneficiary)
 {
     QSqlQuery query;
-    QString script;
 
-    QString querystr;
+    QString querystr="";
     if(rowId > 0)
     {
-//        TODO
-//        querystr = "UPDATE `OrderVRB`.`bank`  \
-//                SET                                 \
-//                `name` = :name,                   \
-//                `address` = :address            \
-//                WHERE `idba1nk` = :idbank; ";
-//        query.prepare(querystr);
-//        query.bindValue(":idbank", rowId);
+        querystr = "UPDATE `OrderVRB`.`order`       \
+                SET                                 \
+                `idсontragent` = :idсontragent,     \
+                `summ` = :summ,                     \
+                `comment` = :comment,               \
+                `chargeinclud` = :chargeinclud,   \
+                `idbeneficiary` = :idbeneficiary    \
+                WHERE `idorder` = :idorder; ";
+        query.prepare(querystr);
+        query.bindValue(":idorder", rowId);
     }
     else
     {
-//        TODO
-//        querystr = "INSERT INTO `OrderVRB`.`bank` \
-//                (`name`,                               \
-//                `idusers`,                               \
-//                `address`)                              \
-//                VALUES                                  \
-//                (:name,                                \
-//                :idusers,                               \
-//                :address);";
-//        query.prepare(querystr);
-//        query.bindValue(":idusers", QListModels::getInstance()->getUserId());
+        querystr = "INSERT INTO `OrderVRB`.`order` \
+                (`idusers`,                        \
+                `idcontragent`,                    \
+                `summ`,                            \
+                `comment`,                         \
+                `chargeinclud`,                   \
+                `idbeneficiary`)                   \
+                VALUES                             \
+                (:idusers,                         \
+                :idcontragent,                     \
+                :summ,                             \
+                :comment,                          \
+                :chargeinclud,                    \
+                :idbeneficiary);";
+         query.prepare(querystr);
+        query.bindValue(":idusers", QListModels::getInstance()->getUserId());
     }
     qDebug() << querystr;
-//        TODO
-//    query.bindValue(":name", name);
-//    query.bindValue(":address", address);
+    query.bindValue(":idcontragent", idContragent);
+    query.bindValue(":summ", summa);
+    query.bindValue(":comment", comment);
+    query.bindValue(":chargeinclud", chargeInclude);
+    query.bindValue(":idbeneficiary", idBeneficiary);
     if(!query.exec())
         qDebug() << query.lastError();
+    else{
+        QSqlQueryModelOrder *mo = static_cast<QSqlQueryModelOrder*> (QListModels::getInstance()->getModel(QListModels::order));
+        mo->setQuery( mo->query().lastQuery() );
+    }
     return true;
 }

@@ -96,5 +96,9 @@ bool QSqlQueryModelUsers::acceptUser(int rowId, QString username, QString  userp
     query.bindValue(":isadmin", isadmin);
     if(!query.exec())
         qDebug() << query.lastError();
+    else{
+        QSqlQueryModelUsers *mu = static_cast<QSqlQueryModelUsers*> (QListModels::getInstance()->getModel(QListModels::users));
+        mu->setQuery( mu->query().lastQuery() );
+    }
     return true;
 }

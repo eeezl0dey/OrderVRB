@@ -15,8 +15,8 @@ ColumnLayout {
     property alias aSummText: summText.text
     property alias aTextCurrency: summTextCurrency.text
     property alias aDescription: discriptionText.text
-    property alias aBeneficiaryIndex: beneficiaryCombo.currentIndex
-    property alias aContragentIndex: contragentCombo.currentIndex
+    property alias aBeneficiaryText: beneficiaryCombo.currentText
+    property alias aContragentText: contragentCombo.currentText
 
     property bool isNew: false
 

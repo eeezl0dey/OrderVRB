@@ -131,7 +131,7 @@ QAbstractItemModel* QListModels::getModel ( mtype mt)
                            LEFT OUTER JOIN OrderVRB.users u \
                            ON (u.idusers = o.idusers) \
                            LEFT OUTER JOIN OrderVRB.сontragent ct   \
-                           ON (ct.`idсontragent` = o.`idсontragent`)");
+                           ON (ct.`idсontragent` = o.`idcontragent`)");
         break;
     case mtype::proxyKontr:
         {

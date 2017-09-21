@@ -91,5 +91,9 @@ bool QSqlQueryModelBank::acceptBank(int rowId, QString name, QString  address)
     query.bindValue(":address", address);
     if(!query.exec())
         qDebug() << query.lastError();
+    else{
+        QSqlQueryModelBank *mb = static_cast<QSqlQueryModelBank*> (QListModels::getInstance()->getModel(QListModels::banks));
+        mb->setQuery( mb->query().lastQuery() );
+    }
     return true;
 }
