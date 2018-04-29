@@ -130,10 +130,18 @@ SwipeScreen {
                 if (enabled) {
                     if(!isNew)
                     {
-// TODO загрузка данных из базы
-//                        bname = dataBase.modelBank.getData(idTableBank.currentRow, 'name')
-//                        baddress = dataBase.modelBank.getData(idTableBank.currentRow, 'address')
-//                        rowId = dataBase.modelBank.getData(idTableBank.currentRow, 'idbank')
+                        rowId = dataBase.modelOrder.getData(idTableOrder.currentRow, 'idorder')
+                        aSumm = dataBase.modelOrder.getData(idTableOrder.currentRow, 'summ')
+                        aDescription = dataBase.modelOrder.getData(idTableOrder.currentRow, 'comment')
+
+                        var beneficiaryId = dataBase.modelOrder.getData(idTableOrder.currentRow, 'idbeneficiary')
+                        var beneficiaryText = dataBase.modelKontr.getDataFromKey(beneficiaryId, 'idcontragent', 'fname')
+                        aBeneficiaryCombo.currentIndex = aBeneficiaryCombo.find(beneficiaryText)
+
+                        var contragentId = dataBase.modelOrder.getData(idTableOrder.currentRow, 'idcontragent')
+                        var contragentText = dataBase.modelKontr.getDataFromKey(contragentId, 'idcontragent', 'fname')
+                        aContragentCombo.currentIndex = aContragentCombo.find(contragentText)
+
                     }
                     else{
                         aSumm = ""

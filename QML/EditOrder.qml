@@ -17,6 +17,8 @@ ColumnLayout {
     property alias aDescription: discriptionText.text
     property alias aBeneficiaryText: beneficiaryCombo.currentText
     property alias aContragentText: contragentCombo.currentText
+    property alias aBeneficiaryCombo: beneficiaryCombo
+    property alias aContragentCombo: contragentCombo
 
     property bool isNew: false
 
