@@ -10,6 +10,16 @@ ColumnLayout {
     id: mainColumn
     property int margin: 12
     property  int rowId: 0
+
+    property alias aSumm: summ.text
+    property alias aSummText: summText.text
+    property alias aTextCurrency: summTextCurrency.text
+    property alias aDescription: discriptionText.text
+    property alias aBeneficiaryText: beneficiaryCombo.currentText
+    property alias aContragentText: contragentCombo.currentText
+    property alias aBeneficiaryCombo: beneficiaryCombo
+    property alias aContragentCombo: contragentCombo
+
     property bool isNew: false
 
 //    property int pictureWidth: 30
@@ -31,7 +41,7 @@ ColumnLayout {
 //        anchors.margins: 4
 //        border.color: "black"
         color: "transparent"
-        property bool ctrlPressed: false
+        property int movePressed: 0 //  1 - нажата ctrl (горизонтальный масштаб); 2 - нажата shift (масштаб по вертикали); 3 - и вертикали и горизонтали
         clip: true
         Image {
             id: imageOrder
@@ -41,11 +51,13 @@ ColumnLayout {
             source: "qrc:/Image/vrbpay.png"
             Keys.onPressed: {
                 if(event.key === Qt.Key_Control)
-                    rectangleOrder.ctrlPressed = true;
+                    rectangleOrder.movePressed |= 1;
+                if(event.key === Qt.Key_Shift)
+                    rectangleOrder.movePressed |= 2;
             }
             Keys.onReleased: {
-                if(event.key === Qt.Key_Control){
-                    rectangleOrder.ctrlPressed = false;
+                if(event.key === Qt.Key_Control || event.key === Qt.Key_Shift){
+                    rectangleOrder.movePressed = 0;
                     pictureX = imageOrder.x;
                     pictureY = imageOrder.y;
                 }
@@ -58,7 +70,7 @@ ColumnLayout {
                 }
 
                 drag.target: {
-                    if(rectangleOrder.ctrlPressed){
+                    if(rectangleOrder.movePressed){
                         return imageOrder
                     }
                     else{
@@ -69,7 +81,7 @@ ColumnLayout {
 
                 onWheel:
                 {
-                    if (rectangleOrder.ctrlPressed){
+                    if (rectangleOrder.movePressed){
                                 if (wheel.angleDelta.y > 0)
                                 {
                                     imageOrder.sourceSize.width++;
@@ -86,7 +98,7 @@ ColumnLayout {
 
         DragText{
             id: summ
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderSum"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignRight
@@ -99,14 +111,14 @@ ColumnLayout {
 
             textInput.onTextChanged: {
                 if(regExpString.test(textInput.text))
-                    summText.text = Digit2vn.transform(text);
+                    summText.text = Digit2vn.transform(text) + " " + summTextCurrency.text;
 
             }
 
         }
         DragText{
             id: summTextCurrency
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderSumCurrency"
             textHorisontalAlignment: TextInput.AlignHCenter
             x: 392
@@ -120,11 +132,11 @@ ColumnLayout {
         }
         DragText{
             id: summText
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderSumText"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
-            regExpString:/^\D+$/;
+            regExpString:/^(\D|\S|\s)+$/;
             x: 29
             y: 97
             width: 520
@@ -134,11 +146,11 @@ ColumnLayout {
 
         DragText{
             id: discriptionText
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderDiscriptionText"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
-            regExpString:/^\D+$/;
+            regExpString:/^.+$/;
             x: 105
             y: 144
             width: 632
@@ -148,7 +160,7 @@ ColumnLayout {
 
         ComboText{
             id: beneficiaryCombo
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderBeneficiaryCombo"
 //            textVerticalAlignment: TextInput.AlignVCenter
 //            extHorisontalAlignment: TextInput.AlignLeft
@@ -159,15 +171,22 @@ ColumnLayout {
             y: 162
             width: 270
             height: 20
-            onCurrentIndexChanged:  {
-//                textInput.text = currentText
+
+            onCurrentIndexChanged: {
+                bankBeneficiaryText.text = dataBase.modelKontr.getDataFromKey(beneficiaryCombo.textAt(currentText), textRole, 'bankname')
+                accBankBeneficiaryText.text = dataBase.modelKontr.getDataFromKey(currentText, textRole, 'naccount')
+
+//                bankBeneficiaryText.text = dataBase.modelProxyKontr.index(currentText,0x0100 + 8).data
+//                accBankBeneficiaryText.text = dataBase.modelProxyKontr.data(currentIndex,0x0100 + 5)
+//                bankBeneficiaryText.text = dataBase.modelKontr.getData(currentIndex, 'bankname')
+//                accBankBeneficiaryText.text = dataBase.modelKontr.getData(currentIndex,'naccount')
             }
 
         }
 
         DragText{
             id: accBankBeneficiaryText
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderAccBankBeneficiaryText"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
@@ -181,7 +200,7 @@ ColumnLayout {
 
         DragText{
             id: bankBeneficiaryText
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderBankBeneficiaryText"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
@@ -190,12 +209,13 @@ ColumnLayout {
             width: 286
             height: 20
             textInput.readOnly: true
+            regExpString:/^.+$/;
 //            borderEnable: false
         }
 
         ComboText{
             id: contragentCombo
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderContragentCombo"
 //            textVerticalAlignment: TextInput.AlignVCenter
 //            extHorisontalAlignment: TextInput.AlignLeft
@@ -207,11 +227,16 @@ ColumnLayout {
             width: 270
             height: 20
 
+            onCurrentIndexChanged: {
+                bankcontragentText.text = dataBase.modelKontr.getData(currentIndex, 'bankname')
+                accBankcontragentText.text = dataBase.modelKontr.getData(currentIndex,'naccount')
+            }
+
         }
 
         DragText{
             id: accBankcontragentText
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderAccBankContragentText"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
@@ -225,7 +250,7 @@ ColumnLayout {
 
         DragText{
             id: bankcontragentText
-            isMoveMode: rectangleOrder.ctrlPressed
+            moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderBankContragentText"
 //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
@@ -234,6 +259,7 @@ ColumnLayout {
             width: 286
             height: 20
             textInput.readOnly: true
+            regExpString:/^.+$/;
 //            borderEnable: false
         }
 
@@ -249,6 +275,10 @@ ColumnLayout {
        Layout.alignment: Qt.AlignRight
        spacing: 20
 
+
+       HelpMoving{
+
+       }
 
 
        Button {

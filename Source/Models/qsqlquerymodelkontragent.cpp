@@ -41,6 +41,26 @@ QVariant QSqlQueryModelKontragent::getData(int row, QString colName){
 
 }
 
+QVariant QSqlQueryModelKontragent::getDataFromKey(QString keyVal, QString keyName, QString colName){
+    QVariant var;
+    QVariant result;
+    int roleKey = roleNames().key(keyName.toUtf8());
+    int numKeyColumn = roleKey - Qt::UserRole - 1;
+    int rows = rowCount();
+    for(int i = 0; i< rows; i++){
+        QModelIndex modelKeyIndex = this->index(i , numKeyColumn);
+        var = data(modelKeyIndex,roleKey);
+        if(keyVal == var){
+            int role = roleNames().key(colName.toUtf8());
+            int numColumn = role - Qt::UserRole - 1;
+            QModelIndex modelIndex = this->index(i , numColumn);
+            result = data(modelIndex,role);
+            break;
+        }
+    }
+    return result;
+}
+
 
 
 bool QSqlQueryModelKontragent::acceptKontr(int rowId, QString fname, int idbank, QString  naccount, int is_beneficiary){
@@ -85,6 +105,10 @@ bool QSqlQueryModelKontragent::acceptKontr(int rowId, QString fname, int idbank,
     query.bindValue(":is_beneficiary", is_beneficiary?1:0);
     if(!query.exec())
         qDebug() << query.lastError();
+    else{
+        QSqlQueryModelKontragent *mk = static_cast<QSqlQueryModelKontragent*> (QListModels::getInstance()->getModel(QListModels::kontr));
+        mk->setQuery( mk->query().lastQuery() );
+    }
     return true;
 }
 

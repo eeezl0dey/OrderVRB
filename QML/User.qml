@@ -173,8 +173,6 @@ SwipeScreen {
                 console.log("checkAccess")
                 var curRow = idTableUser
                 dataBase.modelUsers.acceptUser(editUser.rowId, editUser.uname, editUser.upass, editUser.ufname, editUser.isadm)
-                idTableUser.model = dataBase.modelUsers
-                idTableUser.update()
                 if(idTableUser.rowCount > 0 && curRow < idTableUser.rowCount)
                 {
                     idTableUser.currentRow = curRow;

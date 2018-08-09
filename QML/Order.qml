@@ -128,15 +128,26 @@ SwipeScreen {
                 if (enabled) {
                     if(!isNew)
                     {
-// TODO загрузка данных из базы
-//                        bname = dataBase.modelBank.getData(idTableBank.currentRow, 'name')
-//                        baddress = dataBase.modelBank.getData(idTableBank.currentRow, 'address')
-//                        rowId = dataBase.modelBank.getData(idTableBank.currentRow, 'idbank')
+                        rowId = dataBase.modelOrder.getData(idTableOrder.currentRow, 'idorder')
+                        aSumm = dataBase.modelOrder.getData(idTableOrder.currentRow, 'summ')
+                        aDescription = dataBase.modelOrder.getData(idTableOrder.currentRow, 'comment')
+
+                        var beneficiaryId = dataBase.modelOrder.getData(idTableOrder.currentRow, 'idbeneficiary')
+                        var beneficiaryText = dataBase.modelKontr.getDataFromKey(beneficiaryId, 'idcontragent', 'fname')
+                        aBeneficiaryCombo.currentIndex = aBeneficiaryCombo.find(beneficiaryText)
+
+                        var contragentId = dataBase.modelOrder.getData(idTableOrder.currentRow, 'idcontragent')
+                        var contragentText = dataBase.modelKontr.getDataFromKey(contragentId, 'idcontragent', 'fname')
+                        aContragentCombo.currentIndex = aContragentCombo.find(contragentText)
+
                     }
                     else{
-//                        bname = ""
-//                        baddress = ""
-//                        rowId = ""
+                        aSumm = ""
+//                        aSummText = ""
+                        aTextCurrency = "VND"
+                        aDescription = ""
+//                        aBeneficiaryIndex = 0
+//                        aContragentIndex = 0
                     }
 //                    rowViewOrder.visible = false
                     Layout.preferredHeight = orderItem.height
@@ -154,8 +165,10 @@ SwipeScreen {
                 console.log("checkAccess")
                 var curRow = idTableOrder.currentRow
 //                dataBase.modelBank.acceptBank(editBank.rowId, editBank.bname, editBank.baddress)
-                idTableOrder.model = dataBase.modelOrder
-                idTableOrder.update()
+                var beneficiaryId = dataBase.modelKontr.getDataFromKey(editOrder.aBeneficiaryText, 'fname', 'idcontragent')
+                var contragentId = dataBase.modelKontr.getDataFromKey(editOrder.aContragentText, 'fname', 'idcontragent')
+                dataBase.modelOrder.acceptOrder(editOrder.rowId, contragentId, editOrder.aSumm, editOrder.aDescription, 0, beneficiaryId);
+
                 if(idTableOrder.rowCount > 0 && curRow < idTableOrder.rowCount)
                 {
                     idTableOrder.currentRow = curRow;

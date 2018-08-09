@@ -176,8 +176,7 @@ SwipeScreen {
                 console.log("checkAccess")
                 var curRow = idTableContr.currentRow
                 dataBase.modelKontr.acceptKontr(editcontragent.rowId, editcontragent.contrName, dataBase.modelBank.getData(editcontragent.bankIndex, 'idbank'), editcontragent.accNum, editcontragent.isBeneficiary)
-                idTableContr.model = dataBase.modelKontr
-                idTableContr.update()
+
                 if(idTableContr.rowCount > 0 && curRow < idTableContr.rowCount)
                 {
                     idTableContr.currentRow = curRow;

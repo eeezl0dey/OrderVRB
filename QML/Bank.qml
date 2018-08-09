@@ -147,8 +147,7 @@ SwipeScreen {
                 console.log("checkAccess")
                 var curRow = idTableBank.currentRow
                 dataBase.modelBank.acceptBank(editBank.rowId, editBank.bname, editBank.baddress)
-                idTableBank.model = dataBase.modelBank
-                idTableBank.update()
+
                 if(idTableBank.rowCount > 0 && curRow < idTableBank.rowCount)
                 {
                     idTableBank.currentRow = curRow;
