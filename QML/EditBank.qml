@@ -17,13 +17,10 @@ ColumnLayout {
         id: labelInfo
         height: 50
         text: isNew ? qsTr("Введите данные нового банка") : qsTr("Редактирование банка");
-        anchors.left: parent.left
-        anchors.right: parent.right
         font.bold: true
         font.pointSize: 14
         font.family: "Tahoma"
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
     }
 
 
@@ -96,41 +93,46 @@ ColumnLayout {
         }
     }
 
+    AcceptButton{
 
-    GroupBox {
-        id: groupBoxBottom
-        flat: true
-        Layout.fillWidth: true
-
-        RowLayout {
-            id: rowLayout1
-            anchors.fill: parent
-            spacing: 5
-
-            Button {
-                id: buttonOk
-                text: qsTr("Принять")
-                anchors.right: parent.right
-                anchors.rightMargin: 148
-//                isDefault: false
-                iconSource: "qrc:/Image/48/Symbol Check 2.png"
-                style: ProjectButtonStyle {
-                }
-                onClicked:  checkAccess();
-            }
-
-            Button {
-                id: buttonCancel
-                text: qsTr("Отмена")
-                anchors.right: parent.right
-                anchors.rightMargin: 42
-                iconSource: "qrc:/Image/48/Symbol Stop 2.png"
-                style: ProjectButtonStyle {
-                }
-                onClicked: cancelEdit();
-            }
-        }
     }
+
+
+//    GroupBox {
+//        id: groupBoxBottom
+//        flat: true
+//        Layout.fillWidth: true
+
+//        RowLayout {
+//            id: rowLayout1
+//            anchors.fill: parent
+//            spacing: 5
+//            anchors.leftMargin: parent.width/2
+
+//            Button {
+//                id: buttonOk
+//                text: qsTr("Принять")
+//                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+//                Layout.rightMargin: 148
+////                isDefault: false
+//                iconSource: "qrc:/Image/48/Symbol Check 2.png"
+//                style: ProjectButtonStyle {
+//                }
+//                onClicked:  checkAccess();
+//            }
+
+//            Button {
+//                id: buttonCancel
+//                text: qsTr("Отмена")
+//                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+//                Layout.rightMargin: 42
+//                iconSource: "qrc:/Image/48/Symbol Stop 2.png"
+//                style: ProjectButtonStyle {
+//                }
+//                onClicked: cancelEdit();
+//            }
+//        }
+//    }
 
     onFocusChanged:
         if(focus)textBankName.forceActiveFocus();

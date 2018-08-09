@@ -1,5 +1,5 @@
-#ifndef QLISTMODET_H
-#define QLISTMODET_H
+#ifndef QLISTMODEL_H
+#define QLISTMODEL_H
 
 #include <QObject>
 //#include <QSql>
@@ -59,4 +59,4 @@ private:
     int idUser;
 };
 
-#endif // QLISTMODET_H
+#endif // QLISTMODEL_H

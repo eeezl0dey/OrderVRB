@@ -81,8 +81,6 @@ SwipeScreen {
                 Layout.alignment: Qt.AlignTop
                 Button {
                     id: buttonOrderAdd
-                    anchors.left: parent.left
-                    anchors.right: parent.right
                     Layout.fillWidth: true
                     text: qsTr("Добавить")
                     iconSource: "qrc:/Image/48/Document 2 Add.png"

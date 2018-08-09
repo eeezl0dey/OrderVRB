@@ -32,7 +32,7 @@ QString SourceDB::getConnectError()
 bool SourceDB::login(QString username, QString pass)
 {
     QSqlQueryModelUsers* mUsers;
-    mUsers = (QSqlQueryModelUsers*)getModelUsers();
+    mUsers = static_cast<QSqlQueryModelUsers*>(getModelUsers());
     QSqlQuery query = mUsers->query();
     bool isFind = false;
     if(query.first())

@@ -20,8 +20,7 @@ ColumnLayout {
     Label {
         id: labelInfo
         height: 40
-        anchors.left: parent.left
-        anchors.right: parent.right
+        Layout.fillWidth: true
         font.bold: true
         font.pointSize: 14
         font.family: "Tahoma"
@@ -36,8 +35,7 @@ ColumnLayout {
         flat: true
         checkable: false
         checked: false
-        anchors.left: parent.left
-        anchors.right: parent.right
+        Layout.fillWidth: true
         height: 250
 
         GridLayout {
@@ -142,41 +140,8 @@ ColumnLayout {
     }
 
 
-    GroupBox {
-        id: groupBoxBottom
-        flat: true
+    AcceptButton{
         Layout.fillWidth: true
-
-
-        RowLayout {
-            id: rowLayout1
-            anchors.fill: parent
-            spacing: 5
-            anchors.bottomMargin: 20
-
-            Button {
-                id: buttonOk
-                text: qsTr("Принять")
-                anchors.right: parent.right
-                anchors.rightMargin: 148
-//                isDefault: false
-                iconSource: "qrc:/Image/48/Symbol Check 2.png"
-                style: ProjectButtonStyle {
-                }
-                onClicked:  checkAccess();
-            }
-
-            Button {
-                id: buttonCancel
-                text: qsTr("Отмена")
-                anchors.right: parent.right
-                anchors.rightMargin: 42
-                iconSource: "qrc:/Image/48/Symbol Stop 2.png"
-                style: ProjectButtonStyle {
-                }
-                onClicked: cancelEdit();
-            }
-        }
     }
 
     onFocusChanged:

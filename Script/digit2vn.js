@@ -79,12 +79,12 @@ function transform(digitStr) {
     for (i = 0; i < level; i++) {
         if (separateDigit[i] > 0) {
             switch (i) {
-            case 0:
-                if (level > 1 && separateDigit[1] > 0 && separateDigit[i] === 5)
-                    separateString[i] = "lăm"
-                else
-                    separateString[i] = digitArr[separateDigit[i]]
-                break
+//            case 0:
+//                if (level > 1 && separateDigit[1] > 0 && separateDigit[i] === 5)
+//                    separateString[i] = "lăm"
+//                else
+//                    separateString[i] = digitArr[separateDigit[i]]
+//                break
 //            case 1:
 //                if (separateDigit[i] === 1 && level > 3)
 //                    separateString[i] = "và"

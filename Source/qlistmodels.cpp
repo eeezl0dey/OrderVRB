@@ -35,7 +35,7 @@ bool QListModels::setConnect(QString hostName, QString databaseName, QString use
 
 
     connectdb = db.open();
-    qDebug()<< QString("Connect is ") + QString((bool)connectdb?"accept":"error");
+    qDebug()<< QString("Connect is ") + QString(connectdb?"accept":"error");
     if(!connectdb)
     {
         connectError = db.lastError().text();
@@ -145,10 +145,6 @@ QAbstractItemModel* QListModels::getModel ( mtype mt)
             }
             break;
         }
-
-    default:
-        sqlmodel = NULL;
-        break;
     }
     hashlist[mt] = (mt==mtype::proxyKontr)?filtermodel:(QAbstractItemModel*)sqlmodel;
     return (QAbstractItemModel*)hashlist[mt];
