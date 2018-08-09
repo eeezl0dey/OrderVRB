@@ -95,8 +95,6 @@ SwipeScreen {
                 Layout.alignment: Qt.AlignTop
                 Button {
                     id: buttonUserAdd
-                    anchors.left: parent.left
-                    anchors.right: parent.right
                     Layout.fillWidth: true
                     text: qsTr("Добавить")
                     iconSource: "qrc:/Image/48/Document 2 Add.png"
@@ -191,7 +189,7 @@ SwipeScreen {
     }
 
     Keys.onPressed: {
-        if (event.key == Qt.Key_Down && idTableUser.focus
+        if (event.key === Qt.Key_Down && idTableUser.focus
                 && idTableUser.currentRow == idTableUser.rowCount - 1) {
             console.log("NEW!!!")
             editUser.enabled = true

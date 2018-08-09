@@ -122,14 +122,19 @@ Window {
 
             RowLayout {
                 id: rowLayout1
-                anchors.fill: parent
+                anchors.left: parent.left
+                anchors.right: parent.right
                 spacing: 5
+                anchors.leftMargin: parent.width/2
 
                 Button {
                     id: buttonOk
                     text: qsTr("Принять")
-                    anchors.right: parent.right
-                    anchors.rightMargin: 148
+                    activeFocusOnPress: true
+                    isDefault: true
+                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+//                    anchors.right: parent.right
+//                    anchors.rightMargin: 148
                     tooltip: qsTr("Вход в программу")
                     iconSource: "qrc:/Image/48/Symbol Check 2.png"
                     style: ProjectButtonStyle {
@@ -141,8 +146,10 @@ Window {
                 Button {
                     id: buttonCancel
                     text: qsTr("Отмена")
-                    anchors.right: parent.right
-                    anchors.rightMargin: 42
+                    transformOrigin: Item.Center
+                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                    //                    anchors.right: parent.right
+//                    anchors.rightMargin: 42
                     clip: false
                     tooltip: qsTr("Завершение программы")
                     iconSource: "qrc:/Image/48/Symbol Stop 2.png"
