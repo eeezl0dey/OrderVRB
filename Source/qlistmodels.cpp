@@ -8,7 +8,7 @@ QListModels::QListModels(QObject *parent)
     db = QSqlDatabase::addDatabase("QMYSQL");
 //    db.setHostName("localhost");
 //    db.setDatabaseName("OrderVRB");
-//    db.setUserName("root");
+//    db.setUserName("vrb_user");
 //    db.setPassword("kadet");
 }
 
@@ -22,7 +22,7 @@ bool QListModels::setConnect(QString hostName, QString databaseName, QString use
 {
 //    db.setHostName("localhost");
 //    db.setDatabaseName("OrderVRB");
-//    db.setUserName("root");
+//    db.setUserName("vrb_user");
 //    db.setPassword("kadet");
 
     db.setHostName(hostName);
