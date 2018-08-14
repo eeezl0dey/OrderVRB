@@ -1,14 +1,15 @@
-import QtQuick 2.4
-import QtQuick.Controls 1.3
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import QtQuick.Controls 1.4 as Controls14
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.1
 import "Basic"
 
-SwipeScreen {
+Page {
     id: winbank
-    anchors.fill: parent
+    title: qsTr("Банки")
 
     WindowFone {
     }
@@ -24,7 +25,7 @@ SwipeScreen {
             BaseTableView {
                 id: idTableBank
 
-                TableViewColumn {
+                Controls14.TableViewColumn {
                     id: columnBankNum
                     role: "idbank"
                     title: "#"
@@ -40,21 +41,21 @@ SwipeScreen {
                         }
                     }
                 }
-                TableViewColumn {
+                Controls14.TableViewColumn {
                     id: columnBankName
                     role: "name"
                     title: qsTr("Наименование")
                     width: 200
                     horizontalAlignment: Text.AlignHCenter
                 }
-                TableViewColumn {
+                Controls14.TableViewColumn {
                     id: columnAddress
                     role: "address"
                     title: qsTr("Адрес")
                     width: idTableBank.width - columnBankNum.width - columnBankName.width - columnBankUser.width
                     horizontalAlignment: Text.AlignHCenter
                 }
-                TableViewColumn {
+                Controls14.TableViewColumn {
                     id: columnBankUser
                     role: "creatorname"
                     title: qsTr("Создал")
@@ -73,7 +74,7 @@ SwipeScreen {
                 Layout.preferredWidth: 150
                 Layout.fillWidth: false
                 Layout.alignment: Qt.AlignTop
-                Button {
+                Controls14.Button {
                     id: buttonBankAdd
                     Layout.fillWidth: true
                     text: qsTr("Добавить")
@@ -85,7 +86,7 @@ SwipeScreen {
                         editBank.enabled = true
                     }
                 }
-                Button {
+                Controls14.Button {
                     id: buttonBankEdit
                     Layout.fillWidth: true
                     text: qsTr("Редактирование")
@@ -164,7 +165,7 @@ SwipeScreen {
     }
 
     Keys.onPressed: {
-        if (event.key == Qt.Key_Down && idTableBank.focus
+        if (event.key === Qt.Key_Down && idTableBank.focus
                 && idTableBank.currentRow == idTableBank.rowCount - 1) {
             console.log("NEW!!!")
             editBank.enabled = true

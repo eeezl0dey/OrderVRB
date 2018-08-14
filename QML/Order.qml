@@ -1,20 +1,22 @@
-import QtQuick 2.4
-import QtQuick.Controls 1.3
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import QtQuick.Controls 1.4 as Controls14
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.1
 import "Basic"
 
-SwipeScreen {
+Page {
     id: winorder
-    anchors.fill: parent
+    title: qsTr("Ордера")
 
     WindowFone {
     }
 
     ColumnLayout {
         id: orderItem
+        spacing: 5
         anchors.fill: parent
         RowLayout {
             id: rowViewOrder
@@ -30,7 +32,7 @@ SwipeScreen {
                 //                anchors.left: parent.left
                 //                anchors.top: parent.top
 
-                TableViewColumn {
+                Controls14.TableViewColumn {
                     id: columnOrderNum
                     role: "idorder"
                     title: "#"
@@ -46,21 +48,21 @@ SwipeScreen {
                         }
                     }
                 }
-                TableViewColumn {
+                Controls14.TableViewColumn {
                     id: columnContragentName
                     role: "ncontragent"
                     title: qsTr("Контрагент")
                     width: idTableOrder.width - columnOrderNum.width - columnOrderSumm.width - columnOrderCreator.width
                     horizontalAlignment: Text.AlignHCenter
                 }
-                TableViewColumn {
+                Controls14.TableViewColumn {
                     id: columnOrderSumm
                     role: "summ"
                     title: qsTr("Сумма")
                     width: 200
                     horizontalAlignment: Text.AlignHCenter
                 }
-                TableViewColumn {
+                Controls14.TableViewColumn {
                     id: columnOrderCreator
                     role: "creatorname"
                     title: qsTr("Создал")
@@ -79,7 +81,7 @@ SwipeScreen {
                 Layout.preferredWidth: 150
                 Layout.fillWidth: false
                 Layout.alignment: Qt.AlignTop
-                Button {
+                Controls14.Button {
                     id: buttonOrderAdd
                     Layout.fillWidth: true
                     text: qsTr("Добавить")
@@ -91,7 +93,7 @@ SwipeScreen {
                         editOrder.enabled = true
                     }
                 }
-                Button {
+                Controls14.Button {
                     id: buttonOrderPrint
                     Layout.fillWidth: true
                     text: qsTr("Печать")
@@ -153,11 +155,11 @@ SwipeScreen {
                     Layout.preferredHeight = orderItem.height
                     rowViewOrder.visible = false
                     editOrder.forceActiveFocus()
-                    winorder.deactivated()
+//                    winorder.deactivated()
                 } else {
                     Layout.preferredHeight = 0
                     idTableOrder.forceActiveFocus()
-                    winorder.activated()
+//                    winorder.activated()
                 }
             }
 
@@ -187,8 +189,8 @@ SwipeScreen {
     }
 
     Keys.onPressed: {
-        if (event.key == Qt.Key_Down && idTableOrder.focus
-                && idTableOrder.currentRow == idTableOrder.rowCount - 1) {
+        if (event.key === Qt.Key_Down && idTableOrder.focus
+                && idTableOrder.currentRow === idTableOrder.rowCount - 1) {
             console.log("NEW!!!")
             editOrder.enabled = true
         }

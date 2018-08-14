@@ -19,7 +19,7 @@ class SourceDB: public QObject
     Q_OBJECT
 //    Q_PROPERTY(QString userFullName READ getUserFullName WRITE setUserFullName NOTIFY userFullNameChanged)
       Q_PROPERTY(QString userFullName READ getUserFullName)
-      Q_PROPERTY(bool isAdmin READ getUserIsAdmin)
+      Q_PROPERTY(bool isAdmin READ getUserIsAdmin NOTIFY modelUsersChanged)
       Q_PROPERTY(QAbstractItemModel* modelKontr READ getModelKontr NOTIFY modelKontrChanged)
       Q_PROPERTY(QAbstractItemModel* modelBank READ getModelBank NOTIFY modelBankChanged)
       Q_PROPERTY(QAbstractItemModel* modelUsers READ getModelUsers NOTIFY modelUsersChanged)

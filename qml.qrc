@@ -33,5 +33,7 @@
         <file>QML/Basic/HelpMoving.qml</file>
         <file>QML/Basic/DragCheckBox.qml</file>
         <file>QML/Basic/AcceptButton.qml</file>
+        <file>QML/main.qml</file>
+        <file>QML/MainSV.qml</file>
     </qresource>
 </RCC>

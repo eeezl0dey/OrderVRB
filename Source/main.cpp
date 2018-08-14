@@ -19,7 +19,8 @@ int main(int argc, char *argv[])
     ctx = engine.rootContext();
     ctx->setContextProperty("dataBase", &sourceDB);
 
-    engine.load(QUrl(QStringLiteral("qrc:/QML/MainWND.qml")));
+//    engine.load(QUrl(QStringLiteral("qrc:/QML/MainWND.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/QML/main.qml")));
 
     return app.exec();
 }

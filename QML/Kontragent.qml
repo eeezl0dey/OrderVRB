@@ -1,14 +1,16 @@
-import QtQuick 2.4
-import QtQuick.Controls 1.3
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import QtQuick.Controls 1.4 as Controls14
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.1
 import "Basic"
 
-SwipeScreen {
+Page {
     id: winkontragent
-    anchors.fill: parent
+    title: qsTr("Контрагенты")
+
 
     WindowFone {
     }
@@ -24,7 +26,7 @@ SwipeScreen {
             BaseTableView {
                 id: idTableContr
 
-                TableViewColumn {
+                Controls14.TableViewColumn {
                     id: columnNum
                     role: "idcontragent"
                     title: "#"
@@ -40,21 +42,21 @@ SwipeScreen {
                         }
                     }
                 }
-                TableViewColumn {
+                Controls14.TableViewColumn {
                     id: columnFullname
                     role: "fname"
                     title: qsTr("Наименование")
                     width: idTableContr.width - columnNum.width - columnAccount.width - creatorName.width - beneficiary.width
                     horizontalAlignment: Text.AlignHCenter
                 }
-                TableViewColumn {
+                Controls14.TableViewColumn {
                     id: columnAccount
                     role: "naccount"
                     title: qsTr("Счет")
                     width: 125
                     horizontalAlignment: Text.AlignHCenter
                 }
-                TableViewColumn {
+                Controls14.TableViewColumn {
                     id: creatorName
                     role: "creatorname"
                     title: qsTr("Создал")
@@ -62,7 +64,7 @@ SwipeScreen {
                     horizontalAlignment: Text.AlignHCenter
 //                    delegate: Text { text: model.creatorname }
                 }
-                TableViewColumn {
+                Controls14.TableViewColumn {
                     id: beneficiary
                     role: "is_beneficiary"
                     title: qsTr("Получатель")
@@ -98,7 +100,7 @@ SwipeScreen {
                 Layout.alignment: Qt.AlignTop
                 Layout.preferredWidth: 150
                 Layout.fillWidth: false
-                Button {
+                Controls14.Button {
                     id: buttonAdd
                     Layout.fillWidth: true
                     text: qsTr("Добавить")
@@ -111,7 +113,7 @@ SwipeScreen {
                         editcontragent.enabled = true
                     }
                 }
-                Button {
+                Controls14.Button {
                     id: buttonEdit
                     Layout.fillWidth: true
                     text: qsTr("Редактирование")
@@ -193,7 +195,7 @@ SwipeScreen {
     }
 
     Keys.onPressed: {
-        if (event.key == Qt.Key_Down && idTableContr.focus
+        if (event.key === Qt.Key_Down && idTableContr.focus
                 && idTableContr.currentRow == idTableContr.rowCount - 1) {
             console.log("NEW!!!")
             editcontragent.enabled = true
