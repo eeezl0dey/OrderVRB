@@ -7,9 +7,9 @@ import "Basic"
 ApplicationWindow {
     id: mainApp
     title: qsTr("OrderVRB")
-    width: 770
+    width: 810
     height: 700
-    minimumWidth: 770
+    minimumWidth: 810
     minimumHeight: 480
 //    maximumWidth: 900
 //    maximumHeight: 700
