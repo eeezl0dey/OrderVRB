@@ -136,11 +136,11 @@ Page {
 
                     Layout.preferredHeight = 200
                     editBank.forceActiveFocus()
-                    winbank.deactivated()
                 } else {
                     Layout.preferredHeight = 0
                     idTableBank.forceActiveFocus()
-                    winbank.activated()
+                    //обновим данные модели
+                    dataBase.modelBank
                 }
             }
 

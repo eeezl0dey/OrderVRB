@@ -155,11 +155,11 @@ Page {
                     Layout.preferredHeight = orderItem.height
                     rowViewOrder.visible = false
                     editOrder.forceActiveFocus()
-//                    winorder.deactivated()
                 } else {
                     Layout.preferredHeight = 0
                     idTableOrder.forceActiveFocus()
-//                    winorder.activated()
+                    //обновим данные модели
+                    dataBase.modelOrder
                 }
             }
 

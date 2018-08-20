@@ -162,11 +162,11 @@ Page {
 
                     Layout.preferredHeight = 200
                     editUser.forceActiveFocus()
-                    winUser.deactivated()
                 } else {
                     Layout.preferredHeight = 0
                     idTableUser.forceActiveFocus()
-                    winUser.activated()
+                    //обновим данные модели
+                    dataBase.modelUsers
                 }
             }
 

@@ -41,7 +41,7 @@ ColumnLayout {
 //        anchors.margins: 4
 //        border.color: "black"
         color: "transparent"
-        property int movePressed: 0 //  1 - нажата ctrl (горизонтальный масштаб); 2 - нажата shift (масштаб по вертикали); 3 - и вертикали и горизонтали
+        property int movePressed: 0 //  1 - нажата ctrl (горизонтальный масштаб); 2 - нажата shift (масштаб по вертикали); 3 - и вертикали и горизонтали; 4 - шрифт, когда нажат Alt
         clip: true
         Image {
             id: imageOrder
@@ -56,7 +56,7 @@ ColumnLayout {
                     rectangleOrder.movePressed |= 2;
             }
             Keys.onReleased: {
-                if(event.key === Qt.Key_Control || event.key === Qt.Key_Shift){
+                if(event.key === Qt.Key_Control || rectangleOrder.movePressed > 0){
                     rectangleOrder.movePressed = 0;
                     pictureX = imageOrder.x;
                     pictureY = imageOrder.y;
@@ -100,7 +100,7 @@ ColumnLayout {
             id: summ
             moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderSum"
-//            textVerticalAlignment: TextInput.AlignVCenter
+            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignRight
             x: 160
             y: 75
@@ -120,6 +120,7 @@ ColumnLayout {
             id: summTextCurrency
             moveMode: rectangleOrder.movePressed
             settinsCategory: "EditOrderSumCurrency"
+            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignHCenter
             x: 392
             y: 77

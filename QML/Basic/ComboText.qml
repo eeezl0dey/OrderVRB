@@ -12,7 +12,7 @@ ComboBox{
     property int moveMode: 0
     property bool borderEnable: true
 
-    font.pointSize: 12
+    font.pixelSize: 14
     font.bold: true
 
     Settings {

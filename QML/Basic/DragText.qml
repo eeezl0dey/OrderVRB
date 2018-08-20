@@ -13,7 +13,7 @@ Item {
     property bool borderEnable: true
     property var regExpString:/^\S+$/;
     property bool regExpValid: regExpString.test(textInput.text)
-    property int pointDefaultSize: 12
+    property int pixelDefaultSize: 14
 
     x: 0;
     y: 0;
@@ -24,6 +24,7 @@ Item {
         category: settinsCategory
         property alias textX: textInput.x
         property alias textY: textInput.y
+//        property alias textFontPixelSize: textInput.font.pixelSize
         property alias textWidth: root.width
         property alias textHeihgt: root.height
     }
@@ -37,6 +38,10 @@ Item {
             wrapMode: Text.WordWrap
             renderType: Text.NativeRendering
             font.bold: true
+            // Размер шрифта, чтобы влезло в ячейку
+            font.pixelSize: root.pixelDefaultSize
+
+
 
             Rectangle {
                 id: tile
@@ -53,11 +58,6 @@ Item {
                 color: "transparent"
             }
 
-            onTextChanged: {
-
-                //TODO Размер шрифта, чтобы влезло в ячейку
-                textInput.font.pointSize = pointDefaultSize
-            }
 
             MouseArea {
                 id: mouseArea
@@ -69,7 +69,7 @@ Item {
 
                 onWheel:
                 {
-                    if(moveMode & 1)
+                    if(moveMode === 1)
                     {
                         if (wheel.angleDelta.y > 0)
                         {
@@ -80,7 +80,7 @@ Item {
                             root.width--;
                         }
                     }
-                    if(moveMode & 2)
+                    if(moveMode === 2)
                     {
                         if (wheel.angleDelta.y > 0)
                         {
@@ -91,6 +91,7 @@ Item {
                             root.height--;
                         }
                     }
+
 
                     wheel.accepted=true
                 }

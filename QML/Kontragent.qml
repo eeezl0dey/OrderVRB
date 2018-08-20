@@ -166,11 +166,11 @@ Page {
 
                     Layout.preferredHeight = 200
                     editcontragent.forceActiveFocus()
-                    winkontragent.deactivated()
                 } else {
                     Layout.preferredHeight = 0
                     idTableContr.forceActiveFocus()
-                    winkontragent.activated()
+                    //обновим данные модели
+                    dataBase.modelKontr
                 }
             }
 
