@@ -22,16 +22,16 @@ Page {
             id: rowViewOrder
             Layout.fillHeight: true
             Layout.leftMargin: 5
-            Layout.rightMargin: 5                   
+            Layout.rightMargin: 5
 
             BaseTableView {
                 id: idTableOrder
+
                 //                anchors.bottom: buttonAdd.top;
                 //    //            anchors.bottomMargin: 45
                 //                anchors.right: parent.right
                 //                anchors.left: parent.left
                 //                anchors.top: parent.top
-
                 Controls14.TableViewColumn {
                     id: columnOrderNum
                     role: "idorder"
@@ -52,7 +52,8 @@ Page {
                     id: columnContragentName
                     role: "ncontragent"
                     title: qsTr("Контрагент")
-                    width: idTableOrder.width - columnOrderNum.width - columnOrderSumm.width - columnOrderCreator.width
+                    width: idTableOrder.width - columnOrderNum.width
+                           - columnOrderSumm.width - columnOrderCreator.width
                     horizontalAlignment: Text.AlignHCenter
                 }
                 Controls14.TableViewColumn {
@@ -71,10 +72,6 @@ Page {
                 }
 
                 model: dataBase.modelOrder
-
-                onActivated: {
-                    editOrder.enabled = true
-                }
             }
             ColumnLayout {
                 Layout.fillHeight: true
@@ -101,16 +98,15 @@ Page {
                     style: ProjectButtonStyle {
                     }
                     onClicked: {
-                        if(idTableOrder.currentRow >= 0){
+                        if (idTableOrder.currentRow >= 0) {
                             editOrder.isNew = false
                             editOrder.enabled = true
                         }
                     }
                 }
-
             }
         }
-///TODO
+        ///TODO
         EditOrder {
             id: editOrder
             Layout.alignment: Qt.AlignCenter
@@ -128,30 +124,36 @@ Page {
                 rowViewOrder.enabled = !enabled
 
                 if (enabled) {
-                    if(!isNew)
-                    {
-                        rowId = dataBase.modelOrder.getData(idTableOrder.currentRow, 'idorder')
-                        aSumm = dataBase.modelOrder.getData(idTableOrder.currentRow, 'summ')
-                        aDescription = dataBase.modelOrder.getData(idTableOrder.currentRow, 'comment')
+                    if (!isNew) {
+                        rowId = dataBase.modelOrder.getData(
+                                    idTableOrder.currentRow, 'idorder')
+                        aSumm = dataBase.modelOrder.getData(
+                                    idTableOrder.currentRow, 'summ')
+                        aDescription = dataBase.modelOrder.getData(
+                                    idTableOrder.currentRow, 'comment')
 
-                        var beneficiaryId = dataBase.modelOrder.getData(idTableOrder.currentRow, 'idbeneficiary')
-                        var beneficiaryText = dataBase.modelKontr.getDataFromKey(beneficiaryId, 'idcontragent', 'fname')
-                        aBeneficiaryCombo.currentIndex = aBeneficiaryCombo.find(beneficiaryText)
+                        var beneficiaryId = dataBase.modelOrder.getData(
+                                    idTableOrder.currentRow, 'idbeneficiary')
+                        var beneficiaryText = dataBase.modelKontr.getDataFromKey(
+                                    beneficiaryId, 'idcontragent', 'fname')
+                        aBeneficiaryCombo.currentIndex = aBeneficiaryCombo.find(
+                                    beneficiaryText)
 
-                        var contragentId = dataBase.modelOrder.getData(idTableOrder.currentRow, 'idcontragent')
-                        var contragentText = dataBase.modelKontr.getDataFromKey(contragentId, 'idcontragent', 'fname')
-                        aContragentCombo.currentIndex = aContragentCombo.find(contragentText)
-
-                    }
-                    else{
+                        var contragentId = dataBase.modelOrder.getData(
+                                    idTableOrder.currentRow, 'idcontragent')
+                        var contragentText = dataBase.modelKontr.getDataFromKey(
+                                    contragentId, 'idcontragent', 'fname')
+                        aContragentCombo.currentIndex = aContragentCombo.find(
+                                    contragentText)
+                    } else {
                         aSumm = ""
-//                        aSummText = ""
+                        //                        aSummText = ""
                         aTextCurrency = "VND"
                         aDescription = ""
-//                        aBeneficiaryIndex = 0
-//                        aContragentIndex = 0
+                        //                        aBeneficiaryIndex = 0
+                        //                        aContragentIndex = 0
                     }
-//                    rowViewOrder.visible = false
+                    //                    rowViewOrder.visible = false
                     Layout.preferredHeight = orderItem.height
                     rowViewOrder.visible = false
                     editOrder.forceActiveFocus()
@@ -164,17 +166,26 @@ Page {
             }
 
             function checkAccess() {
+                aOrder.printOrder()
+
+                printChoose.visible = true
+
                 console.log("checkAccess")
                 var curRow = idTableOrder.currentRow
-//                dataBase.modelBank.acceptBank(editBank.rowId, editBank.bname, editBank.baddress)
-                var beneficiaryId = dataBase.modelKontr.getDataFromKey(editOrder.aBeneficiaryText, 'fname', 'idcontragent')
-                var contragentId = dataBase.modelKontr.getDataFromKey(editOrder.aContragentText, 'fname', 'idcontragent')
-                dataBase.modelOrder.acceptOrder(editOrder.rowId, contragentId, editOrder.aSumm, editOrder.aDescription, 0, beneficiaryId);
+                //                dataBase.modelBank.acceptBank(editBank.rowId, editBank.bname, editBank.baddress)
+                var beneficiaryId = dataBase.modelKontr.getDataFromKey(
+                            editOrder.aBeneficiaryText, 'fname', 'idcontragent')
+                var contragentId = dataBase.modelKontr.getDataFromKey(
+                            editOrder.aContragentText, 'fname', 'idcontragent')
+                dataBase.modelOrder.acceptOrder(editOrder.rowId, contragentId,
+                                                editOrder.aSumm,
+                                                editOrder.aDescription, 0,
+                                                beneficiaryId)
 
-                if(idTableOrder.rowCount > 0 && curRow < idTableOrder.rowCount)
-                {
-                    idTableOrder.currentRow = curRow;
-                    idTableOrder.selection.select(curRow);
+                if (idTableOrder.rowCount > 0
+                        && curRow < idTableOrder.rowCount) {
+                    idTableOrder.currentRow = curRow
+                    idTableOrder.selection.select(curRow)
                 }
                 editOrder.enabled = false
                 rowViewOrder.visible = true

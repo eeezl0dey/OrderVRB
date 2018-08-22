@@ -82,7 +82,7 @@ Window {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     onAccepted: checkAccess()
-                    text: "admin"
+//                    text: "admin"
                 }
 
                 Label {
@@ -107,7 +107,7 @@ Window {
                     horizontalAlignment: Text.AlignHCenter
                     echoMode: TextInput.Password
                     onAccepted: checkAccess()
-                    text: "admin"
+//                    text: "admin"
                 }
             }
         }

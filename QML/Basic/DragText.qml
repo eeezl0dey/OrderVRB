@@ -6,6 +6,7 @@ Item {
 //    property Component rootComp: root
     property alias textInput: textInput
     property alias text: textInput.text
+    property alias font: textInput.font
     property alias textVerticalAlignment: textInput.verticalAlignment
     property alias textHorisontalAlignment: textInput.horizontalAlignment
     property string settinsCategory: "null_category"
@@ -14,6 +15,7 @@ Item {
     property var regExpString:/^\S+$/;
     property bool regExpValid: regExpString.test(textInput.text)
     property int pixelDefaultSize: 14
+//    property Rectangle rect: rect()
 
     x: 0;
     y: 0;

@@ -85,9 +85,6 @@ Page {
 
                 model: dataBase.modelUsers
 
-                onActivated: {
-                    editUser.enabled = true
-                }
             }
             ColumnLayout {
                 Layout.fillHeight: true

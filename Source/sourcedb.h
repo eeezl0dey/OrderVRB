@@ -26,7 +26,7 @@ class SourceDB: public QObject
       Q_PROPERTY(QAbstractItemModel* modelOrder READ getModelOrder NOTIFY modelOrderChanged)
       Q_PROPERTY(QAbstractItemModel* modelProxyKontr READ getModelProxyKontr NOTIFY modelProxyKontrChanged)
 public:
-    explicit SourceDB(QObject *parent = 0);
+    explicit SourceDB(QObject *parent = nullptr);
     virtual ~SourceDB();
     QString getUserFullName();
     bool getUserIsAdmin();
