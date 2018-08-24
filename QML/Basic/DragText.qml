@@ -39,7 +39,7 @@ Item {
             height: root.height
             wrapMode: Text.WordWrap
             renderType: Text.NativeRendering
-            font.bold: true
+            font.bold: false
             // Размер шрифта, чтобы влезло в ячейку
             font.pixelSize: root.pixelDefaultSize
 

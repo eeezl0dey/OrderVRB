@@ -104,6 +104,7 @@ ColumnLayout {
             y: 75
             width: 230
             height: 20
+            font.bold: true
             regExpString: /^\d+$/
 
             //            borderEnable: false
@@ -127,6 +128,7 @@ ColumnLayout {
             y: 77
             width: 60
             height: 20
+            font.bold: true
             textInput.font.capitalization: Font.AllUppercase
             regExpString: /^VND|USD$/i
             text: "VND"

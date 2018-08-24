@@ -168,8 +168,6 @@ Page {
             function checkAccess() {
                 aOrder.printOrder()
 
-                printChoose.visible = true
-
                 console.log("checkAccess")
                 var curRow = idTableOrder.currentRow
                 //                dataBase.modelBank.acceptBank(editBank.rowId, editBank.bname, editBank.baddress)

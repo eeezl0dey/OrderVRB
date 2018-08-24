@@ -133,8 +133,9 @@ ApplicationWindow {
 
     }
 
-    onSceneGraphInitialized:  {
-        loginDlg.show();
-        mainApp.hide()
+    Component.onCompleted: {
+                loginDlg.show();
+                mainApp.hide()
+
     }
 }
