@@ -4,6 +4,7 @@ import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
+import Qt.labs.settings 1.0
 import "Basic"
 
 Window {
@@ -16,6 +17,12 @@ Window {
     y: Screen.height / 2 - height / 2
     title: qsTr("Авторизация")
     signal signalAcceptPass
+    
+    Settings {
+        category: "Login"
+        property alias login: textFieldLogin.text
+        property alias pass: textFieldPass.text
+    }
 
     // Задаём сигнал выхода
     WindowFone {
@@ -82,7 +89,7 @@ Window {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     onAccepted: checkAccess()
-                    text: "admin"
+//                    text: "admin"
                 }
 
                 Label {
@@ -107,7 +114,7 @@ Window {
                     horizontalAlignment: Text.AlignHCenter
                     echoMode: TextInput.Password
                     onAccepted: checkAccess()
-                    text: "admin"
+//                    text: "admin"
                 }
             }
         }

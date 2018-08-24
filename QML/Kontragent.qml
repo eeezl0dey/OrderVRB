@@ -88,11 +88,6 @@ Page {
 
                 model: dataBase.modelKontr
 
-                onActivated: {
-                    editcontragent.isNew = false
-                    editcontragent.enabled = true
-
-                }
             }
 
             ColumnLayout {

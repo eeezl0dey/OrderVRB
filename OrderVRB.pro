@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets sql core network
+QT += qml quick widgets sql core network printsupport
 
 CONFIG+=qml_debug
 CONFIG+= c++14 #на будущее, возможно потребуется
@@ -21,7 +21,8 @@ SOURCES += $${SOURCE_DIR}/main.cpp \
     $${MODELS_DIR}/qsqlquerymodelusers.cpp \
     $${SOURCE_DIR}/qlistmodels.cpp \
     $${MODELS_DIR}/qsqlquerymodelbank.cpp \
-    Source/Models/qsqlquerymodelorder.cpp
+    Source/Models/qsqlquerymodelorder.cpp \
+    Source/localprint.cpp
 
 RESOURCES += qml.qrc
 
@@ -37,4 +38,5 @@ HEADERS += \
     Source/Models/qsqlquerymodelusers.h \
     Source/qlistmodels.h \
     Source/sourcedb.h \
-    Source/Models/qsqlquerymodelorder.h
+    Source/Models/qsqlquerymodelorder.h \
+    Source/localprint.h

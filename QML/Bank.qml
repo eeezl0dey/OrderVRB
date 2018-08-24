@@ -65,9 +65,6 @@ Page {
 
                 model: dataBase.modelBank
 
-                onActivated: {
-                    editBank.enabled = true
-                }
             }
             ColumnLayout {
                 Layout.fillHeight: true
