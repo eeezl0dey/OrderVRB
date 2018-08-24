@@ -22,7 +22,7 @@ QVariant QSqlQueryModelOrder::data(const QModelIndex & index, int role) const {
     case IDContragentRole:
         var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
         var = (var == 1) ? "Да":"Нет";
-//        break;
+        break;
     default:
         var = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
         break;
