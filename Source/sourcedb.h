@@ -24,6 +24,7 @@ class SourceDB: public QObject
       Q_PROPERTY(QAbstractItemModel* modelBank READ getModelBank NOTIFY modelBankChanged)
       Q_PROPERTY(QAbstractItemModel* modelUsers READ getModelUsers NOTIFY modelUsersChanged)
       Q_PROPERTY(QAbstractItemModel* modelOrder READ getModelOrder NOTIFY modelOrderChanged)
+      Q_PROPERTY(QAbstractItemModel* modelOrderRetrieve READ getModelOrderRetrieve NOTIFY modelOrderChanged)
       Q_PROPERTY(QAbstractItemModel* modelProxyKontr READ getModelProxyKontr NOTIFY modelProxyKontrChanged)
 public:
     explicit SourceDB(QObject *parent = nullptr);
@@ -34,6 +35,7 @@ public:
     QAbstractItemModel* getModelUsers();
     QAbstractItemModel* getModelBank();
     QAbstractItemModel* getModelOrder();
+    QAbstractItemModel* getModelOrderRetrieve();
     QAbstractItemModel* getModelProxyKontr();
 signals:
     void modelKontrChanged();

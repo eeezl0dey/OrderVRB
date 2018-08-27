@@ -31,6 +31,8 @@ Item {
         property alias textHeihgt: root.height
     }
 
+    FontLoader { id: localFont; source: "qrc:/Font/Vharial.ttf" }
+
 //! [0]
         TextInput {
             id: textInput
@@ -39,11 +41,7 @@ Item {
             height: root.height
             wrapMode: Text.WordWrap
             renderType: Text.NativeRendering
-            font.bold: false
-            // Размер шрифта, чтобы влезло в ячейку
-            font.pixelSize: root.pixelDefaultSize
-
-
+            font { family: localFont.name; pixelSize: root.pixelDefaultSize; capitalization: Font.MixedCase; bold: false}
 
             Rectangle {
                 id: tile

@@ -62,6 +62,7 @@ QHash<int, QByteArray> QSqlQueryModelOrder::roleNames() const {
     return roles;
 }
 
+
 // Добавление/редактирование счета
 bool QSqlQueryModelOrder::acceptOrder(int rowId, int idContragent, int summa, QString comment, short chargeInclude, int idBeneficiary)
 {

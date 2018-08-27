@@ -1,5 +1,5 @@
-#ifndef QLISTMODEL_H
-#define QLISTMODEL_H
+#ifndef QLISTMODELS_H
+#define QLISTMODELS_H
 
 #include <QObject>
 //#include <QSql>
@@ -30,7 +30,7 @@ public:
     };
 
     static QListModels* getInstance();
-    QAbstractItemModel* getModel( mtype);
+    QAbstractItemModel* getModel( mtype, bool retrieve = false);
     bool isConnected();
     QString getConnectError();
     void setUser(int id, QString fname, bool isadmin);
@@ -59,4 +59,4 @@ private:
     int idUser;
 };
 
-#endif // QLISTMODEL_H
+#endif // QLISTMODELS_H

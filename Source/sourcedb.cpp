@@ -80,6 +80,11 @@ QAbstractItemModel* SourceDB::getModelOrder()
     return QListModels::getInstance()->getModel(QListModels::mtype::order);
 }
 
+QAbstractItemModel* SourceDB::getModelOrderRetrieve()
+{
+    return QListModels::getInstance()->getModel(QListModels::mtype::order, true);
+}
+
 QAbstractItemModel* SourceDB::getModelProxyKontr()
 {
     return QListModels::getInstance()->getModel(QListModels::mtype::proxyKontr);

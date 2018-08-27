@@ -199,6 +199,7 @@ ColumnLayout {
             settinsCategory: "EditOrderAccBankBeneficiaryText"
             //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
+            regExpString:/^\d{10,}\s\D\D\D$/
             borderEnable: !forPrint
             x: 90
             y: 250
@@ -254,6 +255,7 @@ ColumnLayout {
             //            textVerticalAlignment: TextInput.AlignVCenter
             textHorisontalAlignment: TextInput.AlignLeft
             borderEnable: !forPrint
+            regExpString:/^\d{10,}\s\D\D\D$/
             x: 450
             y: 250
             width: 286

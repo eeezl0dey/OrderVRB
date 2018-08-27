@@ -35,5 +35,22 @@
         <file>QML/Basic/AcceptButton.qml</file>
         <file>QML/main.qml</file>
         <file>QML/MainSV.qml</file>
+        <file>Font/Vharial.ttf</file>
+        <file>Source/Models/qsqlquerymodelbank.cpp</file>
+        <file>Source/Models/qsqlquerymodelbank.h</file>
+        <file>Source/Models/qsqlquerymodelkontragent.cpp</file>
+        <file>Source/Models/qsqlquerymodelkontragent.h</file>
+        <file>Source/Models/qsqlquerymodelorder.cpp</file>
+        <file>Source/Models/qsqlquerymodelorder.h</file>
+        <file>Source/Models/qsqlquerymodelusers.cpp</file>
+        <file>Source/Models/qsqlquerymodelusers.h</file>
+        <file>Source/localprint.cpp</file>
+        <file>Source/localprint.h</file>
+        <file>Source/main.cpp</file>
+        <file>Source/qlistmodels.cpp</file>
+        <file>Source/qlistmodels.h</file>
+        <file>Source/sourcedb.cpp</file>
+        <file>Source/sourcedb.h</file>
+        <file>Font/VHGOTH.TTF</file>
     </qresource>
 </RCC>

@@ -11,6 +11,12 @@ Page {
     id: winorder
     title: qsTr("Ордера")
 
+    property alias model: idTableOrder.model
+
+//    FontLoader { id: localFont; source: "qrc:/Font/Vharial.ttf" }
+
+
+
     WindowFone {
     }
 
@@ -204,4 +210,5 @@ Page {
             editOrder.enabled = true
         }
     }
+
 }

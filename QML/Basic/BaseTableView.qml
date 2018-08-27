@@ -8,6 +8,8 @@ TableView {
     Layout.fillWidth: true
     Layout.fillHeight: true
 
+    FontLoader { id: localFont; source: "qrc:/Font/Vharial.ttf" }
+
     headerDelegate: Rectangle {
 //                    width: _textHeader.text.length * 1.2
         height: _textHeader.font.pixelSize * 1.6
@@ -53,13 +55,26 @@ TableView {
 
     itemDelegate: Item {
         Text {
+            width: parent.width
             anchors.verticalCenter: parent.verticalCenter
             renderType: Text.NativeRendering
             color: styleData.textColor
             text: styleData.value
-            font.pointSize: 10
+            elide: styleData.elideMode
+//            wrapMode: Text.WordWrap
+            font { family: localFont.name; pixelSize: 14; capitalization: Font.MixedCase }
+//            FontCustomVientamis
         }
     }
+
+//    rowDelegate: Rectangle{
+
+//    }
+
+//    rowDelegate: Rectangle{
+
+//    }
+
 
 //                model: dataBase.modelBank
 

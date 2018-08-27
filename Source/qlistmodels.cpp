@@ -88,11 +88,11 @@ void QListModels::setUser(int id, QString fname, bool isadmin)
     return ;
 }
 
-QAbstractItemModel* QListModels::getModel ( mtype mt)
+QAbstractItemModel* QListModels::getModel ( mtype mt, bool retrieve)
 {
     //позаботимся о однократном выделении
     auto it = hashlist.find(mt);
-    if(it != hashlist.end()){
+    if(it != hashlist.end() && !retrieve){
         return it.value();
     }
 

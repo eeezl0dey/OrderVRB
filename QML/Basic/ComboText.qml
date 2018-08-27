@@ -12,9 +12,6 @@ ComboBox{
     property int moveMode: 0
     property bool borderEnable: true
 
-    font.pixelSize: 14
-    font.bold: true
-
     Settings {
         category: settinsCategory
         property alias textX: comboInput.x
@@ -23,6 +20,9 @@ ComboBox{
         property alias textHeihgt: comboInput.height
     }
 
+    FontLoader { id: localFont; source: "qrc:/Font/Vharial.ttf" }
+
+    font { family: localFont.name; pixelSize: 14; capitalization: Font.MixedCase; bold: true}
 
     background: Rectangle{
       visible: borderEnable

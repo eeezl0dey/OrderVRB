@@ -180,10 +180,6 @@ Page {
                     idTableContr.selection.select(curRow);
                 }
                 editcontragent.enabled = false
-
-                //обновим данные модели
-                dataBase.modelKontr.data();
-                dataBase.modelOrder.data();
             }
 
             function cancelEdit() {
