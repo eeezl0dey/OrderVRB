@@ -68,6 +68,7 @@ ColumnLayout {
                 CheckBox {
                     id: checkIsBeneficiary
                     Layout.fillHeight: true
+                    checked: true
                     width: 100
                     text: qsTr("Получатель")
                 }
