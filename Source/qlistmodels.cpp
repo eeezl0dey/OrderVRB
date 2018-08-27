@@ -98,8 +98,8 @@ QAbstractItemModel* QListModels::getModel ( mtype mt)
 
 
     //утечки памяти не будет, удалятся при удалении этого класса.
-    QSqlQueryModel*  sqlmodel;
-    QSortFilterProxyModel* filtermodel;
+    QSqlQueryModel*  sqlmodel = nullptr;
+    QSortFilterProxyModel* filtermodel = nullptr;
     switch (mt) {
     case mtype::kontr:
     {
@@ -110,7 +110,7 @@ QAbstractItemModel* QListModels::getModel ( mtype mt)
                             ORDER BY c.idсontragent DESC");
         auto it = hashlist.find(mtype::proxyKontr);
         if(it!=hashlist.end()){
-            QSortFilterProxyModel *pm = (QSortFilterProxyModel*)it.value();
+            QSortFilterProxyModel *pm = static_cast<QSortFilterProxyModel*>(it.value());
             pm->setSourceModel(sqlmodel);
         }
         break;
@@ -146,6 +146,13 @@ QAbstractItemModel* QListModels::getModel ( mtype mt)
             break;
         }
     }
-    hashlist[mt] = (mt==mtype::proxyKontr)?filtermodel:(QAbstractItemModel*)sqlmodel;
-    return (QAbstractItemModel*)hashlist[mt];
+
+    if(mt==mtype::proxyKontr){
+        hashlist[mt] = static_cast<QAbstractItemModel*>(filtermodel);
+    }
+    else{
+        hashlist[mt] = static_cast<QAbstractItemModel*>( sqlmodel);
+    }
+
+    return hashlist[mt];
 }
